@@ -1,0 +1,61 @@
+body{
+	background: #8EAE9D;
+}
+
+
+/* ----- MAIN CONTENT ------ */
+#root, .pageWrap, .ant-layout, .ant-layout-has-sider{
+	min-height: 100vh;
+}
+
+/* ----- LOGIN ------ */
+
+h1{
+	text-align: center;
+}
+h3{
+	text-align: center;
+}
+.login-wrap{
+	height: 100vh;
+}
+.login-wrap embed{
+	max-width: 89%;
+	padding-left: 43px;
+	margin-bottom: -17px;
+}
+.login-form{
+	border-radius: 5px;
+	background: #C8D8D0;
+	padding: 30px;
+	width: 100%;
+}
+.login-form-button{
+	width: 100%;
+}
+.ant-form-item{
+	margin-bottom: 7px;
+}
+
+/* ----- SiderMenu ------ */
+.logoMenu embed {
+	height: 42px;
+	margin: 16px;
+}
+.logomenu{
+	background: #0000004f;
+}
+.ant-layout-sider {
+	background: #365042;
+}
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub{
+	background: #365042;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+	background-color: #94B2A2;
+}
+
+/* ----- Footer ------ */
+.footer{
+	max-height: 100px;
+}
