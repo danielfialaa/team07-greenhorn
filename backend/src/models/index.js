@@ -25,6 +25,7 @@ if (config.use_env_variable) {
 // Add all modules to this array
 const modelModules = [
   require('./loginform'),
+  require('./users'),
 ];
 
 modelModules.forEach(modelModule => {

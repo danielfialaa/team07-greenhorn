@@ -46,6 +46,7 @@ export class AddUserForm extends Component {
 								console.log(data);
 	              actions.setSubmitting(false);
 	            })
+							.catch(err => console.log('There was an error:' + err))
 	        }}
 	        render={({
 	          values,

@@ -4,30 +4,46 @@ import { Logo } from '../atoms/Logo';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
+import { Redirect } from 'react-router';
+
 
 import api from '../../api';
 
 const FormItem = Form.Item;
 
+
+
 export class LoginForm extends Component {
+	state = {
+		loggedIn: false,
+	}
 
 	render() {
 	    const initialValues = { email: '', password: ''};
+			const isLoggedIn = false;
+			if(this.state.loggedIn === true){
+				return <Redirect to="/home"/>;
+			}
+
+
 	    return (
 	      <Formik
 	        initialValues={initialValues}
 	        onSubmit={(values, actions) => {
+						console.log(values)
 	          api.post('auth', values)
 	            .then(({ data }) => {
 								console.log(data);
 	              actions.setSubmitting(false);
 								if (data.status) {
 									Notification('success', 'Log-in success', 'You have been successfully logged in!');
+									this.setState(() => ({
+										loggedIn: true
+									}))
 								}else{
 									Notification('error', 'Log-in error', 'Wrong username and password combination!');
 								}
 	            })
-						console.log(values)
 	        }}
 	        render={({
 	          values,
@@ -35,7 +51,9 @@ export class LoginForm extends Component {
 	          handleChange,
 	          handleSubmit,
 	          isSubmitting,
+						loggedIn,
 	        }) => (
+
 					<Row type="flex" justify="space-around" align="middle" className="login-wrap">
 						<Col>
 						<Logo/>

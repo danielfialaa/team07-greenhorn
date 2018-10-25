@@ -3,17 +3,16 @@ import db from '../../models/';
 export const addUserFormController =
   async (req, res) => {
 
-  const form = await req.body;
+  const bcrypt = require('bcrypt');
 
-  const firstName = form.firstname;
-  const lastName = form.lastname;
-	const email = form.email;
+  var hash = bcrypt.hashSync('123456', 10);
+  req.body.password = hash;
+  const form = await db.Users.create(req.body);
+	// const form = await req.body;
 
 
   res.json({
     status: true,
-    firstName,
-    lastName,
-    email,
+    form,
   });
 };

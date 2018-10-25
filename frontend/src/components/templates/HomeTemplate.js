@@ -2,27 +2,34 @@ import React from 'react';
 import { Layout } from 'antd';
 import { SiderMenu } from '../organisms/SiderMenu';
 import { Footer } from '../atoms/Footer';
+import { UserList } from '../organisms/UserList';
+import { UserListTable } from '../organisms/UserListTable';
+
+import { Spin, Icon } from 'antd';
 
 const { Header, Content } = Layout;
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
+export const HomeTemplate = ({
+  isLoading,
+  isError,
+  users,
+  error,
+}) => {
+	console.log(isLoading);
+	console.log(users);
+  if (isError && !isLoading) {
+    // return <ErrorMessage error={error} />;
+		// return <div> Error </div>
+		console.log(isError);
+		return <Spin indicator={antIcon} />
+  }
 
-export const HomeTemplate = ({ title, paragraph }) => (
-<div  className="pageWrap">
-	<Layout>
-		<SiderMenu/>
-		<Layout>
-			<Header style={{ background: '#3D6A52' }}>
-				{title}
-			</Header>
-			<Content style={{ margin: '24px 16px 0' }}>
-				<div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-          content
-        </div>
-			</Content>
-			<Footer/>
-		</Layout>
-	</Layout>
+  if (isLoading) {
+		return <Spin indicator={antIcon} />
+  }
 
-
-</div>
-);
+  return (
+		<UserListTable users={users}/>
+  );
+};
