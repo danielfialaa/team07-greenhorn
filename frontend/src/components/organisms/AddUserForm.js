@@ -3,6 +3,7 @@ import { Row,Col, Form, Button, notification, Select, DatePicker } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
+import moment from 'moment';
 
 import api from '../../api';
 
@@ -21,6 +22,24 @@ const departments = [{
 }];
 
 export class AddUserForm extends Component {
+	state = {
+		departments: "",
+		dob: "",
+	}
+
+	handleSelectChange = (value) => {
+		console.log(value);
+		this.setState({departments: value}, function () {
+			console.log(this.state);
+		});
+	}
+
+	handleDateChange = (value) => {
+		console.log(value);
+		this.setState({dob: value}, function () {
+			console.log(this.state);
+		});
+	}
 
 	render() {
 	    const initialValues = {
@@ -28,13 +47,15 @@ export class AddUserForm extends Component {
 				lastname: '',
 				email: '',
 				phone: '',
-				departments: '',
+				department: '',
 				dob: '',
 			};
 	    return (
 	      <Formik
 	        initialValues={initialValues}
 	        onSubmit={(values, actions) => {
+						values.department = this.state.departments;
+						values.dob = this.state.dob.format("YYYY-MM-DD");
 						console.log(values);
 	          api.post('addUser', values)
 	            .then(({ data }) => {
@@ -86,16 +107,19 @@ export class AddUserForm extends Component {
 							<FormItem label="Department">
 								<Select
 									name="departments"
-									id="departments" value={values.departments} onChange={handleChange} onBlur={handleBlur}
+									id="departments"
+									 onChange={this.handleSelectChange}
 								>
-									<Option value="HR">Human Resources</Option>
-									<Option value="IT">IT</Option>
-									<Option value="Fin">Finance</Option>
+									<Option value="HR" key="HR">Human Resources</Option>
+									<Option value="IT" key="IT">IT</Option>
+									<Option value="Fin" key="Fin">Finance</Option>
 								</Select>
 							</FormItem>
 							<FormItem label="Date of Birth">
 								<DatePicker
-									name="dob" id="dob" value = {values.dob} onChange={handleChange} onBlur={handleBlur}
+									dropdownClassName = "dob"
+									name="dob" id="dob"
+									 onChange={this.handleDateChange}
 								/>
 							</FormItem>
 							<FormItem>
