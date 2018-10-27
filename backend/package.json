@@ -24,6 +24,7 @@
     "express": "^4.15.2",
     "log4js": "1.1.1",
     "mysql2": "^1.6.1",
+    "randomstring": "^1.1.5",
     "sequelize": "^4.41.0"
   },
   "devDependencies": {

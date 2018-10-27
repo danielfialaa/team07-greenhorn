@@ -2,9 +2,9 @@ import React from 'react';
 import { NewPasswordForm } from '../organisms/NewPasswordForm';
 
 
-export const NewPasswordTemplate = ({ title, paragraph }) => (
+export const NewPasswordTemplate = ({ link }) => (
 	<div>
-		<NewPasswordForm/>
+		<NewPasswordForm link={link}/>
 	</div>
 
 

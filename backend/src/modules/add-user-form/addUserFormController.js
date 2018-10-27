@@ -1,12 +1,10 @@
 import db from '../../models/';
+import randomstring from 'randomstring';
 
 export const addUserFormController =
   async (req, res) => {
 
-  const bcrypt = require('bcrypt');
-
-  var hash = bcrypt.hashSync('123456', 10);
-  req.body.password = hash;
+  req.body.password = randomstring.generate(20);
   const form = await db.Users.create(req.body);
 	// const form = await req.body;
 
