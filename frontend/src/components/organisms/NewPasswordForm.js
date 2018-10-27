@@ -28,7 +28,7 @@ export class NewPasswordForm extends Component {
 	              actions.setSubmitting(false);
 								console.log(data.result[0]);
 								if(data.result[0]){
-									Notification('success', 'Password changed', 'Your have been successfully changed! You can log-in now!');
+									Notification('success', 'Password changed', 'Your password have been successfully changed! You can log-in now!');
 									this.setState(() => ({
 										success: true
 									}))
