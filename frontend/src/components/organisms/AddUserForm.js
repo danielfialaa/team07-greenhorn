@@ -43,12 +43,12 @@ export class AddUserForm extends Component {
 
 	render() {
 	    const initialValues = {
-				firstname: '',
-				lastname: '',
+				firstName: '',
+				lastName: '',
 				email: '',
-				phone: '',
+				telephone: '',
 				department: '',
-				dob: '',
+				dob: null,
 			};
 	    return (
 	      <Formik
@@ -82,14 +82,14 @@ export class AddUserForm extends Component {
 						<Form className="addUser-form" onSubmit={handleSubmit}>
 							<FormItem label="First Name">
 								<InputWithIcon
-									iconType="lock" placeholder="Enter user first name" type="text" name="firstname"
-									id="firstname" value={values.firstname} onChange={handleChange} onBlur={handleBlur}
+									iconType="lock" placeholder="Enter user first name" type="text" name="firstName"
+									id="firstName" value={values.firstName} onChange={handleChange} onBlur={handleBlur}
 								/>
 							</FormItem>
 							<FormItem label="Last Name">
 								<InputWithIcon
-									iconType="lock" placeholder="Enter user last name" type="text" name="lastname"
-									id="lastname" value={values.lastname} onChange={handleChange} onBlur={handleBlur}
+									iconType="lock" placeholder="Enter user last name" type="text" name="lastName"
+									id="lastName" value={values.lastName} onChange={handleChange} onBlur={handleBlur}
 								/>
 							</FormItem>
 							<FormItem label="Email">
@@ -100,8 +100,8 @@ export class AddUserForm extends Component {
 							</FormItem>
 							<FormItem label="Tel.">
 								<InputWithIcon
-									iconType="user" placeholder="Enter user phone number" type="tel" name="phone"
-									id="phone" value = {values.phone} onChange={handleChange} onBlur={handleBlur}
+									iconType="user" placeholder="Enter user telephone number" type="tel" name="telephone"
+									id="telephone" value = {values.telephone} onChange={handleChange} onBlur={handleBlur}
 								/>
 							</FormItem>
 							<FormItem label="Department">
@@ -124,7 +124,7 @@ export class AddUserForm extends Component {
 							</FormItem>
 							<FormItem>
 								<Button type="primary" htmlType="submit" className="login-form-button" disabled={isSubmitting} loading={isSubmitting}>
-									Log-in
+									Create
 								</Button>
 							</FormItem>
 						</Form>

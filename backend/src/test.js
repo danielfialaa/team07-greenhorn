@@ -1,1 +1,1 @@
-console.log('Kristin smrdi');
+console.log('čus');

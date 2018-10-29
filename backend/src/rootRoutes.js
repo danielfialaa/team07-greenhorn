@@ -9,6 +9,7 @@ import newPassRoutes from './modules/new-pass/routes';
 
 const router = Router();
 
+
 router.use('/api/auth', loginFormRoutes);
 router.use('/api/addUser', addUserFormRoutes);
 router.use('/api/userList', userListRoutes);

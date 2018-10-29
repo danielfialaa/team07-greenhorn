@@ -1,31 +1,10 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Divider } from 'antd';
 import { Logo } from '../atoms/Logo';
 
 
 import api from '../../api';
 
-const data = [{
-  key: '1',
-  name: 'John Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park',
-}, {
-  key: '2',
-  name: 'Jim Green',
-  age: 42,
-  address: 'London No. 1 Lake Park',
-}, {
-  key: '3',
-  name: 'Joe Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park',
-}, {
-  key: '4',
-  name: 'Jim Red',
-  age: 32,
-  address: 'London No. 2 Lake Park',
-}];
 
 
 
@@ -61,21 +40,29 @@ sortedInfo = sortedInfo || {};
 filteredInfo = filteredInfo || {};
 const columns = [{
 	title: 'Firstname',
-	dataIndex: 'firstname',
-	key: 'firstname',
-	filteredValue: filteredInfo.firstname || null,
-	onFilter: (value, record) => record.firstname.includes(value),
-	sorter: (a, b) => a.firstname.length - b.firstname.length,
-	sortOrder: sortedInfo.columnKey === 'firstname' && sortedInfo.order,
+	dataIndex: 'firstName',
+	key: 'firstName',
+	filteredValue: filteredInfo.firstName || null,
+	onFilter: (value, record) => record.firstName.includes(value),
+	sorter: (a, b) => a.firstName.length - b.firstName.length,
+	sortOrder: sortedInfo.columnKey === 'firstName' && sortedInfo.order,
 }, {
 	title: 'Lastname',
-	dataIndex: 'lastname',
-	key: 'lastname',
-	filteredValue: filteredInfo.lastname || null,
-	onFilter: (value, record) => record.lastname.includes(value),
-	sorter: (a, b) => a.lastname.length - b.lastname.length,
-	sortOrder: sortedInfo.columnKey === 'lastname' && sortedInfo.order,
+	dataIndex: 'lastName',
+	key: 'lastName',
+	filteredValue: filteredInfo.lastName || null,
+	onFilter: (value, record) => record.lastName.includes(value),
+	sorter: (a, b) => a.lastName.length - b.lastName.length,
+	sortOrder: sortedInfo.columnKey === 'lastName' && sortedInfo.order,
 }, {
+	title: 'Department',
+	dataIndex: 'department',
+	key: 'department',
+	filteredValue: filteredInfo.department || null,
+	onFilter: (value, record) => record.department.includes(value),
+	sorter: (a, b) => a.department.length - b.department.length,
+	sortOrder: sortedInfo.columnKey === 'department' && sortedInfo.order,
+},{
 	title: 'Email',
 	dataIndex: 'email',
 	key: 'email',
@@ -83,6 +70,20 @@ const columns = [{
 	onFilter: (value, record) => record.email.includes(value),
 	sorter: (a, b) => a.email.length - b.email.length,
 	sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order,
+}, {
+	title: 'Telephone',
+	dataIndex: 'telephone',
+	key: 'telephone',
+}, {
+  title: 'Action',
+  key: 'action',
+  render: (text, record) => (
+    <span>
+      <a href="javascript:;">Profile</a>
+      <Divider type="vertical" />
+      <a href="javascript:;">Tasks</a>
+    </span>
+  ),
 }];
 	    return (
 				<div>

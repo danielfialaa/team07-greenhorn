@@ -14,10 +14,10 @@ export const AppRoutes = () => (
     <Switch>
       <Route path="/" exact component={LoginPage} />
 			<Route path="/NewPassword/:link" exact component={NewPasswordPage} />
-		<PageWrapper>
-			<Route path="/Home" exact component={HomePage} />
-			<Route path="/AddUser" exact component={AddUserPage} />
-		</PageWrapper>
+			<PageWrapper>
+				<Route path="/Home" exact component={HomePage} />
+				<Route path="/AddUser" exact component={AddUserPage} />
+			</PageWrapper>
     </Switch>
 
 );

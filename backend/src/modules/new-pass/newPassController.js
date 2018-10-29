@@ -9,7 +9,7 @@ export const newPassController =
   // req.body.password = hash;
 	// const form = await req.body;
 
-	db.Users.update(
+	db.users.update(
 		{password: hash},
 		{where:
 			{ password: req.body.userLink}

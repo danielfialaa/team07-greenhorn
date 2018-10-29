@@ -8,35 +8,25 @@ export const loginFormController =
   const bcrypt = require('bcrypt');
 
 
-  const result = db.Users.findOne({
+  const result = db.users.findOne({
     where: {
       email: data.email,
     }
   }).then((response) => {
-
         if (response) {
-
           const hash = response.password;
-
           bcrypt.compare(data.password, hash, function(error, success) {
-
               if (success) {
                   res.json({
                     status: true,
                   });
-
               } else {
-
                   res.json({
                     status: false,
                   });
-
               }
-
           });
-          
         } else {
-
             res.json({
               status: false,
             });

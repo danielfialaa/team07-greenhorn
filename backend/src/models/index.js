@@ -24,8 +24,9 @@ if (config.use_env_variable) {
 
 // Add all modules to this array
 const modelModules = [
-  require('./loginform'),
   require('./users'),
+  require('./task'),
+  require('./attachment')
 ];
 
 modelModules.forEach(modelModule => {
@@ -41,5 +42,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.sequelize.sync();
 
 export default db;

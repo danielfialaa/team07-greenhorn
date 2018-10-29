@@ -5,7 +5,7 @@ export const userListController =
 
   const data = await req.body;
 
-  const result = db.Users.findAll().then((response) => {
+  const result = db.users.findAll().then((response) => {
 		// response = JSON.stringify(response)
 		// response = JSON.parse(response)
     res.json({
