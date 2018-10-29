@@ -57,7 +57,7 @@ export class NewPasswordForm extends Component {
 								/>
 							</FormItem>
 							<FormItem>
-								<Button type="submit" htmlType="submit" className="login-form-button" disabled={isSubmitting} >
+								<Button type="submit" htmlType="submit" className="login-form-button" disabled={isSubmitting} loading={isSubmitting} >
 									Submit
 								</Button>
 							</FormItem>

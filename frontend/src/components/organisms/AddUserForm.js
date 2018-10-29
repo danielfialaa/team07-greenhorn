@@ -82,25 +82,25 @@ export class AddUserForm extends Component {
 						<Form className="addUser-form" onSubmit={handleSubmit}>
 							<FormItem label="First Name">
 								<InputWithIcon
-									iconType="lock" placeholder="Enter user first name" type="text" name="firstName"
+									iconType="user" placeholder="Enter user first name" type="text" name="firstName"
 									id="firstName" value={values.firstName} onChange={handleChange} onBlur={handleBlur}
 								/>
 							</FormItem>
 							<FormItem label="Last Name">
 								<InputWithIcon
-									iconType="lock" placeholder="Enter user last name" type="text" name="lastName"
+									iconType="user" placeholder="Enter user last name" type="text" name="lastName"
 									id="lastName" value={values.lastName} onChange={handleChange} onBlur={handleBlur}
 								/>
 							</FormItem>
 							<FormItem label="Email">
 								<InputWithIcon
-									iconType="user" placeholder="Enter user email" type="email" name="email"
+									iconType="mail" placeholder="Enter user email" type="email" name="email"
 									id="email" value = {values.email} onChange={handleChange} onBlur={handleBlur}
 								/>
 							</FormItem>
 							<FormItem label="Tel.">
 								<InputWithIcon
-									iconType="user" placeholder="Enter user telephone number" type="tel" name="telephone"
+									iconType="phone" placeholder="Enter user telephone number" type="tel" name="telephone"
 									id="telephone" value = {values.telephone} onChange={handleChange} onBlur={handleBlur}
 								/>
 							</FormItem>
