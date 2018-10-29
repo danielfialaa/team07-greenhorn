@@ -5,47 +5,38 @@ import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-
-
 
 import api from '../../api';
 
 const FormItem = Form.Item;
 
-
-
-export class LoginForm extends Component {
+export class ResetPasswordForm extends Component {
 	state = {
-		loggedIn: false,
+		success: false,
 	}
-
 	render() {
-	    const initialValues = { email: '', password: ''};
-			const isLoggedIn = false;
-			if(this.state.loggedIn === true){
-				return <Redirect to="/home"/>;
+	    const initialValues = { email: ''};
+			if(this.state.success === true){
+				return <Redirect to="/"/>;
 			}
-
-
 	    return (
 	      <Formik
 	        initialValues={initialValues}
 	        onSubmit={(values, actions) => {
-						console.log(values)
-	          api.post('auth', values)
+	          api.post('resetPass', values)
 	            .then(({ data }) => {
-								console.log(data);
 	              actions.setSubmitting(false);
-								if (data.status) {
-									Notification('success', 'Log-in success', 'You have been successfully logged in!');
+								console.log(data.result[0]);
+								if(data.result[0]){
+									Notification('success', 'Password reset', 'Your password have been successfully reset! Check your email inbox, and click the link in the email you received to reset your password.');
 									this.setState(() => ({
-										loggedIn: true
+										success: true
 									}))
 								}else{
-									Notification('error', 'Log-in error', 'Wrong username and password combination!');
+									Notification('error', 'Password not changed', 'Your link seems to be expired!');
 								}
 	            })
+						console.log(values)
 	        }}
 	        render={({
 	          values,
@@ -53,13 +44,12 @@ export class LoginForm extends Component {
 	          handleChange,
 	          handleSubmit,
 	          isSubmitting,
-						loggedIn,
 	        }) => (
-
 					<Row type="flex" justify="space-around" align="middle" className="login-wrap">
 						<Col>
 						<Logo/>
 						<Form className="login-form" onSubmit={handleSubmit}>
+							<h3>Enter the email address used to create your account</h3>
 							<FormItem>
 								<InputWithIcon
 									iconType="user" placeholder="Enter your email" type="email" name="email"
@@ -67,19 +57,8 @@ export class LoginForm extends Component {
 								/>
 							</FormItem>
 							<FormItem>
-								<InputWithIcon
-									iconType="lock" placeholder="Enter your passowrd" type="password" name="password"
-									id="password" value = {values.password} onChange={handleChange} onBlur={handleBlur}
-								/>
-							</FormItem>
-							<FormItem>
-								<Link to="/ResetPassword">
-									Forgot Password
-								</Link>
-							</FormItem>
-							<FormItem>
-								<Button type="submit" htmlType="submit" className="login-form-button" disabled={isSubmitting} loading={isSubmitting} >
-									Log-in
+								<Button type="submit" htmlType="submit" className="login-form-button" disabled={isSubmitting} >
+									Submit
 								</Button>
 							</FormItem>
 						</Form>
