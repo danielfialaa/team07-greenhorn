@@ -1,15 +1,15 @@
 module.exports = {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "greenhorn",
+    "username": "team07",
+    "password": "xe7wd48swrfdi6vx",
+    "database": "user_team07",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "",
-    "database": "greenhorn",
+    "username": "team07",
+    "password": "xe7wd48swrfdi6vx",
+    "database": "user_team07",
     "host": "localhost",
     "dialect": "mysql"
   }
