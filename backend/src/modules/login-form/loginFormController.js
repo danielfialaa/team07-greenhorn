@@ -17,7 +17,8 @@ export const loginFormController =
         if (response) {
           const hash = response.password;
           bcrypt.compare(data.password, hash, function(error, success) {
-              if (success) {
+
+              if (success) {    
                   var tokenData = {
                     firstName: response.firstName,
                     lastName: response.lastName,
@@ -26,6 +27,7 @@ export const loginFormController =
 
                   console.log(tokenData);
 
+                  //jwt env promenna nejde
                   var encodedToken = jwt.sign(tokenData, '2', {
                     expiresIn: 60 * 60 * 12 // expires in 12 hours
                   });;

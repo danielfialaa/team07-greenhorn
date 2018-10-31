@@ -12,6 +12,7 @@ const router = Router();
 
 
 router.use('/api/auth', loginFormRoutes);
+//dummy route in progress
 router.use('*', (req, res, next) => {
   if(true) {
 
