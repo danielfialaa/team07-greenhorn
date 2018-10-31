@@ -12,6 +12,16 @@ const router = Router();
 
 
 router.use('/api/auth', loginFormRoutes);
+//dummy route in progress
+router.use('*', (req, res, next) => {
+  if(true) {
+
+    console.log('req.user existuje');
+    next();
+  } else {
+    console.log('nic totální dno');
+  }
+});
 router.use('/api/addUser', addUserFormRoutes);
 router.use('/api/userList', userListRoutes);
 router.use('/api/products', productRoutes);
