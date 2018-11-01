@@ -1,0 +1,23 @@
+{
+    "protocol": "sftp",
+    "host": "vse.handson.pro",
+    "port": 22,
+    "user": "team07",
+    "pass": "xi5efjtsx4ottld3",
+    "promptForPass": false,
+    "remote": "/home/team07/code/project/",
+    "local": "",
+    "agent": "",
+    "privatekey": "",
+    "passphrase": "",
+    "hosthash": "",
+    "ignorehost": true,
+    "connTimeout": 10000,
+    "keepalive": 10000,
+    "keyboardInteractive": false,
+    "keyboardInteractiveForPass": false,
+    "remoteCommand": "",
+    "remoteShell": "",
+    "watch": [],
+    "watchTimeout": 500
+}
