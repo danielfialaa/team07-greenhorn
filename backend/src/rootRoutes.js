@@ -19,7 +19,8 @@ router.use('*', (req, res, next) => {
     console.log('req.user existuje');
     next();
   } else {
-    console.log('nic totální dno');
+    console.log('unauthorized');
+    res.status(401).send('unauthorized');
   }
 });
 router.use('/api/addUser', addUserFormRoutes);
