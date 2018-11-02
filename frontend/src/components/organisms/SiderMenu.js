@@ -16,13 +16,6 @@ const MenuItem = ({ title, icon, linkTo, ...rest }) => (
 
 
 export class SiderMenu extends Component {
-	componentDidMount() {
-		api.post('/')
-			.then(({data})) => {
-				console.log("checking user token");
-				console.log(data.status);
-			}
-	}
 	state = {
     collapsed: false,
   };
