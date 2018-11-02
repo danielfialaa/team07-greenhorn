@@ -4,15 +4,17 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     telephone: DataTypes.STRING,
-    department: DataTypes.STRING,
     dob: DataTypes.DATE,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    bio: DataTypes.STRING
+    bio: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN
   }, {});
   users.associate = function(models) {
-    // associations can be defined here
-    
+    users.hasOne(departments {
+      as: 'idDepartment'
+    })
+
   };
   return users;
 };

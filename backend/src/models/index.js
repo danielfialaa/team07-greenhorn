@@ -25,7 +25,10 @@ if (config.use_env_variable) {
 // Add all modules to this array
 const modelModules = [
   require('./users'),
-  require('./task'),
+  require('./tasks'),
+  require('./attachment'),
+  require('./involves_att'),
+  require('./departments'),
   require('./attachment')
 ];
 
