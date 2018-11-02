@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import jwt from 'jsonwebtoken';
+
 
 import productRoutes from './modules/products/routes';
 import contactFormRoutes from './modules/contact-form/routes';
@@ -14,7 +16,7 @@ const router = Router();
 router.use('/api/auth', loginFormRoutes);
 //dummy route in progress
 router.use('*', (req, res, next) => {
-  if(true) {
+  if(jwt.verify(req.token, '2')) {
 
     console.log('req.user existuje');
     next();
