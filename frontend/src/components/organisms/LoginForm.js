@@ -35,6 +35,7 @@ export class LoginForm extends Component {
 						console.log(values)
 	          api.post('auth', values)
 	            .then(({ data }) => {
+								
 								console.log(data);
 	              actions.setSubmitting(false);
 								if (data.status) {
