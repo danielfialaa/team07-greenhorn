@@ -26,7 +26,13 @@ router.use('*', (req, res, next) => {
 
     } else {
       console.log(decoded);
-
+      req.user = {
+        email: decoded.email,
+        firstName: decoded.firstName,
+        lastName: decoded.lastName,
+        department: decoded.department
+      }
+      console.log(req.user);
       next();
     }
   });
@@ -41,7 +47,7 @@ router.use('/api/contactForm', contactFormRoutes);
 router.use('/api/newPass', newPassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/', () => {
-  
+
 });
 
 
