@@ -39,6 +39,8 @@ export class LoginForm extends Component {
 								console.log(data);
 	              actions.setSubmitting(false);
 								if (data.status) {
+									localStorage.setItem('token', data.token);
+									console.log(localStorage.getItem('token'));
 									Notification('success', 'Log-in success', 'You have been successfully logged in!');
 									this.setState(() => ({
 										loggedIn: true
