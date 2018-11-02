@@ -41,7 +41,8 @@ export class SiderMenu extends Component {
       <Menu theme="dark" mode="inline" defaultSelectedKeys={window.location.pathname.split('/')}>
 				<MenuItem key="home" title="User List" icon="team" linkTo="/home"/>
         <MenuItem key="AddUser" title="Add User" icon="user-add" linkTo="/AddUser"/>
-				<MenuItem key="Checklist" title="Checklist" icon="project" linkTo="/Checklist"/>
+				<MenuItem key="AddTask" title="Add task" icon="form" linkTo="/AddTask" />
+				<MenuItem key="Checklist" title="Checlist" icon="project" linkTo="/Checklist"/>
 				<MenuItem key="Settings" title="Settings" icon="setting" linkTo="/settings"/>
 				<MenuItem key="Logout" title="Logout" icon="logout" linkTo="/"/>
       </Menu>
