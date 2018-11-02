@@ -26,10 +26,10 @@ if (config.use_env_variable) {
 const modelModules = [
   require('./users'),
   require('./tasks'),
-  require('./attachment'),
+  require('./attachments'),
   require('./involves_att'),
   require('./departments'),
-  require('./attachment')
+  require('./task_history')
 ];
 
 modelModules.forEach(modelModule => {
