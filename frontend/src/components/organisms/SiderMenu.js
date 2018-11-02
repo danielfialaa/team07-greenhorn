@@ -3,6 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import { Logo } from '../atoms/Logo.js';
 import { Link } from 'react-router-dom';
 
+
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItem = ({ title, icon, linkTo, ...rest }) => (
