@@ -4,17 +4,22 @@ module.exports = (sequelize, DataTypes) => {
     dateOfAssignment: DataTypes.DATE,
     dateOfCompletion: DataTypes.DATE,
     dateOfNotification: DataTypes.DATE,
+    dateOfDeadline: DataTypes.DATE,
     status: DataTypes.STRING
   }, {});
   task_history.associate = function(models) {
     // associations can be defined here
-    task_history.hasOne(attachment);
-    task_history.hasOne(task);
+    task_history.hasMany(attachment {
+      as: 'idAttachment'
+    });
+    task_history.hasOne(task {
+      as: 'idTask'
+    });
     task_history.hasOne(users {
       as: 'idRequestor'
     });
     task_history.hasOne(users {
-      as: 'idCompletor'
+      as: 'idReporter'
     });
     task_history.hasOne(users {
       as: 'idUser'
