@@ -20,18 +20,19 @@ router.use('*', (req, res, next) => {
 
   console.log(req.get('Authorization'));
   const x = jwt.verify(req.get('Authorization'), '2', (err, decoded) => {
-    if(res) {
-
-      console.log(err);
-
-      next();
-    } else {
+    if(err) {
       console.log('unauthorized');
       res.status(401).send('unauthorized');
+
+    } else {
+      console.log(decoded);
+
+      next();
     }
   });
 
 });
+
 router.use('/api/addUser', addUserFormRoutes);
 router.use('/api/updateUser', updateUserFormRoutes);
 router.use('/api/userList', userListRoutes);
@@ -39,6 +40,9 @@ router.use('/api/products', productRoutes);
 router.use('/api/contactForm', contactFormRoutes);
 router.use('/api/newPass', newPassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
+router.use('/api/', () => {
+  
+});
 
 
 export default router;
