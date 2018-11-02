@@ -18,10 +18,11 @@ export const loginFormController =
           const hash = response.password;
           bcrypt.compare(data.password, hash, function(error, success) {
 
-              if (success) {    
+              if (success) {
                   var tokenData = {
                     firstName: response.firstName,
                     lastName: response.lastName,
+                    email: response.email,
                     department: response.department,
                   };
 
