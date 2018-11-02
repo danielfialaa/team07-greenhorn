@@ -9,6 +9,7 @@ import addUserFormRoutes from './modules/add-user-form/routes';
 import userListRoutes from './modules/user-list/routes';
 import newPassRoutes from './modules/new-pass/routes';
 import resetPassRoutes from './modules/reset-pass/routes';
+import updateUserFormRoutes from './modules/update-user-form/routes';
 
 const router = Router();
 
@@ -32,7 +33,7 @@ router.use('*', (req, res, next) => {
 
 });
 router.use('/api/addUser', addUserFormRoutes);
-// router.use('/api/updateUser', updateUserFormRoutes);
+router.use('/api/updateUser', updateUserFormRoutes);
 router.use('/api/userList', userListRoutes);
 router.use('/api/products', productRoutes);
 router.use('/api/contactForm', contactFormRoutes);
