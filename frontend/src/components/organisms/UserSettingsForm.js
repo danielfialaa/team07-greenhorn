@@ -13,28 +13,9 @@ import api from '../../api';
 const FormItem = Form.Item;
 const Option = Select.Option
 
-const departments = [{
-  value: 'HR',
-  label: 'Human Resources',
-}, {
-  value: 'IT',
-  label: 'IT',
-}, {
-  value: 'Fin',
-  label: 'Finance',
-}];
-
 export class UserSettingsForm extends Component {
 	state = {
-		departments: "",
 		dob: "",
-	}
-
-	handleSelectChange = (value) => {
-		console.log(value);
-		this.setState({departments: value}, function () {
-			console.log(this.state);
-		});
 	}
 
 	handleDateChange = (value) => {
@@ -56,7 +37,6 @@ export class UserSettingsForm extends Component {
 	        initialValues={initialValues}
           validationSchema={UserValidation}
 	        onSubmit={(values, actions) => {
-						values.department = this.state.departments;
 						values.dob = this.state.dob.format("YYYY-MM-DD");
 						console.log(values);
 	          api.put('updateUser', values)
@@ -110,8 +90,9 @@ export class UserSettingsForm extends Component {
               <FormItem label="Date of Birth">
                 <DatePicker
                   dropdownClassName = "dob"
-                  name="dob" id="dob"
-                   onChange={this.handleDateChange}
+                  name="dob"
+                  id="dob"
+                  onChange={this.handleDateChange}
                 />
               </FormItem>
 							<FormItem>
