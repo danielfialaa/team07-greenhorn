@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Row,Col, Form, Button, notification, Select, DatePicker } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
-import { Formik } from 'formik';
+import { FormItemWithError } from '../molecules/FormItemWithError';
+import { Formik, Field } from 'formik';
 import { Notification } from '../atoms/Notification';
+import { PasswordValidation } from '../atoms/schemas/PasswordValidation';
 import moment from 'moment';
+import * as Yup from 'yup';
 
-import api from '../../api';
+import api from '../../api'
 
 const FormItem = Form.Item;
-const Option = Select.Option
+const Option = Select.Option;
 
 export class ChangePasswordForm extends Component {
   state = {
@@ -24,6 +27,7 @@ export class ChangePasswordForm extends Component {
 	    return (
 	      <Formik
 	        initialValues={initialValues}
+          validationSchema={PasswordValidation}
           onSubmit={(values, actions) => {
             api.post('newPass', values)
               .then(({ data }) => {
@@ -42,43 +46,53 @@ export class ChangePasswordForm extends Component {
           }}
 	        render={({
 	          values,
+            errors,
 	          handleBlur,
 	          handleChange,
 	          handleSubmit,
 	          isSubmitting,
+    isValid,
 	        }) => (
 					<Row type="flex" justify="space-around" align="middle" className="addUser-wrap">
 						<Col>
 							<h1>Change Password</h1>
 						<Form className="changePassword-form" onSubmit={handleSubmit}>
-							<FormItem label="Enter current password">
-								<InputWithIcon
-									iconType="lock" placeholder="" type="password" name="password_current"
-									id="password_current" value={values.password_current} onChange={handleChange} onBlur={handleBlur}
-								/>
-							</FormItem>
-							<FormItem label="Enter new password">
-								<InputWithIcon
-									iconType="lock" placeholder="" type="password" name="password_new"
-									id="password_new" value={values.password_new} onChange={handleChange} onBlur={handleBlur}
-								/>
-							</FormItem>
-							<FormItem label="Confirm new password">
-								<InputWithIcon
-									iconType="lock" placeholder="" type="password" name="password_new_confirm"
-									id="password_new_confirm" value = {values.password_new_confirm} onChange={handleChange} onBlur={handleBlur}
-								/>
-							</FormItem>
+              <FormItemWithError
+                label="Enter current password"
+                iconType="lock"
+                placeholder=""
+                type="password"
+                name="password_current"
+                id="password_current"
+                value={values.password_current}/>
+              <FormItemWithError
+                label="Enter new password"
+                iconType="lock"
+                placeholder=""
+                type="password"
+                name="password_new"
+                id="password_new"
+                value={values.password_new}/>
+              <FormItemWithError
+                label="Confirm new password"
+                iconType="lock"
+                placeholder=""
+                type="password"
+                name="password_new_confirm"
+                id="password_new_confirm"
+                value = {values.password_new_confirm}/>
 							<FormItem>
-								<Button type="primary" htmlType="submit" className="change-password-button" disabled={isSubmitting} loading={isSubmitting}>
+								<Button type="primary" htmlType="submit" className="change-password-button"
+                disabled={!isValid || isSubmitting}
+                loading={isSubmitting}>
 									Change password
 								</Button>
 							</FormItem>
-						</Form>
-						</Col>
-					</Row>
-	        )}
-	      />
-	    );
-	  }
-}
+            </Form>
+					  </Col>
+		      </Row>
+  	        )}
+  	      />
+  	    );
+  	  }
+  }

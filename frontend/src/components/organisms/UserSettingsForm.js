@@ -3,7 +3,10 @@ import { Row,Col, Form, Button, notification, Select, DatePicker } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
+import { FormItemWithError } from '../molecules/FormItemWithError';
+import { UserValidation } from '../atoms/schemas/UserValidation';
 import moment from 'moment';
+import * as Yup from 'yup';
 
 import api from '../../api';
 
@@ -51,6 +54,7 @@ export class UserSettingsForm extends Component {
 	    return (
 	      <Formik
 	        initialValues={initialValues}
+          validationSchema={UserValidation}
 	        onSubmit={(values, actions) => {
 						values.department = this.state.departments;
 						values.dob = this.state.dob.format("YYYY-MM-DD");
@@ -73,29 +77,36 @@ export class UserSettingsForm extends Component {
 	          handleChange,
 	          handleSubmit,
 	          isSubmitting,
+            isValid,
 	        }) => (
 					<Row type="flex" justify="space-around" align="middle" className="addUser-wrap">
 						<Col>
 							<h1>Edit User Profile</h1>
 						<Form className="editUser-form" onSubmit={handleSubmit}>
-							<FormItem label="Change user first name">
-								<InputWithIcon
-									iconType="user" placeholder="" type="text" name="firstName"
-									id="firstName" value={values.firstName} onChange={handleChange} onBlur={handleBlur}
-								/>
-							</FormItem>
-							<FormItem label="Change user last name">
-								<InputWithIcon
-									iconType="user" placeholder="" type="text" name="lastName"
-									id="lastName" value={values.lastName} onChange={handleChange} onBlur={handleBlur}
-								/>
-							</FormItem>
-							<FormItem label="Change user telephone number">
-								<InputWithIcon
-									iconType="phone" placeholder="" type="tel" name="telephone"
-									id="telephone" value = {values.telephone} onChange={handleChange} onBlur={handleBlur}
-								/>
-							</FormItem>
+            <FormItemWithError
+              label="Change user first name"
+              iconType="user"
+              placeholder=""
+              type="text"
+              name="firstName"
+              id="firstName"
+              value={values.firstName}/>
+              <FormItemWithError
+                label="Change user last name"
+                iconType="user"
+                placeholder=""
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={values.lastName}/>
+              <FormItemWithError
+                label="Change user telephone number"
+                iconType="phone"
+                placeholder=""
+                type="tel"
+                name="telephone"
+                id="telephone"
+                value={values.telephone}/>
               <FormItem label="Date of Birth">
                 <DatePicker
                   dropdownClassName = "dob"
@@ -104,7 +115,9 @@ export class UserSettingsForm extends Component {
                 />
               </FormItem>
 							<FormItem>
-								<Button type="primary" htmlType="submit" className="submit-changes-button" disabled={isSubmitting} loading={isSubmitting}>
+								<Button type="primary" htmlType="submit" className="submit-changes-button"
+                disabled={!isValid || isSubmitting}
+                loading={isSubmitting}>
 									Confirm changes
 								</Button>
 							</FormItem>
