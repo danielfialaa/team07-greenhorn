@@ -1,7 +1,6 @@
 'use_strict';
 module.exports = (sequelize, DataTypes) => {
   const departments = sequelize.define('departments', {
-    idDepartment: DataTypes.INTEGER,
     departmentName: DataTypes.STRING
   });
   departments.associate = function(models) {
