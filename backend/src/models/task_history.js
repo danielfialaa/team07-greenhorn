@@ -1,23 +1,31 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const task_history = sequelize.define('task_history', {
+    idAssignedTask: DataTypes.INTEGER,
     dateOfAssignment: DataTypes.DATE,
     dateOfCompletion: DataTypes.DATE,
     dateOfNotification: DataTypes.DATE,
+    dateOfDeadline: DataTypes.DATE,
     status: DataTypes.STRING
   }, {});
   task_history.associate = function(models) {
-    // associations can be defined here
-    task_history.hasOne(attachment);
-    task_history.hasOne(task);
-    task_history.hasOne(users {
+    task_history.belongsTo(models.users, {
+      foreignKey: 'idUser',
+      as: 'users'
+    });
+    task_history.belongsTo(models.users, {
+      foreignKey: 'idUser',
       as: 'idRequestor'
     });
-    task_history.hasOne(users {
-      as: 'idCompletor'
+    task_history.belongsTo(models.users, {
+      foreignKey: 'idUser',
+      as: 'idReporter'
     });
-    task_history.hasOne(users {
-      as: 'idUser'
+    task_history.belongsTo(models.tasks, {
+      foreignKey: 'idTask'
+    });
+    task_history.hasMany(models.attachments, {
+      foreignKey: 'idAssignedTask'
     });
   };
   return task_history;
