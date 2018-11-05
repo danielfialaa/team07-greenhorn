@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
+    idUser: DataTypes.INTEGER,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     telephone: DataTypes.STRING,
@@ -11,9 +12,23 @@ module.exports = (sequelize, DataTypes) => {
     isAdmin: DataTypes.BOOLEAN
   }, {});
   users.associate = function(models) {
-    users.hasOne(departments {
-      as: 'idDepartment'
-    })
+    users.belongsTo(models.departments, {
+      foreignKey: 'idDepartment'
+    });
+
+    users.hasMany(models.task_history, {
+      foreignKey: 'idUser',
+      as: 'users',
+    });
+    users.hasMany(models.task_history, {
+      foreignKey: 'idUser',
+      as: 'idRequestor',
+    });
+    users.hasMany(models.task_history, {
+      foreignKey: 'idUser',
+      as: 'idReporter',
+    });
+
 
   };
   return users;

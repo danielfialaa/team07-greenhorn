@@ -27,7 +27,6 @@ const modelModules = [
   require('./users'),
   require('./tasks'),
   require('./attachments'),
-  require('./involves_att'),
   require('./departments'),
   require('./task_history')
 ];
