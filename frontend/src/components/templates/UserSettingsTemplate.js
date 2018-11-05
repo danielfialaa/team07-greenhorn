@@ -7,10 +7,9 @@ import { ChangePasswordForm } from '../organisms/ChangePasswordForm';
 
 const { Header, Content } = Layout;
 
-
 export const UserSettingsTemplate = ({  }) => (
   <div>
-  <UserSettingsForm/>
-  <ChangePasswordForm/>
+    <UserSettingsForm/>
+    <ChangePasswordForm/>
   </div>
 );
