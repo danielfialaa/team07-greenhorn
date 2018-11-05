@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider } from 'antd';
+import { Table, Button, Divider, Tag } from 'antd';
 import { Logo } from '../atoms/Logo';
 
 
@@ -34,7 +34,6 @@ export class UserListTable extends Component {
 		const {users} = this.props;
 		console.log(this.props.users.response);
 
-
 		let { sortedInfo, filteredInfo } = this.state;
 sortedInfo = sortedInfo || {};
 filteredInfo = filteredInfo || {};
@@ -55,13 +54,21 @@ const columns = [{
 	sorter: (a, b) => a.lastName.length - b.lastName.length,
 	sortOrder: sortedInfo.columnKey === 'lastName' && sortedInfo.order,
 }, {
+	title: 'isAdmin',
+	dataIndex: 'isAdmin',
+	className: 'hide',
+}, {
 	title: 'Department',
-	dataIndex: 'department',
-	key: 'department',
-	filteredValue: filteredInfo.department || null,
-	onFilter: (value, record) => record.department.includes(value),
-	sorter: (a, b) => a.department.length - b.department.length,
-	sortOrder: sortedInfo.columnKey === 'department' && sortedInfo.order,
+	dataIndex: 'department.departmentName',
+	key: 'department.departmentName',
+	align: 'center',
+	render: (dataIndex, row) => (
+		<span>
+			{dataIndex}
+			<Divider type="vertical" className={row.isAdmin ? '' : 'hide'} />
+			<Tag color="red" visible={row.isAdmin} >Admin</Tag>
+		</span>
+	)
 },{
 	title: 'Email',
 	dataIndex: 'email',
@@ -77,7 +84,7 @@ const columns = [{
 }, {
   title: 'Action',
   key: 'action',
-  render: (text, record) => (
+  render: () => (
     <span>
       <a href="javascript:;">Profile</a>
       <Divider type="vertical" />

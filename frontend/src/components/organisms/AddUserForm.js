@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row,Col, Form, Button, notification, Select, DatePicker } from 'antd';
+import { Row,Col, Form, Button, notification, Select, DatePicker, Checkbox } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
@@ -20,6 +20,7 @@ export class AddUserForm extends Component {
 	state = {
 		departments: "",
 		dob: "",
+		adminChecked: false,
 	};
 
 	handleSelectChange = (value) => {
@@ -32,6 +33,11 @@ export class AddUserForm extends Component {
 	handleDateChange = (value) => {
 		console.log(value);
 		this.setState({dob: value}, function () {
+			console.log(this.state);
+		});
+	}
+	handleCheckboxChange = () => {
+		this.setState({adminChecked: !this.state.adminChecked}, function () {
 			console.log(this.state);
 		});
 	}
@@ -54,6 +60,7 @@ export class AddUserForm extends Component {
 	        onSubmit={(values, actions) => {
 						values.idDepartment = this.state.departments;
 						values.dob = this.state.dob.format("YYYY-MM-DD");
+						values.isAdmin = this.state.adminChecked;
 						console.log(values);
 	          api.post('addUser', values)
 	            .then(({ data }) => {
@@ -123,6 +130,14 @@ export class AddUserForm extends Component {
 									name="dob" id="dob"
 									 onChange={this.handleDateChange}
 								/>
+							</FormItem>
+							<FormItem>
+								<Checkbox
+									checked={this.state.adminChecked}
+									onChange={this.handleCheckboxChange}
+								>
+									admin
+								</Checkbox>
 							</FormItem>
 							<FormItem>
 								<Button type="primary" htmlType="submit" className="login-form-button" disabled={isSubmitting} loading={isSubmitting}>
