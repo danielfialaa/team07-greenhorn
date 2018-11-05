@@ -10,22 +10,17 @@ import api from '../../api';
 const FormItem = Form.Item;
 const Option = Select.Option
 
-const departments = [{
-  value: 'HR',
-  label: 'Human Resources',
-}, {
-  value: 'IT',
-  label: 'IT',
-}, {
-  value: 'Fin',
-  label: 'Finance',
+const emptyDepartments = [{
+  id: '',
+  departmentName: '',
 }];
 
 export class AddUserForm extends Component {
+
 	state = {
 		departments: "",
 		dob: "",
-	}
+	};
 
 	handleSelectChange = (value) => {
 		console.log(value);
@@ -47,14 +42,17 @@ export class AddUserForm extends Component {
 				lastName: '',
 				email: '',
 				telephone: '',
-				department: '',
+				idDepartment: '',
 				dob: null,
 			};
+			let departmentList = this.props.departmentList.response || emptyDepartments;
+			console.log(departmentList);
+			console.log(this.props.departmentList.response);
 	    return (
 	      <Formik
 	        initialValues={initialValues}
 	        onSubmit={(values, actions) => {
-						values.department = this.state.departments;
+						values.idDepartment = this.state.departments;
 						values.dob = this.state.dob.format("YYYY-MM-DD");
 						console.log(values);
 	          api.post('addUser', values)
@@ -110,9 +108,13 @@ export class AddUserForm extends Component {
 									id="departments"
 									 onChange={this.handleSelectChange}
 								>
-									<Option value="HR" key="HR">Human Resources</Option>
-									<Option value="IT" key="IT">IT</Option>
-									<Option value="Fin" key="Fin">Finance</Option>
+								{
+									departmentList.map(function(department) {
+										return <Option key={department.id}
+										value={department.id}>{department.departmentName}</Option>;
+									})
+
+								}
 								</Select>
 							</FormItem>
 							<FormItem label="Date of Birth">
@@ -130,7 +132,7 @@ export class AddUserForm extends Component {
 						</Form>
 						</Col>
 					</Row>
-        )}kkkkk
+        )}
 	      />
 	    );
 	  }

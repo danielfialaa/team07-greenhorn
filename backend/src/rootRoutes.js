@@ -10,6 +10,7 @@ import userListRoutes from './modules/user-list/routes';
 import newPassRoutes from './modules/new-pass/routes';
 import resetPassRoutes from './modules/reset-pass/routes';
 import updateUserFormRoutes from './modules/update-user-form/routes';
+import departmentListRoutes from './modules/department-list/routes';
 
 const router = Router();
 
@@ -46,6 +47,7 @@ router.use('/api/products', productRoutes);
 router.use('/api/contactForm', contactFormRoutes);
 router.use('/api/newPass', newPassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
+router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/', () => {
 
 });
