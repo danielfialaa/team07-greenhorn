@@ -30,6 +30,7 @@ export class UserSettingsForm extends Component {
 	}
 
 	render() {
+		console.log(this.props.userInfo);
 	    const initialValues = {
 				firstName: '',
 				lastName: '',
@@ -41,6 +42,9 @@ export class UserSettingsForm extends Component {
 	        initialValues={initialValues}
           validationSchema={UserValidation}
 	        onSubmit={(values, actions) => {
+						this.state.firstName ? null : this.state.firstName=moment('1950/01/01', dateFormat);
+						this.state.lastName ? null : this.state.lastName=moment('1950/01/01', dateFormat);
+						this.state.telephone ? null : this.state.telephone=moment('1950/01/01', dateFormat);
 						this.state.dob ? null : this.state.dob=moment('1950/01/01', dateFormat);
 						values.dob = this.state.dob.format("YYYY-MM-DD");
 						console.log(values);
