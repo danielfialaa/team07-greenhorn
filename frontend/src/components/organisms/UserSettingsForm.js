@@ -11,7 +11,8 @@ import * as Yup from 'yup';
 import api from '../../api';
 
 const FormItem = Form.Item;
-const Option = Select.Option
+const Option = Select.Option;
+const dateFormat = 'YYYY/MM/DD';
 
 export class UserSettingsForm extends Component {
 	state = {
@@ -22,6 +23,9 @@ export class UserSettingsForm extends Component {
 		console.log(value);
 		this.setState({dob: value}, function () {
 			console.log(this.state);
+			if (value == null){
+
+			}
 		});
 	}
 
@@ -37,6 +41,7 @@ export class UserSettingsForm extends Component {
 	        initialValues={initialValues}
           validationSchema={UserValidation}
 	        onSubmit={(values, actions) => {
+						this.state.dob ? null : this.state.dob=moment('1950/01/01', dateFormat);
 						values.dob = this.state.dob.format("YYYY-MM-DD");
 						console.log(values);
 	          api.put('updateUser', values)
@@ -91,7 +96,9 @@ export class UserSettingsForm extends Component {
                 <DatePicker
                   dropdownClassName = "dob"
                   name="dob"
+									allowClear={false}
                   id="dob"
+									defaultValue={moment('1950/01/01', dateFormat)}
                   onChange={this.handleDateChange}
                 />
               </FormItem>
