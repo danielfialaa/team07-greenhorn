@@ -2,8 +2,9 @@ import db from '../../models/';
 
 export const updateUserFormController =
   async (req, res) => {
-
-  const form = await db.users.update((
+		console.log("ano prosim");
+	console.log(req.user.email);
+  const form = await db.users.update(
 		{
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -12,16 +13,23 @@ export const updateUserFormController =
     },
 		{
       where: {
-        email: req.body.email
+        email: req.user.email
       }
 		}
-	));
+	).then((result) =>{
+		console.log("pass");
+			res.json({
+				status: true,
+				result,
+		});
+	}).catch(e => {
+		console.log("not-pass");
+			res.json({
+				status: false,
+				result,
+		});
+	});
+	console.log(form);
 
 	// const form = await req.body;
-
-
-  res.json({
-    status: true,
-    form,
-  });
 };
