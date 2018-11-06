@@ -44,7 +44,7 @@ export class UserSettingsForm extends Component {
 						this.state.dob ? null : this.state.dob=moment('1950/01/01', dateFormat);
 						values.dob = this.state.dob.format("YYYY-MM-DD");
 						console.log(values);
-	          api.put('updateUser', values)
+	          api.post('updateUser', values)
 	            .then(({ data }) => {
 								if (data.status) {
 									Notification('success', 'User Updated', 'User information has been succesfully updated')
