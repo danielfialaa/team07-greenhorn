@@ -2,6 +2,9 @@ body{
 	background: #8EAE9D;
 }
 
+.hide{
+	display:none;
+}
 
 /* ----- MAIN CONTENT ------ */
 #root, .pageWrap, .ant-layout, .ant-layout-has-sider{

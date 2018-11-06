@@ -4,15 +4,31 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     telephone: DataTypes.STRING,
-    department: DataTypes.STRING,
     dob: DataTypes.DATE,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    bio: DataTypes.STRING
+    bio: DataTypes.BLOB,
+    isAdmin: DataTypes.BOOLEAN
   }, {});
   users.associate = function(models) {
-    // associations can be defined here
-    
+    users.belongsTo(models.departments, {
+      foreignKey: 'idDepartment'
+    });
+
+    users.hasMany(models.task_history, {
+      foreignKey: 'idUser',
+      as: 'users',
+    });
+    users.hasMany(models.task_history, {
+      foreignKey: 'idUser',
+      as: 'idRequestor',
+    });
+    users.hasMany(models.task_history, {
+      foreignKey: 'idUser',
+      as: 'idReporter',
+    });
+
+
   };
   return users;
 };
