@@ -27,7 +27,7 @@ const departments = [{
 const attachments = {
     name: 'file',
     multiple: true,
-    action: '//jsonplaceholder.typicode.com/posts/',
+    action: 'addTask',
     onChange(info) {
       const status = info.file.status;
       if (status !== 'uploading') {
