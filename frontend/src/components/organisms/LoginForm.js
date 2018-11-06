@@ -7,13 +7,9 @@ import { Notification } from '../atoms/Notification';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
-
-
 import api from '../../api';
 
 const FormItem = Form.Item;
-
-
 
 export class LoginForm extends Component {
 	state = {
@@ -26,8 +22,6 @@ export class LoginForm extends Component {
 			if(this.state.loggedIn === true){
 				return <Redirect to="/home"/>;
 			}
-
-
 	    return (
 	      <Formik
 	        initialValues={initialValues}
@@ -42,10 +36,11 @@ export class LoginForm extends Component {
 									localStorage.setItem('token', data.token);
 									console.log(localStorage.getItem('token'));
 									api.defaults.headers.common['Authorization'] = data.token;
+										this.setState(() => ({
+											loggedIn: true
+										}))
 									Notification('success', 'Log-in success', 'You have been successfully logged in!');
-									this.setState(() => ({
-										loggedIn: true
-									}))
+
 								}else{
 									Notification('error', 'Log-in error', 'Wrong username and password combination!');
 								}
