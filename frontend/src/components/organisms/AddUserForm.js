@@ -72,7 +72,11 @@ export class AddUserForm extends Component {
 								console.log(data);
 	              actions.setSubmitting(false);
 	            })
-							.catch(err => console.log('There was an error:' + err))
+							.catch(err => {
+								console.log('There was an error:' + err)
+								actions.setSubmitting(false);
+								Notification('error', 'Error', 'Error while creating user!')
+							})
 	        }}
 	        render={({
 	          values,

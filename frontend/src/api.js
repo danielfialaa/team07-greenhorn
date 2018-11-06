@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: '/api/',
-	headers: {
-		Authorization : localStorage.getItem('token')
-}
+// 	headers: {
+// 		Authorization : null ? localStorage.getItem('token'): this,
+// }
 });
 
 export default api;
