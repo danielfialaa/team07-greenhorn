@@ -39,7 +39,7 @@ export class UserSettingsForm extends Component {
 	        onSubmit={(values, actions) => {
 						values.dob = this.state.dob.format("YYYY-MM-DD");
 						console.log(values);
-	          api.put('updateUser', values)
+	          api.post('updateUser', values)
 	            .then(({ data }) => {
 								if (data.status) {
 									Notification('success', 'User Updated', 'User information has been succesfully updated')

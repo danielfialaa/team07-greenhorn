@@ -49,9 +49,16 @@ router.use('/api/contactForm', contactFormRoutes);
 router.use('/api/newPass', newPassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
+<<<<<<< HEAD
 router.use('/api/taskList', taskListRoutes);
 router.use('/api/', () => {
 
+=======
+router.use('/api/', (req,res) => {
+		res.json({
+			status: true,
+		})
+>>>>>>> master
 });
 
 
