@@ -20,17 +20,16 @@ export class UserSettingsForm extends Component {
 	}
 
 	handleDateChange = (value) => {
-		console.log(value);
+		value ? null : value= moment(this.props.userInfo.dob)
 		this.setState({dob: value}, function () {
 			console.log(this.state);
-			if (value == null){
-
-			}
 		});
 	}
 
 	render() {
-		console.log(this.props.userInfo);
+		console.log("settings");
+	  console.log(this.props.userInfo);
+		console.log(this.props.userInfo.firstName);
 	    const initialValues = {
 				firstName: '',
 				lastName: '',
@@ -42,12 +41,7 @@ export class UserSettingsForm extends Component {
 	        initialValues={initialValues}
           validationSchema={UserValidation}
 	        onSubmit={(values, actions) => {
-						this.state.firstName ? null : this.state.firstName=moment('1950/01/01', dateFormat);
-						this.state.lastName ? null : this.state.lastName=moment('1950/01/01', dateFormat);
-						this.state.telephone ? null : this.state.telephone=moment('1950/01/01', dateFormat);
-						this.state.dob ? null : this.state.dob=moment('1950/01/01', dateFormat);
 						values.dob = this.state.dob.format("YYYY-MM-DD");
-						console.log(values);
 	          api.post('updateUser', values)
 	            .then(({ data }) => {
 								if (data.status) {
@@ -75,7 +69,7 @@ export class UserSettingsForm extends Component {
             <FormItemWithError
               label="Change user first name"
               iconType="user"
-              placeholder=""
+							defaultValue={this.props.userInfo.firstName}
               type="text"
               name="firstName"
               id="firstName"
@@ -83,7 +77,7 @@ export class UserSettingsForm extends Component {
               <FormItemWithError
                 label="Change user last name"
                 iconType="user"
-                placeholder=""
+								defaultValue={this.props.userInfo.lastName}
                 type="text"
                 name="lastName"
                 id="lastName"
@@ -91,7 +85,7 @@ export class UserSettingsForm extends Component {
               <FormItemWithError
                 label="Change user telephone number"
                 iconType="phone"
-                placeholder=""
+								defaultValue={this.props.userInfo.telephone}
                 type="tel"
                 name="telephone"
                 id="telephone"
@@ -102,7 +96,7 @@ export class UserSettingsForm extends Component {
                   name="dob"
 									allowClear={false}
                   id="dob"
-									defaultValue={moment('1950/01/01', dateFormat)}
+									defaultValue={moment(this.props.userInfo.dob)}
                   onChange={this.handleDateChange}
                 />
               </FormItem>

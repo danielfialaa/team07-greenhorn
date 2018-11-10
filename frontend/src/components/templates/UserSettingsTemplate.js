@@ -9,7 +9,6 @@ const { Header, Content } = Layout;
 
 export const UserSettingsTemplate = ({ userInfo }) => (
   <div>
-  <div>DATA: {userInfo}</div>
     <UserSettingsForm userInfo={userInfo}/>
     <ChangePasswordForm/>
   </div>
