@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import api from '../../api';
 
-
 export class HomePage extends Component {
 	state = {
 		isLoading: true,
@@ -33,8 +32,6 @@ export class HomePage extends Component {
         users={this.state.users}
         error={error}
       />
-
-
     );
   }
 }

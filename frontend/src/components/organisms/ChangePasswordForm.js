@@ -20,27 +20,23 @@ export class ChangePasswordForm extends Component {
 
 	render() {
 	    const initialValues = {
-				password_current: '',
+        password_current: '',
         password_new: '',
-        password_new_confirm: ''
+        password: ''
 			};
 	    return (
 	      <Formik
 	        initialValues={initialValues}
           validationSchema={PasswordValidation}
           onSubmit={(values, actions) => {
-            api.post('newPass', values)
+            api.post('changePass', values)
               .then(({ data }) => {
-                actions.setSubmitting(false);
-                console.log(data.result[0]);
-                if(data.result[0]){
+                if(data.status){
                   Notification('success', 'Password changed', 'Your password have been successfully changed!');
-                  this.setState(() => ({
-                    success: true
-                  }))
                 }else{
                   Notification('error', 'Password not changed', 'Try to enter another password!');
                 }
+	              actions.setSubmitting(false);
               })
             console.log(values)
           }}
@@ -78,9 +74,9 @@ export class ChangePasswordForm extends Component {
                 iconType="lock"
                 placeholder=""
                 type="password"
-                name="password_new_confirm"
-                id="password_new_confirm"
-                value = {values.password_new_confirm}/>
+                name="password"
+                id="password"
+                value = {values.password}/>
 							<FormItem>
 								<Button type="primary" htmlType="submit" className="change-password-button"
                 disabled={!isValid || isSubmitting}
