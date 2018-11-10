@@ -10,26 +10,17 @@ import { Spin, Icon } from 'antd';
 const { Header, Content } = Layout;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-export const HomeTemplate = ({
-  isLoading,
-  isError,
-  users,
-  error,
-}) => {
-	console.log(isLoading);
-	console.log(users);
+export const HomeTemplate = ({ isLoading, isError, users, error }) => {
   if (isError && !isLoading) {
     // return <ErrorMessage error={error} />;
-		// return <div> Error </div>
-		console.log(isError);
-		return <Spin indicator={antIcon} />
+    // return <div> Error </div>
+    console.log(isError);
+    return <Spin indicator={antIcon} />;
   }
 
   if (isLoading) {
-		return <Spin indicator={antIcon} />
+    return <Spin indicator={antIcon} />;
   }
 
-  return (
-		<UserListTable users={users}/>
-  );
+  return <UserListTable users={users} />;
 };

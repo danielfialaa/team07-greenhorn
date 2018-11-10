@@ -10,8 +10,6 @@ export const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-
-
 if (__DEV__) {
   app.use(express.static('public'));
 }

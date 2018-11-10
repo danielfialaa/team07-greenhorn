@@ -6,7 +6,6 @@ import { AddUserForm } from '../organisms/AddUserForm';
 
 const { Header, Content } = Layout;
 
-
 export const AddUserTemplate = ({ departmentList }) => (
-          <AddUserForm departmentList = {departmentList}/>
+  <AddUserForm departmentList={departmentList} />
 );
