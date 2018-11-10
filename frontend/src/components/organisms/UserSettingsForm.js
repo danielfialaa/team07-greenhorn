@@ -29,15 +29,17 @@ export class UserSettingsForm extends Component {
 	render() {
 		console.log("settings");
 	  console.log(this.props.userInfo);
-		console.log(this.props.userInfo.firstName);
+		console.log("values: ",this.props.userInfo.firstName);
 	    const initialValues = {
-				firstName: '',
-				lastName: '',
-				telephone: '',
+				firstName: this.props.userInfo.firstName,
+				lastName: this.props.userInfo.lastName,
+				telephone: this.props.userInfo.telephone,
 				dob: null,
 			};
+			console.log(initialValues);
 	    return (
 	      <Formik
+					enableReinitialize= {true}
 	        initialValues={initialValues}
           validationSchema={UserValidation}
 	        onSubmit={(values, actions) => {
@@ -69,7 +71,7 @@ export class UserSettingsForm extends Component {
             <FormItemWithError
               label="Change user first name"
               iconType="user"
-							defaultValue={this.props.userInfo.firstName}
+							// defaultValue={this.props.userInfo.firstName}
               type="text"
               name="firstName"
               id="firstName"
