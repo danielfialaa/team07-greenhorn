@@ -20,6 +20,8 @@ export class AssignTaskForm extends Component {
   state = {
     tasks: '',
     dob: '',
+    userId: '',
+    requestorId: '',
   };
 
   handleSelectChange = value => {
@@ -37,9 +39,6 @@ export class AssignTaskForm extends Component {
     };
 
     let taskList = this.props.taskList || emptyTaskList;
-    console.log('tasklist');
-    console.log(taskList);
-
     return (
       <Formik
         initialValues={initialValues}
@@ -65,52 +64,93 @@ export class AssignTaskForm extends Component {
             });
         }}
         render={({ isSubmitting }) => (
-          <Row>
-            <Col span={12}>
-              <Select
-                name="tasks"
-                id="tasks"
-                onChange={this.handleSelectChange}
-                placeholder="Select a task"
-                style={{
-                  width: '-webkit-fill-available',
-                  margin: '0px 5px 0px 0px',
-                }}
-              >
-                {taskList.map(function(task) {
-                  return (
-                    <Option key={task.id} value={task.id}>
-                      {task.name}
-                    </Option>
-                  );
-                })}
-              </Select>
-            </Col>
-            <Col span={8}>
-              <DatePicker
-                dropdownClassName="dob"
-                placeholder="Select deadline"
-                name="dob"
-                id="dob"
-                style={{
-                  width: '-webkit-fill-available',
-                  margin: '0px 5px 0px 0px',
-                }}
-                onChange={this.handleDateChange}
-              />
-            </Col>
-            <Col span={4}>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-                disabled={isSubmitting}
-                loading={isSubmitting}
-              >
-                Assign
-              </Button>
-            </Col>
-          </Row>
+          <div>
+            <Row>
+              <Col span={12}>
+                <Select
+                  name="tasks"
+                  id="tasks"
+                  onChange={this.handleSelectChange}
+                  placeholder="Select a task"
+                  style={{
+                    width: '-webkit-fill-available',
+                    margin: '5px 5px 5px 5px',
+                  }}
+                >
+                  {taskList.map(function(task) {
+                    return (
+                      <Option key={task.id} value={task.id}>
+                        {task.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </Col>
+              <Col span={12}>
+                <Select
+                  name="tasks"
+                  id="tasks"
+                  onChange={this.handleSelectChange}
+                  placeholder="Select a reporter"
+                  style={{
+                    width: '-webkit-fill-available',
+                    margin: '5px 5px 5px 5px',
+                  }}
+                >
+                  {taskList.map(function(task) {
+                    return (
+                      <Option key={task.id} value={task.id}>
+                        {task.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={8}>
+                <DatePicker
+                  dropdownClassName="dob"
+                  placeholder="Select deadline"
+                  name="dob"
+                  id="dob"
+                  style={{
+                    width: '-webkit-fill-available',
+                    margin: '5px 5px 5px 5px',
+                  }}
+                  onChange={this.handleDateChange}
+                />
+              </Col>
+              <Col span={8}>
+                <DatePicker
+                  dropdownClassName="dob"
+                  placeholder="Select notification date"
+                  name="dob"
+                  id="dob"
+                  style={{
+                    width: '-webkit-fill-available',
+                    margin: '5px 5px 5px 5px',
+                  }}
+                  onChange={this.handleDateChange}
+                />
+              </Col>
+              <Col span={8}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  disabled={isSubmitting}
+                  loading={isSubmitting}
+                  style={{
+                    width: '-webkit-fill-available',
+                    margin: '5px 5px 5px 5px',
+                  }}
+                >
+                  Assign
+                </Button>
+              </Col>
+            </Row>
+          </div>
         )}
       />
     );

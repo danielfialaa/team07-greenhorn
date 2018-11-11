@@ -10,24 +10,31 @@ export class UserAdministrationPage extends Component {
     isLoading: true,
     userInfo: '',
     taskList: '',
+    tasks: '',
+    userId: '',
+    requestorId: '',
+    reporterList: '',
   };
 
   componentDidMount() {
     api.get('userAdministration').then(({ data }) => {
-      console.log('userAdministration');
-      console.log(data);
       this.setState(() => ({
         userInfo: data.response[0],
+        userId: data.response[0].id,
       }));
     });
 
     api.get('tasks').then(({ data }) => {
       this.setState(() => ({
         taskList: data.response,
-        isLoading: false,
       }));
-      console.log('taskList');
-      console.log(this.state.taskList);
+    });
+
+    api.get('taskList/4').then(({ data }) => {
+      this.setState(() => ({
+        isLoading: false,
+        tasks: data,
+      }));
     });
   }
 
@@ -37,6 +44,8 @@ export class UserAdministrationPage extends Component {
         isLoading={this.state.isLoading}
         userInfo={this.state.userInfo}
         taskList={this.state.taskList}
+        tasks={this.state.tasks}
+        userId={this.state.userId}
         title="User profile"
       />
     );

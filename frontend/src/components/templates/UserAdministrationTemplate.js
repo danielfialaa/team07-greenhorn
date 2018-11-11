@@ -4,6 +4,7 @@ import { SiderMenu } from '../organisms/SiderMenu';
 import { Footer } from '../atoms/Footer';
 import { UserAdministrationForm } from '../organisms/UserAdministrationForm';
 import { AssignTaskForm } from '../organisms/AssignTaskForm';
+import { TaskListTable } from '../organisms/TaskListTable';
 import { Spin, Icon } from 'antd';
 
 const { Header, Content } = Layout;
@@ -12,6 +13,9 @@ const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 export const UserAdministrationTemplate = ({
   userInfo,
   taskList,
+  tasks,
+  userId,
+  currentUserId,
   isLoading,
 }) => {
   if (isLoading) {
@@ -34,7 +38,9 @@ export const UserAdministrationTemplate = ({
       </Row>
       <Row>
         <h2>User task history</h2>
-        <Col />
+        <Col>
+          <TaskListTable tasks={tasks} userId={userId} />
+        </Col>
       </Row>
     </div>
   );
