@@ -1,8 +1,6 @@
 import db from '../../models/';
 
 export const updateUserFormController = async (req, res) => {
-  console.log('ano prosim');
-  console.log(req.user.email);
   const form = await db.users
     .update(
       {
@@ -31,7 +29,4 @@ export const updateUserFormController = async (req, res) => {
         result,
       });
     });
-  console.log(form);
-
-  // const form = await req.body;
 };

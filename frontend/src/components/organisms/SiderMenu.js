@@ -98,10 +98,16 @@ export class SiderMenu extends Component {
             linkTo="/Checklist"
           />
           <MenuItem
+            key="UserAdministration"
+            title="User Administration"
+            icon="user"
+            linkTo="/UserAdministration"
+          />
+          <MenuItem
             key="Settings"
             title="Settings"
             icon="setting"
-            linkTo="/settings"
+            linkTo="/Settings"
           />
           <MenuItem
             key="Logout"

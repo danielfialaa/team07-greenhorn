@@ -12,6 +12,8 @@ import updateUserFormRoutes from './modules/update-user-form/routes';
 import departmentListRoutes from './modules/department-list/routes';
 import changePassRoutes from './modules/change-pass/routes';
 import currentUserRoutes from './modules/current-user/routes';
+import userAdministrationRoutes from './modules/user-administration/routes';
+import taskListRoutes from './modules/task-list/routes';
 
 const router = Router();
 
@@ -47,6 +49,8 @@ router.use('/api/newPass', newPassRoutes);
 router.use('/api/changePass', changePassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
+router.use('/api/userAdministration', userAdministrationRoutes);
+router.use('/api/taskList', taskListRoutes);
 router.use('/api/', (req, res) => {
   res.json({
     status: true,
