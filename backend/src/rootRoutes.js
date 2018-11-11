@@ -10,6 +10,7 @@ import newPassRoutes from './modules/new-pass/routes';
 import resetPassRoutes from './modules/reset-pass/routes';
 import updateUserFormRoutes from './modules/update-user-form/routes';
 import departmentListRoutes from './modules/department-list/routes';
+import taskListRoutes from './modules/task-list/routes';
 import changePassRoutes from './modules/change-pass/routes';
 import currentUserRoutes from './modules/current-user/routes';
 
@@ -50,6 +51,8 @@ router.use('/api/newPass', newPassRoutes);
 router.use('/api/changePass', changePassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
+router.use('/api/taskList', taskListRoutes);
+
 router.use('/api/', (req,res) => {
 		res.json({
 			status: true,
