@@ -1,10 +1,10 @@
-export { Router } from 'express';
+import { Router } from 'express';
 
 import {
-  createAddTaskFormController,
+  addTaskFormController,
 } from './addTaskFormController';
 
 const router = Router();
-router.post('/', createAddTaskFormController);
+router.post('/', addTaskFormController);
 
 export default router;

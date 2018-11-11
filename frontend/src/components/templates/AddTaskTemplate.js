@@ -7,6 +7,6 @@ import { AddTaskForm } from '../organisms/AddTaskForm';
 const { Header, Content } = Layout;
 
 
-export const AddTaskTemplate = ({  }) => (
-          <AddTaskForm/>
+export const AddTaskTemplate = ({ departmentList }) => (
+          <AddTaskForm departmentList = {departmentList}/>
 );
