@@ -7,24 +7,24 @@ import api from '../../api';
 
 export class UserSettingsPage extends Component {
   state = {
-    userInfo: "",
-  }
+    isLoading: true,
+    userInfo: '',
+  };
 
-  componentDidMount(){
-    api.get('currentUser')
-    .then(({ data }) => {
-      console.log("current user");
+  componentDidMount() {
+    api.get('currentUser').then(({ data }) => {
       this.setState(() => ({
-          userInfo: data.response[0]
+        userInfo: data.response[0],
+        isLoading: false,
       }));
-				console.log(this.state.userInfo);
-    })
+    });
   }
 
   render() {
-    console.log(this.state.userInfo);
     return (
-      <UserSettingsTemplate userInfo = {this.state.userInfo}
+      <UserSettingsTemplate
+        isLoading={this.state.isLoading}
+        userInfo={this.state.userInfo}
         title="Edit profile"
       />
     );

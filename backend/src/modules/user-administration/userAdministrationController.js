@@ -1,12 +1,13 @@
 import db from '../../models/';
 
-export const currentUserController = async (req, res) => {
+export const userAdministrationController = async (req, res) => {
   const data = await req.body;
+  const mail = 'pivo@dobre.cz';
 
   const result = db.users
     .findAll({
       where: {
-        email: req.user.email,
+        email: mail,
       },
     })
     .then(response => {

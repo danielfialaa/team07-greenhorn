@@ -1,8 +1,8 @@
 import React from 'react';
-import { notification } from 'antd'
+import { notification } from 'antd';
 
-export const Notification = (type,msg,desc) => {
-	notification[type]({
+export const Notification = (type, msg, desc) => {
+  notification[type]({
     message: msg,
     description: desc,
   });

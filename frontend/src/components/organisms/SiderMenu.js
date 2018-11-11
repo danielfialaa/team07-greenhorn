@@ -9,81 +9,117 @@ import api from '../../api';
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItem = ({ title, icon, linkTo, ...rest }) => (
-	<Link to={linkTo}>
-		<Menu.Item {...rest}>
-			<Icon type={icon} theme="outlined" />
-			{title}
-		</Menu.Item>
-	</Link>
+  <Link to={linkTo}>
+    <Menu.Item {...rest}>
+      <Icon type={icon} theme="outlined" />
+      {title}
+    </Menu.Item>
+  </Link>
 );
 
-
 export class SiderMenu extends Component {
-	componentDidMount() {
-		this.setState.authorized = true;
-		console.log(this.state.authorized);
-		console.log("login check");
-		if(localStorage.getItem('token')){
-			console.log("mas token, tak to zkusím");
-			api.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-			console.log(api.defaults.headers.common['Authorization']);
-			api.get('/')
-				.then(({ data }) => {
-					console.log("login check arrived");
-					this.setState(() => ({
-						authorized: true
-					}))
-				})
-				.catch(e => {
-					console.log(e);
-					this.setState(() => ({
-						authorized: false
-					}))
-				})
-		}else{
-			console.log("nemas token vole");
-			this.setState(() => ({
-				authorized: false
-			}))
-		}
-
-	}
-	state = {
+  componentDidMount() {
+    this.setState.authorized = true;
+    if (localStorage.getItem('token')) {
+      api.defaults.headers.common['Authorization'] = localStorage.getItem(
+        'token',
+      );
+      api
+        .get('/')
+        .then(({ data }) => {
+          console.log('login check arrived');
+          this.setState(() => ({
+            authorized: true,
+          }));
+        })
+        .catch(e => {
+          console.log(e);
+          this.setState(() => ({
+            authorized: false,
+          }));
+        });
+    } else {
+      console.log('nemas token vole');
+      this.setState(() => ({
+        authorized: false,
+      }));
+    }
+  }
+  state = {
     collapsed: false,
-		authorized: true,
+    authorized: true,
   };
 
-	onCollapse = (collapsed) => {
-     console.log(collapsed);
-     this.setState({ collapsed });
-   }
+  onCollapse = collapsed => {
+    console.log(collapsed);
+    this.setState({ collapsed });
+  };
 
   render() {
-		if (!this.state.authorized) {
-			return <Redirect to="/"/>;
-		}
+    if (!this.state.authorized) {
+      return <Redirect to="/" />;
+    }
     return (
-			<Sider
-      breakpoint="lg"
-      collapsedWidth="0"
-      onBreakpoint={(broken) => { console.log(broken); }}
-      onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
-    >
-			<div className="logoMenu">
-				<Logo/>
-			</div>
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={window.location.pathname.split('/')}>
-				<MenuItem key="home" title="User List" icon="team" linkTo="/home"/>
-        <MenuItem key="AddUser" title="Add User" icon="user-add" linkTo="/AddUser"/>
-				<MenuItem key="AddTask" title="Add task" icon="form" linkTo="/AddTask" />
-				<MenuItem key="MyTasks" title="My tasks" icon="project" linkTo="/UserTasks"/>
-				<MenuItem key="Checklist" title="Checklist" icon="project" linkTo="/Checklist"/>
-				<MenuItem key="Settings" title="Settings" icon="setting" linkTo="/settings"/>
-				<MenuItem key="Logout" title="Logout" icon="logout" linkTo="/" onClick={()=>{
-					localStorage.removeItem('token');
-				}}/>
-      </Menu>
-    </Sider>
-			);
-		}
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={broken => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type);
+        }}
+      >
+        <div className="logoMenu">
+          <Logo />
+        </div>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={window.location.pathname.split('/')}
+        >
+          <MenuItem key="home" title="User List" icon="team" linkTo="/home" />
+          <MenuItem
+            key="AddUser"
+            title="Add User"
+            icon="user-add"
+            linkTo="/AddUser"
+          />
+          <MenuItem
+            key="AddTask"
+            title="Add task"
+            icon="form"
+            linkTo="/AddTask"
+          />
+          <MenuItem
+            key="Checklist"
+            title="Checklist"
+            icon="project"
+            linkTo="/Checklist"
+          />
+          <MenuItem
+            key="UserAdministration"
+            title="User Administration"
+            icon="user"
+            linkTo="/UserAdministration"
+          />
+          <MenuItem
+            key="Settings"
+            title="Settings"
+            icon="setting"
+            linkTo="/Settings"
+          />
+          <MenuItem
+            key="Logout"
+            title="Logout"
+            icon="logout"
+            linkTo="/"
+            onClick={() => {
+              localStorage.removeItem('token');
+            }}
+          />
+        </Menu>
+      </Sider>
+    );
+  }
 }

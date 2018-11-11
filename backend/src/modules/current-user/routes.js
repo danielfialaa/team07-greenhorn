@@ -1,8 +1,6 @@
 import { Router } from 'express';
 
-import {
-  currentUserController,
-} from './currentUserController';
+import { currentUserController } from './currentUserController';
 
 const router = Router();
 router.get('/', currentUserController);

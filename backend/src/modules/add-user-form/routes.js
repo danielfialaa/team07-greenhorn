@@ -1,8 +1,6 @@
 import { Router } from 'express';
 
-import {
-  addUserFormController,
-} from './addUserFormController';
+import { addUserFormController } from './addUserFormController';
 
 const router = Router();
 router.post('/', addUserFormController);

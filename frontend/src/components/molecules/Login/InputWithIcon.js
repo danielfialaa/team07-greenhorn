@@ -3,9 +3,14 @@ import { Input, Icon } from 'antd';
 
 export class InputWithIcon extends Component {
   render() {
-    const { iconType, placeholder, defaultValue, type, input, ...rest } = this.props;
-    console.log("input with icon");
-      console.log(defaultValue);
+    const {
+      iconType,
+      placeholder,
+      defaultValue,
+      type,
+      input,
+      ...rest
+    } = this.props;
     return (
       <Input
         prefix={
