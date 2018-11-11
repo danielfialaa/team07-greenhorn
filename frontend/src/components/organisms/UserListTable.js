@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Divider, Tag } from 'antd';
 import { Logo } from '../atoms/Logo';
-//import { Link } from 'link';
+import { Link } from 'react-router-dom';
 
 
 import api from '../../api';
@@ -87,14 +87,12 @@ const columns = [{
   key: 'action',
   render: () => (
     <span>
-			<a href="javascript:;">Profile</a>
+      <a href="javascript:;">Profile</a>
       <Divider type="vertical" />
       <a href="javascript:;">Tasks</a>
     </span>
   ),
 }];
-{/*    <Link to="/UserProfile" activeClassName="active">{users.firstName}</Link>
-`/UserProfile/${users.id}`*/}
 	    return (
 				<div>
         <div className="table-operations">

@@ -4,12 +4,20 @@ import { SiderMenu } from '../organisms/SiderMenu';
 import { Footer } from '../atoms/Footer';
 import { UserSettingsForm } from '../organisms/UserSettingsForm';
 import { ChangePasswordForm } from '../organisms/ChangePasswordForm';
+import { Spin, Icon } from 'antd';
 
 const { Header, Content } = Layout;
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-export const UserSettingsTemplate = ({  }) => (
-  <div>
-    <UserSettingsForm/>
-    <ChangePasswordForm/>
-  </div>
-);
+export const UserSettingsTemplate = ({ userInfo, isLoading }) => {
+  if (isLoading) {
+    return <Spin indicator={antIcon} />;
+  }
+
+  return (
+    <div>
+      <UserSettingsForm userInfo={userInfo} />
+      <ChangePasswordForm />
+    </div>
+  );
+};

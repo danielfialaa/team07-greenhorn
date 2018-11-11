@@ -1,8 +1,6 @@
 import { Router } from 'express';
 
-import {
-  resetPassController,
-} from './resetPassController';
+import { resetPassController } from './resetPassController';
 
 const router = Router();
 router.post('/', resetPassController);
