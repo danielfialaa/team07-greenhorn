@@ -11,6 +11,7 @@ import { NewPasswordPage } from './components/pages/NewPasswordPage';
 import { ResetPasswordPage } from './components/pages/ResetPasswordPage';
 import { UserTaskPage } from './components/pages/UserTaskPage';
 import { AddTaskPage } from './components/pages/AddTaskPage';
+import { UserProfilePage } from './components/pages/UserProfilePage';
 
 
 export const AppRoutes = () => (
@@ -25,6 +26,7 @@ export const AppRoutes = () => (
         <Route path="/UserTasks" exact component={UserTaskPage} />
         <Route path="/AddTask" exact component={AddTaskPage} />
 				<Route path="/settings" exact component={UserSettingsPage} />
+        <Route path="/UserProfile" exact component={UserProfilePage} />
 			</PageWrapper>
     </Switch>
 

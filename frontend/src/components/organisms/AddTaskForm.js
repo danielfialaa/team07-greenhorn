@@ -6,7 +6,7 @@ import { Notification } from '../atoms/Notification';
 import { AddTaskValidation } from '../atoms/schemas/AddTaskValidation';
 import * as Yup from 'yup';
 import { FormItemWithError } from '../molecules/FormItemWithError';
-
+//import { UploadFile } from '../molecules/UploadFile';
 import moment from 'moment';
 
 import api from '../../api';
@@ -20,23 +20,25 @@ const emptyDepartments = [{
   id: '',
   departmentName: '',
 }];
-//
-// const attachments = {
-//     name: 'file',
-//     multiple: true,
-//     action: '//jsonplaceholder.typicode.com/posts/',
-//     onChange(info) {
-//       const status = info.file.status;
-//       if (status !== 'uploading') {
-//         console.log(info.file, info.fileList);
-//       }
-//       if (status === 'done') {
-//         message.success(`${info.file.name} file uploaded successfully.`);
-//       } else if (status === 'error') {
-//         message.error(`${info.file.name} file upload failed.`);
-//       }
-//     },
-//   }
+
+const __dirname = "C:\\Users\\jvobornik\\Documents\\Greenhorn-uploadedFiles";
+//const __dirname = "//jsonplaceholder.typicode.com/posts/";
+const attachments = {
+    name: 'file',
+    multiple: true,
+    action: __dirname,
+    onChange(info) {
+      const status = info.file.status;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  }
 
 export class AddTaskForm extends Component {
   state = {
@@ -59,17 +61,18 @@ export class AddTaskForm extends Component {
         idDepartment: '',
         name: '',
         description: '',
-  //      attachments: '',
+        attachments: '',
       };
+      
       let departmentList = this.props.departmentList.response || emptyDepartments;
       return (
         <Formik
           initialValues={initialValues}
           validationSchema={AddTaskValidation}
           onSubmit={(values, actions) => {
-            values.idDepartment = this.state.departments;
+          values.idDepartment = this.state.departments;
 
-            console.log(values, 'tisknu values');
+            console.log('tisknu values', values);
             api.post('addTask', values)
               .then(({ data }) => {
                 if (data.status) {
@@ -79,6 +82,8 @@ export class AddTaskForm extends Component {
                   this.setState(() => ({
                     success: true
                   }))
+                  console.log("values.attachments:", values.attachments);
+                  values.attachments = '';
                 }else{
                   Notification('error', 'Error', 'Error while creating task!')
                 }
@@ -129,18 +134,22 @@ export class AddTaskForm extends Component {
                 id="description" value={values.description} onChange={handleChange} onBlur={handleBlur}
                 />
               </FormItem>
-              {/*
-                <FormItem label="Template form">
-                <Dragger {...attachments}>
-                    <p className="ant-upload-drag-icon">
-                      <Icon type="inbox" />
-                    </p>
-                    <p className="ant-upload-text">Click or drag template file to this area to upload</p>
-                    <p className="ant-upload-hint">Template to be attached to task and filled by an employee</p>
-                  </Dragger>
-                </FormItem>
-                */
-              }
+              <FormItem label="emplate form">
+              <Dragger {...attachments}>
+                  <p className="ant-upload-drag-icon">
+                    <Icon type="inbox" />
+                  </p>
+                  <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                  <p className="ant-upload-hint">Select the attachment. Uploaded file will be attached to the task</p>
+                </Dragger>
+              </FormItem>
+        {/*      <UploadFile
+              label="Template form"
+              name="name"
+              id="name"
+              value={values.name}
+              />
+*/}
               <FormItem>
                 <Button type="primary" htmlType="submit" className="login-form-button" disabled={!isValid || isSubmitting} loading={isSubmitting}>
                   Create Task
