@@ -88,7 +88,7 @@ const columns = [{
   key: 'action',
   render: (dataIndex) => (
     <span>
-      <Link to="">Profile</Link>
+      <Link to={"UserAdministration/"+dataIndex}>Profile</Link>
       <Divider type="vertical" />
 			<Link to={"UserTasks/"+dataIndex}>Tasks</Link>
     </span>

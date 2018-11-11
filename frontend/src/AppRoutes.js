@@ -24,7 +24,7 @@ export const AppRoutes = () => (
       <Route path="/UserTasks" exact component={UserTaskPage} />
       <Route path="/UserTasks/:id" exact component={UserTaskPage} />
       <Route
-        path="/UserAdministration"
+        path="/UserAdministration/:id"
         exact
         component={UserAdministrationPage}
       />
