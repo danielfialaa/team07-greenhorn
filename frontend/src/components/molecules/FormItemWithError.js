@@ -13,6 +13,7 @@ export class FormItemWithError extends Component {
   static propTypes = {
     label: PropTypes.string,
     iconType: PropTypes.string,
+    defaultValue: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
     name: PropTypes.string,
@@ -21,9 +22,11 @@ export class FormItemWithError extends Component {
     };
 
     render() {
-      const {  label, iconType, placeholder, type, name, id, value,  handleBlur, handleChange,
+      const {  label, iconType, placeholder, type, name, id, defaultValue,value, handleBlur, handleChange,
         ...filed} = this.props;
 
+          console.log("form ");
+            console.log(defaultValue);
       return (
         <Field
           name={name}
@@ -37,6 +40,7 @@ export class FormItemWithError extends Component {
                 type={type}
                 id={id}
                 value={value}
+                defaultValue={defaultValue}
                 placeholder={placeholder}
                 onChange={handleChange}
                 onBlur={handleBlur}
