@@ -1,18 +1,29 @@
 import db from '../../models/';
 
 export const taskListController =
-
   async (req, res) => {
-    console.log(req.body.email);
+		console.log("received id: ",req.params.id);
+
   const data = await req.body;
+	let id = await req.params.id;
+	console.log(typeof id);
+	if(id == 'undefined'){
+		const preResult = await db.users.findOne({
+			where: { email: req.user.email}
+		}).then((response)=>{
+			console.log("preResult: ", response.id);
+			id = response.id;
+		});
+	}
+	console.log("id:", id);
 
-  const preResult = db.users.findOne({
-    where: { email: req.user.email}
-    }).then((responseFirst) => {
-      console.log(responseFirst);
 
+		//
+		// .then((responseFirst) => {
+    //   console.log(responseFirst);
+		//
       const result = db.task_history.findAll({
-        where: { idUser: responseFirst.id },
+        where: { idUser: id },
         include: [{
              model: db.tasks,
              include: [{
@@ -26,9 +37,9 @@ export const taskListController =
            response,
          });
          console.log(response);
-
+		//
        });
-     });
+    //  });
   }
 
 /*

@@ -14,8 +14,9 @@ export class UserTaskPage extends Component {
     }
 
 	componentDidMount() {
+		console.log(this.props.match.params.id);
 		console.log("ehm");
-		api.get('taskList')
+		api.get('taskList/'+this.props.match.params.id)
 			.then(({ data }) => {
 				console.log("hmm");
 				this.setState(() => ({

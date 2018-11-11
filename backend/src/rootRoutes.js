@@ -14,7 +14,7 @@ import taskListRoutes from './modules/task-list/routes';
 import changePassRoutes from './modules/change-pass/routes';
 import currentUserRoutes from './modules/current-user/routes';
 
-const router = Router();
+const router = Router({mergeParams: true});
 
 router.use('/api/auth', loginFormRoutes);
 //dummy route in progress
@@ -51,7 +51,7 @@ router.use('/api/newPass', newPassRoutes);
 router.use('/api/changePass', changePassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
-router.use('/api/taskList', taskListRoutes);
+router.use('/api/taskList/:id', taskListRoutes);
 
 router.use('/api/', (req,res) => {
 		res.json({

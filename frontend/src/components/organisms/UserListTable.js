@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Divider, Tag } from 'antd';
 import { Logo } from '../atoms/Logo';
+import { Link } from 'react-router-dom';
 
 
 import api from '../../api';
@@ -83,12 +84,13 @@ const columns = [{
 	key: 'telephone',
 }, {
   title: 'Action',
+	dataIndex: 'id',
   key: 'action',
-  render: () => (
+  render: (dataIndex) => (
     <span>
-      <a href="javascript:;">Profile</a>
+      <Link to="">Profile</Link>
       <Divider type="vertical" />
-      <a href="javascript:;">Tasks</a>
+			<Link to={"UserTasks/"+dataIndex}>Tasks</Link>
     </span>
   ),
 }];
