@@ -21,7 +21,7 @@ export class UserAdministrationPage extends Component {
       }));
     });
 
-    api.get('taskList').then(({ data }) => {
+    api.get('tasks').then(({ data }) => {
       this.setState(() => ({
         taskList: data.response,
         isLoading: false,
