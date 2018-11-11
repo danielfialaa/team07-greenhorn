@@ -7,7 +7,7 @@ export const PasswordValidation = Yup.object().shape({
   password_new: Yup
         .string()
         .required('Password is required'),
-        password_new_confirm: Yup
+  password: Yup
         .string()
         .oneOf([Yup.ref('password_new'), null], "Passwords don't match")
         .required('Password confirmation is required')

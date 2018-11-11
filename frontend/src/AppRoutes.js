@@ -23,6 +23,7 @@ export const AppRoutes = () => (
 				<Route path="/Home" exact component={HomePage} />
 				<Route path="/AddUser" exact component={AddUserPage} />
         <Route path="/UserTasks" exact component={UserTaskPage} />
+				<Route path="/UserTasks/:id" exact component={UserTaskPage} />
         <Route path="/AddTask" exact component={AddTaskPage} />
 				<Route path="/settings" exact component={UserSettingsPage} />
 			</PageWrapper>
