@@ -10,8 +10,9 @@ export class UserTaskPage extends Component {
   state = {
 		isLoading: true,
 		isError: false,
-		tasks: "",
-	}
+		tasks: ""
+    }
+
 	componentDidMount() {
 		console.log("ehm");
 		api.get('taskList')
@@ -19,13 +20,13 @@ export class UserTaskPage extends Component {
 				console.log("hmm");
 				this.setState(() => ({
 					isLoading: false,
-					tasks: data
+          tasks: data
 				}))
 			})
 	}
 
   render() {
-		const { isLoading, users, isLoaded, isError, error } = this.props;
+		const { isLoading, tasks, isLoaded, isError, error } = this.props;
     return (
       <UserTasksTemplate
 				isLoading= {this.state.isLoading}
