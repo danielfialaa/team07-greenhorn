@@ -2,12 +2,12 @@ import db from '../../models/';
 
 export const userAdministrationController = async (req, res) => {
   const data = await req.body;
-  const mail = 'pivo@dobre.cz';
+  const id = await req.params.id;
 
   const result = db.users
     .findAll({
       where: {
-        email: mail,
+        id: id,
       },
     })
     .then(response => {

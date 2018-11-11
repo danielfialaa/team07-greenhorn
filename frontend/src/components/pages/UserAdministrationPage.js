@@ -17,7 +17,7 @@ export class UserAdministrationPage extends Component {
   };
 
   componentDidMount() {
-    api.get('userAdministration').then(({ data }) => {
+    api.get('userAdministration/'+this.props.match.params.id).then(({ data }) => {
       this.setState(() => ({
         userInfo: data.response[0],
         userId: data.response[0].id,
@@ -30,7 +30,7 @@ export class UserAdministrationPage extends Component {
       }));
     });
 
-    api.get('taskList/4').then(({ data }) => {
+    api.get('taskList/'+this.props.match.params.id).then(({ data }) => {
       this.setState(() => ({
         isLoading: false,
         tasks: data,

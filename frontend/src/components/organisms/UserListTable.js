@@ -84,12 +84,13 @@ const columns = [{
 	key: 'telephone',
 }, {
   title: 'Action',
+	dataIndex: 'id',
   key: 'action',
-  render: () => (
+  render: (dataIndex) => (
     <span>
-      <a href="javascript:;">Profile</a>
+      <Link to={"UserAdministration/"+dataIndex}>Profile</Link>
       <Divider type="vertical" />
-      <a href="javascript:;">Tasks</a>
+			<Link to={"UserTasks/"+dataIndex}>Tasks</Link>
     </span>
   ),
 }];

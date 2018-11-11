@@ -92,10 +92,10 @@ export class SiderMenu extends Component {
             linkTo="/AddTask"
           />
           <MenuItem
-            key="Checklist"
-            title="Checklist"
+            key="My Tasks"
+            title="My Tasks"
             icon="project"
-            linkTo="/Checklist"
+            linkTo="/UserTasks"
           />
           <MenuItem
             key="UserAdministration"

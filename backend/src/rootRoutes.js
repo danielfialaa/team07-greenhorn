@@ -54,7 +54,7 @@ router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
-router.use('/api/userAdministration', userAdministrationRoutes);
+router.use('/api/userAdministration/:id', userAdministrationRoutes);
 
 router.use('/api/', (req, res) => {
   res.json({
