@@ -12,7 +12,6 @@ import { ResetPasswordPage } from './components/pages/ResetPasswordPage';
 import { UserTaskPage } from './components/pages/UserTaskPage';
 import { AddTaskPage } from './components/pages/AddTaskPage';
 import { UserAdministrationPage } from './components/pages/UserAdministrationPage';
-import { UserProfilePage } from './components/pages/UserProfilePage';
 
 export const AppRoutes = () => (
   <Switch>

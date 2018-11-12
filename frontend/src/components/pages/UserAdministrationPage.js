@@ -12,8 +12,8 @@ export class UserAdministrationPage extends Component {
     taskList: '',
     tasks: '',
     userId: this.props.match.params.id,
-    requestorId: '',
-    reporterList: '',
+    reporterId: '',
+    requestorList: '',
   };
 
   componentDidMount() {
@@ -26,7 +26,7 @@ export class UserAdministrationPage extends Component {
 
 		api.get('userList').then(({ data }) => {
 			this.setState(() => ({
-				reporterList: data.response,
+				requestorList: data.response,
 			}));
 		});
 
@@ -54,7 +54,7 @@ export class UserAdministrationPage extends Component {
         taskList={this.state.taskList}
         tasks={this.state.tasks}
         userId={this.state.userId}
-				reporterList={this.state.reporterList}
+				requestorList={this.state.requestorList}
         title="User profile"
       />
     );

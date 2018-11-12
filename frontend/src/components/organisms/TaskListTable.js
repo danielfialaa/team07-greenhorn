@@ -24,6 +24,28 @@ export class TaskListTable extends Component {
     });
   };
 
+  deleteTaskHandler = (id) => {
+    api.post('deleteUserTask', {'id':id})
+    .then(({ response }) => {
+      // new Notification(
+      //   'success',
+      //   'Task has been deleted',
+      //   'Task has been succesfully deleted',
+      // );
+      console.log("Proslo to");
+      this.forceUpdate();
+    }).catch(error => {
+      //   Notification(
+      //   'error',
+      //   'Error occured while deleting task',
+      //   'Error occured while deleting task',
+      // );
+      console.log("Velký špatný");
+
+    });
+    console.log("id", id);
+  }
+
   /*setAgeSort = () => {
     this.setState({
       sortedInfo: {
@@ -112,9 +134,10 @@ export class TaskListTable extends Component {
       {
         title: 'Action',
         key: 'action',
-        render: () => (
+        dataIndex: 'id',
+        render: (dataIndex) => (
           <span>
-            <a href="javascript:;">Detail</a>
+            <Button onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
           </span>
         ),
       } /*{
