@@ -11,7 +11,7 @@ export class UserAdministrationPage extends Component {
     userInfo: '',
     taskList: '',
     tasks: '',
-    userId: '',
+    userId: this.props.match.params.id,
     requestorId: '',
     reporterList: '',
   };
@@ -23,6 +23,12 @@ export class UserAdministrationPage extends Component {
         userId: data.response[0].id,
       }));
     });
+
+		api.get('userList').then(({ data }) => {
+			this.setState(() => ({
+				reporterList: data.response,
+			}));
+		});
 
     api.get('tasks').then(({ data }) => {
       this.setState(() => ({
@@ -39,6 +45,8 @@ export class UserAdministrationPage extends Component {
   }
 
   render() {
+		console.log(this.state.userId);
+		console.log(this.props.match.params.id);
     return (
       <UserAdministrationTemplate
         isLoading={this.state.isLoading}
@@ -46,6 +54,7 @@ export class UserAdministrationPage extends Component {
         taskList={this.state.taskList}
         tasks={this.state.tasks}
         userId={this.state.userId}
+				reporterList={this.state.reporterList}
         title="User profile"
       />
     );

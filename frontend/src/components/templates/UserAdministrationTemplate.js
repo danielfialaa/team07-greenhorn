@@ -17,6 +17,7 @@ export const UserAdministrationTemplate = ({
   userId,
   currentUserId,
   isLoading,
+	reporterList,
 }) => {
   if (isLoading) {
     return <Spin indicator={antIcon} />;
@@ -33,7 +34,7 @@ export const UserAdministrationTemplate = ({
       <Row>
         <h2>Assign new task</h2>
         <Col>
-          <AssignTaskForm taskList={taskList} />
+          <AssignTaskForm taskList={taskList} reporterList={reporterList} userId={userId}/>
         </Col>
       </Row>
       <Row>

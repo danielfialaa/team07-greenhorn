@@ -1,48 +1,61 @@
 import React, { Component } from 'react';
-import { Row, Col, Select, DatePicker, Button } from 'antd';
+import { Row, Col, Select, DatePicker, Button, Form } from 'antd';
 import { Input, Icon } from 'antd';
 import moment from 'moment';
 import { Formik } from 'formik';
+import { Notification } from '../atoms/Notification';
 
 import api from '../../api';
 
 const Option = Select.Option;
 const dateFormat = 'YYYY/MM/DD';
 
-const emptyTaskList = [
-  {
-    id: '',
-    taskName: '',
-  },
-];
+const emptyTaskList = [{id: '',taskName: ''}];
+const emptyReporterList = [{id: '',firstName: '',lastName:''}];
 
 export class AssignTaskForm extends Component {
   state = {
-    tasks: '',
-    dob: '',
+    task: '',
+    reporter: '',
+		deadline: '',
     userId: '',
     requestorId: '',
   };
 
-  handleSelectChange = value => {
-    this.setState({ tasks: value }, function() {});
+  handleTaskSelectChange = value => {
+    this.setState({ task: value }, function() {});
   };
+	handleReporterSelectChange = value => {
+		this.setState({ reporter: value }, function() {});
+	};
 
-  handleDateChange = value => {
-    this.setState({ dob: value }, function() {});
+  handleDeadlineDateChange = value => {
+    this.setState({ deadline: value }, function() {});
   };
 
   render() {
     const initialValues = {
+      idUser: '',
       idTask: '',
-      dob: '',
+			idRequestor: '',
+			idReporter:'',
+			dateOfAssignment: '',
+			dateOfDeadline: '',
     };
+		console.log("userId: ",this.props.userId);
 
+		let reporterList = this.props.reporterList || emptyReporterList;
     let taskList = this.props.taskList || emptyTaskList;
     return (
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
+					values.idTask = this.state.task;
+					values.idReporter = this.state.reporter;
+					values.dateOfDeadline = this.state.deadline.format('YYYY-MM-DD');
+					values.idUser = this.props.userId;
+					values.dateOfAssignment = moment().format('YYYY-MM-DD');
+					console.log(values);
           api
             .post('assignTask', values)
             .then(({ data }) => {
@@ -63,14 +76,20 @@ export class AssignTaskForm extends Component {
               Notification('error', 'Error', 'Error while assigning task!');
             });
         }}
-        render={({ isSubmitting }) => (
-          <div>
+        render={({
+					values,
+					handleBlur,
+					handleChange,
+					handleSubmit,
+					isSubmitting,
+				}) => (
+          <Form className="assignTask-form" onSubmit={handleSubmit}>
             <Row>
-              <Col span={12}>
+              <Col offset={6} span={6}>
                 <Select
                   name="tasks"
                   id="tasks"
-                  onChange={this.handleSelectChange}
+                  onChange={this.handleTaskSelectChange}
                   placeholder="Select a task"
                   style={{
                     width: '-webkit-fill-available',
@@ -86,21 +105,21 @@ export class AssignTaskForm extends Component {
                   })}
                 </Select>
               </Col>
-              <Col span={12}>
+              <Col span={6}>
                 <Select
                   name="tasks"
                   id="tasks"
-                  onChange={this.handleSelectChange}
+                  onChange={this.handleReporterSelectChange}
                   placeholder="Select a reporter"
                   style={{
                     width: '-webkit-fill-available',
                     margin: '5px 5px 5px 5px',
                   }}
                 >
-                  {taskList.map(function(task) {
+                  {reporterList.map(function(reporter) {
                     return (
-                      <Option key={task.id} value={task.id}>
-                        {task.name}
+                      <Option key={reporter.id} value={reporter.id}>
+                        {reporter.firstName} {reporter.lastName}
                       </Option>
                     );
                   })}
@@ -108,7 +127,7 @@ export class AssignTaskForm extends Component {
               </Col>
             </Row>
             <Row>
-              <Col span={8}>
+              <Col offset={6} span={8}>
                 <DatePicker
                   dropdownClassName="dob"
                   placeholder="Select deadline"
@@ -118,23 +137,10 @@ export class AssignTaskForm extends Component {
                     width: '-webkit-fill-available',
                     margin: '5px 5px 5px 5px',
                   }}
-                  onChange={this.handleDateChange}
+                  onChange={this.handleDeadlineDateChange}
                 />
               </Col>
-              <Col span={8}>
-                <DatePicker
-                  dropdownClassName="dob"
-                  placeholder="Select notification date"
-                  name="dob"
-                  id="dob"
-                  style={{
-                    width: '-webkit-fill-available',
-                    margin: '5px 5px 5px 5px',
-                  }}
-                  onChange={this.handleDateChange}
-                />
-              </Col>
-              <Col span={8}>
+              <Col span={4}>
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -150,7 +156,7 @@ export class AssignTaskForm extends Component {
                 </Button>
               </Col>
             </Row>
-          </div>
+          </Form>
         )}
       />
     );

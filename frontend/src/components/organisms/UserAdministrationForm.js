@@ -19,7 +19,7 @@ export class UserAdministrationForm extends Component {
     return (
       <div>
         <Row>
-          <Col span={12}>
+          <Col offset={8} span={8}>
             <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
             <span>
               {' '}
@@ -28,19 +28,19 @@ export class UserAdministrationForm extends Component {
           </Col>
         </Row>
         <Row>
-          <Col span={12}>
+        <Col offset={8} span={8}>
             <Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />
             <span> {this.props.userInfo.email}</span>
           </Col>
         </Row>
         <Row>
-          <Col span={12}>
+        <Col offset={8} span={8}>
             <Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />
             <span> {this.props.userInfo.telephone}</span>
           </Col>
         </Row>
         <Row>
-          <Col span={12}>
+        <Col offset={8} span={8}>
             <Icon type="calendar" style={{ color: 'rgba(0,0,0,.25)' }} />
             <span> {moment(this.props.userInfo.dob).format(dateFormat)}</span>
           </Col>
