@@ -10,13 +10,10 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const Dragger = Upload.Dragger;
 
-const __dirname = "C:\\Users\\jvobornik\\Documents\\Greenhorn-uploadedFiles";
-//const __dirname = "//jsonplaceholder.typicode.com/posts/";
 const attachments = {
     name: 'file',
     multiple: true,
-    // '//jsonplaceholder.typicode.com/posts/',
-    action: __dirname,
+    action: '//jsonplaceholder.typicode.com/posts/',
     onChange(info) {
       const status = info.file.status;
       if (status !== 'uploading') {
