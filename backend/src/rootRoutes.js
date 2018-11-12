@@ -16,6 +16,7 @@ import changePassRoutes from './modules/change-pass/routes';
 import currentUserRoutes from './modules/current-user/routes';
 import tasksRoutes from './modules/tasks/routes';
 import userAdministrationRoutes from './modules/user-administration/routes';
+import assignTaskRoutes from './modules/assign-task/routes';
 
 const router = Router({ mergeParams: true });
 
@@ -46,6 +47,7 @@ router.use('/api/addTask', addTaskFormRoutes);
 router.use('/api/currentUser', currentUserRoutes);
 router.use('/api/updateUser', updateUserFormRoutes);
 router.use('/api/userList', userListRoutes);
+router.use('/api/assignTask', assignTaskRoutes);
 router.use('/api/products', productRoutes);
 router.use('/api/contactForm', contactFormRoutes);
 router.use('/api/newPass', newPassRoutes);
