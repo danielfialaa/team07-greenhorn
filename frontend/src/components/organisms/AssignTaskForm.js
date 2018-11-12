@@ -11,22 +11,22 @@ const Option = Select.Option;
 const dateFormat = 'YYYY/MM/DD';
 
 const emptyTaskList = [{id: '',taskName: ''}];
-const emptyReporterList = [{id: '',firstName: '',lastName:''}];
+const emptyRequestorList = [{id: '',firstName: '',lastName:''}];
 
 export class AssignTaskForm extends Component {
   state = {
     task: '',
-    reporter: '',
+    requestor: '',
 		deadline: '',
     userId: '',
-    requestorId: '',
+    reporterId: '',
   };
 
   handleTaskSelectChange = value => {
     this.setState({ task: value }, function() {});
   };
-	handleReporterSelectChange = value => {
-		this.setState({ reporter: value }, function() {});
+	handleRequestorSelectChange = value => {
+		this.setState({ requestor: value }, function() {});
 	};
 
   handleDeadlineDateChange = value => {
@@ -37,21 +37,21 @@ export class AssignTaskForm extends Component {
     const initialValues = {
       idUser: '',
       idTask: '',
-			idRequestor: '',
 			idReporter:'',
+			idRequestor: '',
 			dateOfAssignment: '',
 			dateOfDeadline: '',
     };
 		console.log("userId: ",this.props.userId);
 
-		let reporterList = this.props.reporterList || emptyReporterList;
+		let requestorList = this.props.requestorList || emptyRequestorList;
     let taskList = this.props.taskList || emptyTaskList;
     return (
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
 					values.idTask = this.state.task;
-					values.idReporter = this.state.reporter;
+					values.idRequestor = this.state.requestor;
 					values.dateOfDeadline = this.state.deadline.format('YYYY-MM-DD');
 					values.idUser = this.props.userId;
 					values.dateOfAssignment = moment().format('YYYY-MM-DD');
@@ -63,7 +63,7 @@ export class AssignTaskForm extends Component {
                 Notification(
                   'success',
                   'Task assigned',
-                  'task has been succesfully assigned',
+                  'Task has been succesfully assigned',
                 );
               } else {
                 Notification('error', 'Error', 'Error while assigning task!');
@@ -109,19 +109,21 @@ export class AssignTaskForm extends Component {
                 <Select
                   name="tasks"
                   id="tasks"
-                  onChange={this.handleReporterSelectChange}
-                  placeholder="Select a reporter"
+                  onChange={this.handleRequestorSelectChange}
+                  placeholder="Select a requestor"
                   style={{
                     width: '-webkit-fill-available',
                     margin: '5px 5px 5px 5px',
                   }}
                 >
-                  {reporterList.map(function(reporter) {
-                    return (
-                      <Option key={reporter.id} value={reporter.id}>
-                        {reporter.firstName} {reporter.lastName}
+                  {requestorList.map(function(requestor) {
+                    if(requestor.isAdmin){
+                      return (
+                      <Option key={requestor.id} value={requestor.id}>
+                        {requestor.firstName} {requestor.lastName}
                       </Option>
                     );
+                  }
                   })}
                 </Select>
               </Col>

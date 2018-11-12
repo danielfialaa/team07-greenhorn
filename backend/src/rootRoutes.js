@@ -17,6 +17,7 @@ import currentUserRoutes from './modules/current-user/routes';
 import tasksRoutes from './modules/tasks/routes';
 import userAdministrationRoutes from './modules/user-administration/routes';
 import assignTaskRoutes from './modules/assign-task/routes';
+import deleteUserTaskRoutes from './modules/delete-user-task/routes';
 
 const router = Router({ mergeParams: true });
 
@@ -57,6 +58,7 @@ router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
+router.use('/api/deleteUserTask', deleteUserTaskRoutes);
 
 router.use('/api/', (req, res) => {
   res.json({
