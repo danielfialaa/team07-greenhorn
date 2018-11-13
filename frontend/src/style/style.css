@@ -1,5 +1,5 @@
 body{
-	background: #8EAE9D;
+	background: #AED581;
 }
 
 .hide{
@@ -9,7 +9,7 @@ body{
 /* ----- MAIN CONTENT ------ */
 #root, .pageWrap, .ant-layout, .ant-layout-has-sider{
 	min-height: 100vh;
-	background: #94B2A2;
+	background: #fff;
 }
 
 /* ----- LOGIN ------ */
@@ -50,13 +50,13 @@ h3{
 	background: #0000004f;
 }
 .ant-layout-sider {
-	background: #2e3233;
+	background: #37474F;
 }
 .ant-menu-dark, .ant-menu-dark .ant-menu-sub{
-	background: #2e3233;
+	background: #37474F;
 }
 .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
-	background-color: #365042;
+	background-color: #263238;
 }
 
 /* ----- Footer ------ */
