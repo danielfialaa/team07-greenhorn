@@ -19,3 +19,5 @@ npm-debug.log
 /src/config/config.js
 
 package-json
+
+/public/uploads

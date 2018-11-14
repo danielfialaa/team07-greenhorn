@@ -1,5 +1,16 @@
 import { Router } from 'express';
 const jwt = require('jsonwebtoken');
+var path = require('path');
+var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/');
+  },
+  filename: function (req, file, cb) {
+      cb(null, Date.now() + file.originalname);
+  }
+});
+var upload = multer({ storage: storage });
 
 import productRoutes from './modules/products/routes';
 import contactFormRoutes from './modules/contact-form/routes';
@@ -18,6 +29,7 @@ import tasksRoutes from './modules/tasks/routes';
 import userAdministrationRoutes from './modules/user-administration/routes';
 import assignTaskRoutes from './modules/assign-task/routes';
 import deleteUserTaskRoutes from './modules/delete-user-task/routes';
+import uploadTaskFileRoutes from './modules/upload-task-file/routes';
 
 const router = Router({ mergeParams: true });
 
@@ -59,6 +71,7 @@ router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
 router.use('/api/deleteUserTask', deleteUserTaskRoutes);
+router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
 
 router.use('/api/', (req, res) => {
   res.json({

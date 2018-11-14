@@ -5,18 +5,28 @@ export const addTaskFormController =
 
     console.log("req: ", req);
     console.log("res: ", res);
-  const form = await db.tasks.create(req.body)
+  const task = await db.tasks.create(req.body)
     .then((response) => {
-      res.json({
-        status: true,
-        response,
-      });
+			console.log("id tasku: ",response.get('id'));
+			const file = db.attachments.create({
+				path: req.body.filePath,
+				idTask: response.get('id'),
+			}).then((response) => {
+				res.json({
+					status: true,
+					response,
+				});
+			}).catch(e => {
+				console.log('e:', e);
+				res.json({
+					status: false
+				});
+			});
     }).catch( e => {
-      console.log('e:', e);
+			console.log('e:', e);
       res.json({
         status: false
       });
-    })
-  console.log(form);
+    });
 //  const attachments = await db.attachment.create(req.body.attachments);
 };
