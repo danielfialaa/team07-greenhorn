@@ -28,7 +28,9 @@ const modelModules = [
   require('./tasks'),
   require('./attachments'),
   require('./departments'),
-  require('./task_history')
+  require('./task_history'),
+  require('./groups'),
+  require('./groupBelonging')
 ];
 
 modelModules.forEach(modelModule => {

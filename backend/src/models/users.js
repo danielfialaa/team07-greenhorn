@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'idDepartment'
     });
 
+    users.belongsToMany(models.groups, {
+      through: 'groupBelonging'
+    });
+
     users.hasMany(models.task_history, {
       foreignKey: 'idUser',
       as: 'users',
