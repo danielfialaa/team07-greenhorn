@@ -6,8 +6,13 @@ module.exports = (sequelize, DataTypes) => {
 
   groups.associate = function(models) {
     groups.belongsToMany(models.users, {
-      through: 'groupBelonging'
+      through: 'userGroupBelonging'
     });
+
+    groups.belongsToMany(models.tasks, {
+      through: 'taskGroupBelonging'
+    });
+
   };
 
   return groups;
