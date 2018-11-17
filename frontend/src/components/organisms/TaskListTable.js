@@ -56,8 +56,11 @@ export class TaskListTable extends Component {
   }*/
 
   render() {
-    const { tasks } = this.props;
-    console.log(this.props);
+    const  tasks  = this.props.tasks.response;
+    const  attachmentPath  = [{attachmentPath: this.props.attachmentPath}];
+    const dataSource = [...tasks, ...attachmentPath];
+    
+    console.log('dataSource: ', dataSource);
 
     var dateFormat = require('dateformat');
 
@@ -137,10 +140,20 @@ export class TaskListTable extends Component {
         dataIndex: 'id',
         render: (dataIndex) => (
           <span>
-            <Button onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
+            <Button type="danger" icon="delete" onClick={() => {this.deleteTaskHandler(dataIndex)}} >Delete</Button>
           </span>
         ),
-      } /*{
+      }/*,
+      {
+        title: 'Download attachment',
+        key: 'attachmentPath',
+        dataIndex: 'attachmentPath',
+        render: dataIndex => (
+          <a href={'../../backend/'+this.props.attachmentPath} download>{this.props.attachmentPath}</a>
+        )
+
+
+      }*//*{
       title: 'Requestor',
       dataIndex: 'idRequestor',
       key: 'idRequestor',
@@ -160,12 +173,11 @@ export class TaskListTable extends Component {
       sortOrder: sortedInfo.columnKey === 'idUser' && sortedInfo.order,
     } */,
     ];
-
     return (
       <div>
         <Table
           columns={columns}
-          dataSource={this.props.tasks.response}
+          dataSource={dataSource}
           onChange={this.handleChange}
           rowKey="id"
         />
