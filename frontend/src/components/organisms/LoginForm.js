@@ -35,6 +35,7 @@ export class LoginForm extends Component {
             actions.setSubmitting(false);
             if (data.status) {
               localStorage.setItem('token', data.token);
+              localStorage.setItem('isAdmin', data.isAdmin);
               console.log(localStorage.getItem('token'));
               api.defaults.headers.common['Authorization'] = data.token;
               this.setState(() => ({

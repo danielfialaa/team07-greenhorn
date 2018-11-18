@@ -34,6 +34,7 @@ export class SiderMenu extends Component {
           console.log('login check arrived');
           this.setState(() => ({
             authorized: true,
+            isAdmin: localStorage.isAdmin,
           }));
         })
         .catch(e => {
@@ -42,11 +43,6 @@ export class SiderMenu extends Component {
             authorized: false,
           }));
         });
-      api.get('currentUser').then(({ data }) => {
-        this.setState(() => ({
-          isAdmin: data.response[0].isAdmin,
-        }));
-      });
     } else {
       console.log('nemas token vole');
       this.setState(() => ({
