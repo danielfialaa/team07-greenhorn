@@ -17,18 +17,20 @@ export class UserAdministrationPage extends Component {
   };
 
   componentDidMount() {
-    api.get('userAdministration/'+this.props.match.params.id).then(({ data }) => {
+    api
+      .get('userAdministration/' + this.props.match.params.id)
+      .then(({ data }) => {
+        this.setState(() => ({
+          userInfo: data.response[0],
+          userId: data.response[0].id,
+        }));
+      });
+
+    api.get('userList').then(({ data }) => {
       this.setState(() => ({
-        userInfo: data.response[0],
-        userId: data.response[0].id,
+        requestorList: data.response,
       }));
     });
-
-		api.get('userList').then(({ data }) => {
-			this.setState(() => ({
-				requestorList: data.response,
-			}));
-		});
 
     api.get('tasks').then(({ data }) => {
       this.setState(() => ({
@@ -36,7 +38,7 @@ export class UserAdministrationPage extends Component {
       }));
     });
 
-    api.get('taskList/'+this.props.match.params.id).then(({ data }) => {
+    api.get('taskList/' + this.props.match.params.id).then(({ data }) => {
       this.setState(() => ({
         isLoading: false,
         tasks: data,
@@ -45,8 +47,6 @@ export class UserAdministrationPage extends Component {
   }
 
   render() {
-		console.log(this.state.userId);
-		console.log(this.props.match.params.id);
     return (
       <UserAdministrationTemplate
         isLoading={this.state.isLoading}
@@ -54,7 +54,7 @@ export class UserAdministrationPage extends Component {
         taskList={this.state.taskList}
         tasks={this.state.tasks}
         userId={this.state.userId}
-				requestorList={this.state.requestorList}
+        requestorList={this.state.requestorList}
         title="User profile"
       />
     );
