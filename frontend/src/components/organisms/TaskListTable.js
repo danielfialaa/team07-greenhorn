@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Divider, Tag } from 'antd';
 import { Logo } from '../atoms/Logo';
+import { Link } from 'react-router-dom';
 
 import api from '../../api';
 
@@ -56,11 +57,8 @@ export class TaskListTable extends Component {
   }*/
 
   render() {
-    const  tasks  = this.props.tasks.response;
-    const  attachmentPath  = [{attachmentPath: this.props.attachmentPath}];
-    const dataSource = [...tasks, ...attachmentPath];
-    
-    console.log('dataSource: ', dataSource);
+    const { tasks } = this.props;
+    console.log(this.props);
 
     var dateFormat = require('dateformat');
 
@@ -140,20 +138,12 @@ export class TaskListTable extends Component {
         dataIndex: 'id',
         render: (dataIndex) => (
           <span>
-            <Button type="danger" icon="delete" onClick={() => {this.deleteTaskHandler(dataIndex)}} >Delete</Button>
+              <Button onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
+              <Divider type='vertical' />
+              <Link to={"TaskDetail/"+dataIndex}>Detail</Link>
           </span>
         ),
-      }/*,
-      {
-        title: 'Download attachment',
-        key: 'attachmentPath',
-        dataIndex: 'attachmentPath',
-        render: dataIndex => (
-          <a href={'../../backend/'+this.props.attachmentPath} download>{this.props.attachmentPath}</a>
-        )
-
-
-      }*//*{
+      } /*{
       title: 'Requestor',
       dataIndex: 'idRequestor',
       key: 'idRequestor',
@@ -173,11 +163,12 @@ export class TaskListTable extends Component {
       sortOrder: sortedInfo.columnKey === 'idUser' && sortedInfo.order,
     } */,
     ];
+
     return (
       <div>
         <Table
           columns={columns}
-          dataSource={dataSource}
+          dataSource={this.props.tasks.response}
           onChange={this.handleChange}
           rowKey="id"
         />

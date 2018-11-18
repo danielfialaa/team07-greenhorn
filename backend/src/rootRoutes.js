@@ -31,6 +31,9 @@ import assignTaskRoutes from './modules/assign-task/routes';
 import deleteUserTaskRoutes from './modules/delete-user-task/routes';
 import uploadTaskFileRoutes from './modules/upload-task-file/routes';
 import downloadTaskFileRoutes from './modules/download-task-file/routes';
+import taskDetailRoutes from './modules/task-detail/routes';
+import modifyUserTaskRoutes from './modules/modify-user-task/routes';
+
 
 const router = Router({ mergeParams: true });
 
@@ -73,7 +76,6 @@ router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
 router.use('/api/deleteUserTask', deleteUserTaskRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
-router.use('/api/downloadTaskFile', downloadTaskFileRoutes);
 
 router.use('/api/', (req, res) => {
   res.json({
