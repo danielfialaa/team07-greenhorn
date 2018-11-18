@@ -11,7 +11,6 @@ export class UserTaskPage extends Component {
 		isLoading: true,
 		isError: false,
 		tasks: "",
-    attachmentPath: ""
     }
 
 	componentDidMount() {
@@ -23,24 +22,15 @@ export class UserTaskPage extends Component {
           tasks: data
 				}))
 			});
-      api.get('downloadTaskFile', this.props.match)
-      .then(({ data }) => {
-        console.log('download task file - data.path: ', data.attachmentPath);
-          console.log('download task file - data: ', data);
-        this.setState(() => ({
-          attachmentPath: data.attachmentPath
-        }))
-      })
 	}
 
   render() {
-		const { isLoading, tasks, isLoaded, isError, error, attachment } = this.props;
+		const { isLoading, tasks, isLoaded, isError, error } = this.props;
     return (
       <UserTasksTemplate
 				isLoading= {this.state.isLoading}
         isError={this.state.error}
         tasks={this.state.tasks}
-        attachmentPath={this.state.attachmentPath}
         error={error}
       />
 

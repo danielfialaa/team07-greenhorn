@@ -138,9 +138,9 @@ export class TaskListTable extends Component {
         dataIndex: 'id',
         render: (dataIndex) => (
           <span>
-              <Button onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
+              <Button type="primary" icon="file-search" href={"TaskDetail/"+dataIndex}>Detail</Button>
               <Divider type='vertical' />
-              <Link to={"TaskDetail/"+dataIndex}>Detail</Link>
+              <Button type="danger" icon="delete" onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
           </span>
         ),
       } /*{

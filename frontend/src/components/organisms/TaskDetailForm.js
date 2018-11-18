@@ -3,7 +3,7 @@ import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col } from 'ant
 import { Logo } from '../atoms/Logo';
 import { Layout } from 'antd';
 import api from '../../api';
-const { Content, Sider } = Layout;
+const { Content, Sider, Header } = Layout;
 
 export class TaskDetailForm extends Component {
   state = {
@@ -17,6 +17,7 @@ export class TaskDetailForm extends Component {
       'status': status
     })
     .then(({ response }) => {
+      console.log("Response >>>>>> ",response);
       window.location.reload();
       }).catch(error => {
         console.log('chyba');
@@ -39,6 +40,7 @@ export class TaskDetailForm extends Component {
 
   render(){
     const { taskDetailed } = this.props;
+    console.log("taskDetailed>>>>> ", taskDetailed);
     var dateFormat = require('dateformat');
 
 
@@ -50,6 +52,7 @@ export class TaskDetailForm extends Component {
 
     return (
       <div>
+      <Header style={{ background: '#F3F3F3' }}><h1>Task detail</h1></Header>
         <Layout style={{ background: '#fff' }}>
           <Content style={{ margin: '16px 36px 24px 16px' }}>
             <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>
@@ -57,7 +60,10 @@ export class TaskDetailForm extends Component {
               <span>{taskDetailed.task.description}</span>
             </Row>
             <Divider type='horizontal' orientation='left'><h3>Attachments</h3></Divider>
-            <Row><span>Cesta k prílohe: {taskDetailed.task.attachment.path}</span></Row>
+            <Row>
+            <span> Download link: </span>
+            <a href={taskDetailed.task.attachment.path} download>{taskDetailed.task.attachment.path}</a>
+            </Row>
           </Content>
           <Sider
           style={{ background: '#fff', margin: '50px 16px 24px 16px'}}>

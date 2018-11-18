@@ -21,6 +21,7 @@ export const taskDetailController = async (req, res) => {
 
     })
     .then(response => {
+      console.log("BE task detail response: ", response);
       res.json({
         response,
       });

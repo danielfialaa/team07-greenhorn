@@ -14,11 +14,11 @@ state = {
 }
 
 componentDidMount() {
-  console.log(this.props.match.params.id);
+  console.log("this.props.match.params.id: ",this.props.match.params.id);
   console.log("ehm");
   api.get('taskDetail/'+this.props.match.params.id)
     .then(({ data }) => {
-      console.log(data);
+      console.log("data: ",data);
       this.setState(() => ({
         isLoading: false,
         taskDetailed: data.response[0]

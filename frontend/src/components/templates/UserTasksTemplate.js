@@ -12,7 +12,6 @@ export const UserTasksTemplate = ({
   isLoading,
   isError,
   tasks,
-  attachmentPath,
   error,
 }) => {
   console.log('isLoading: ',isLoading);
@@ -30,7 +29,6 @@ export const UserTasksTemplate = ({
   return (
     <TaskListTable
     tasks={tasks}
-    attachmentPath={attachmentPath}
     />
   );
 };
