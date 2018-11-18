@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     tasks.belongsToMany(models.groups, {
       through: 'taskGroupBelonging'
     });
+    tasks.hasOne(models.attachments, {
+      foreignKey: 'idTask'
+    });
   };
   return tasks;
 };
