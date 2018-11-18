@@ -18,6 +18,10 @@ const MenuItem = ({ title, icon, linkTo, ...rest }) => (
 );
 
 export class SiderMenu extends Component {
+  state = {
+    isAdmin: false,
+  };
+
   componentDidMount() {
     this.setState.authorized = true;
     if (localStorage.getItem('token')) {
@@ -38,6 +42,11 @@ export class SiderMenu extends Component {
             authorized: false,
           }));
         });
+      api.get('currentUser').then(({ data }) => {
+        this.setState(() => ({
+          isAdmin: data.response[0].isAdmin,
+        }));
+      });
     } else {
       console.log('nemas token vole');
       this.setState(() => ({
@@ -78,18 +87,26 @@ export class SiderMenu extends Component {
           mode="inline"
           defaultSelectedKeys={window.location.pathname.split('/')}
         >
-          <MenuItem key="home" title="User List" icon="team" linkTo="/home" />
+          <MenuItem
+            key="home"
+            title="User List"
+            icon="team"
+            linkTo="/home"
+            style={this.state.isAdmin ? {} : { display: 'none' }}
+          />
           <MenuItem
             key="AddUser"
             title="Add User"
             icon="user-add"
             linkTo="/AddUser"
+            style={this.state.isAdmin ? {} : { display: 'none' }}
           />
           <MenuItem
             key="AddTask"
             title="Add task"
             icon="form"
             linkTo="/AddTask"
+            style={this.state.isAdmin ? {} : { display: 'none' }}
           />
           <MenuItem
             key="My Tasks"

@@ -3,12 +3,12 @@ const jwt = require('jsonwebtoken');
 var path = require('path');
 var multer = require('multer');
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function(req, file, cb) {
     cb(null, 'public/uploads/');
   },
-  filename: function (req, file, cb) {
-      cb(null, Date.now() + file.originalname);
-  }
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
 });
 var upload = multer({ storage: storage });
 
@@ -35,6 +35,8 @@ const router = Router({ mergeParams: true });
 
 router.use('/api/auth', loginFormRoutes);
 //dummy route in progress
+
+router.use('/api/newPass', newPassRoutes);
 router.use('*', (req, res, next) => {
   console.log(req.get('Authorization'));
   const x = jwt.verify(req.get('Authorization'), '2', (err, decoded) => {
