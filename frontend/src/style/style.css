@@ -9,7 +9,14 @@ body{
 /* ----- MAIN CONTENT ------ */
 #root, .pageWrap, .ant-layout, .ant-layout-has-sider{
 	min-height: 100vh;
-	background: #fff;
+	background: linear-gradient(#E0F7FA,#F1F8E9);
+}
+.ant-form {
+	min-width: 500px;
+}
+
+.ant-layout-content > div {
+	box-shadow: 0px 0px 20px #E0E0E0;
 }
 
 /* ----- LOGIN ------ */
@@ -29,8 +36,8 @@ h3{
 	margin-bottom: -17px;
 }
 .login-form{
-	border-radius: 5px;
-	background: #C8D8D0;
+	background: #fff;
+	box-shadow: 0px 0px 30px #616161;
 	padding: 30px;
 	width: 100%;
 }
@@ -51,12 +58,16 @@ h3{
 }
 .ant-layout-sider {
 	background: #37474F;
+	box-shadow: 0px 0px 20px #E0E0E0;
 }
 .ant-menu-dark, .ant-menu-dark .ant-menu-sub{
 	background: #37474F;
 }
 .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
-	background-color: #263238;
+	background-color: rgb(47, 53, 54);
+	color: #E0F7FA;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 /* ----- Footer ------ */
