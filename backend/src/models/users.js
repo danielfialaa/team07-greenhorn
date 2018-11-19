@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     users.belongsToMany(models.groups, {
-      through: 'groupBelonging'
+      through: 'userGroupBelonging'
     });
 
     users.hasMany(models.task_history, {

@@ -10,20 +10,18 @@ export class UserTaskPage extends Component {
   state = {
 		isLoading: true,
 		isError: false,
-		tasks: ""
+		tasks: "",
     }
 
 	componentDidMount() {
-		console.log(this.props.match.params.id);
-		console.log("ehm");
 		api.get('taskList/'+this.props.match.params.id)
 			.then(({ data }) => {
-				console.log("hmm");
+        console.log('task list data: ', data);
 				this.setState(() => ({
 					isLoading: false,
           tasks: data
 				}))
-			})
+			});
 	}
 
   render() {

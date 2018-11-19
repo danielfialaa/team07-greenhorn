@@ -4,7 +4,7 @@ var path = require('path');
 var multer = require('multer');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/uploads/');
+    cb(null, '../frontend/public/uploads/');
   },
   filename: function (req, file, cb) {
       cb(null, Date.now() + file.originalname);
@@ -30,6 +30,9 @@ import userAdministrationRoutes from './modules/user-administration/routes';
 import assignTaskRoutes from './modules/assign-task/routes';
 import deleteUserTaskRoutes from './modules/delete-user-task/routes';
 import uploadTaskFileRoutes from './modules/upload-task-file/routes';
+import modifyUserTaskRoutes from './modules/modify-user-task/routes';
+import taskDetailRoutes from './modules/task-detail/routes';
+
 
 const router = Router({ mergeParams: true });
 
@@ -70,8 +73,10 @@ router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
+router.use('/api/taskDetail/:id', taskDetailRoutes);
 router.use('/api/deleteUserTask', deleteUserTaskRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
+router.use('/api/modifyUserTask', modifyUserTaskRoutes);
 
 router.use('/api/', (req, res) => {
   res.json({
