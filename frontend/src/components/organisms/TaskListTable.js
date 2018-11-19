@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Divider, Tag } from 'antd';
 import { Logo } from '../atoms/Logo';
+import { Link } from 'react-router-dom';
 
 import api from '../../api';
 
@@ -137,7 +138,9 @@ export class TaskListTable extends Component {
         dataIndex: 'id',
         render: (dataIndex) => (
           <span>
-            <Button onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
+              <Button type="primary" icon="file-search" href={"TaskDetail/"+dataIndex}>Detail</Button>
+              <Divider type='vertical' />
+              <Button type="danger" icon="delete" onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
           </span>
         ),
       } /*{
