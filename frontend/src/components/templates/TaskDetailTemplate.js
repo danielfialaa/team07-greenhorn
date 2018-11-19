@@ -11,7 +11,8 @@ const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 export const TaskDetailTemplate = ({
   isLoading,
   isError,
-  taskDetailed
+  taskDetailed,
+	attachments
 }) => {
   if (isLoading) {
     return <Spin indicator={antIcon} />;
@@ -19,7 +20,7 @@ export const TaskDetailTemplate = ({
 
   return (
     <div>
-        <TaskDetailForm taskDetailed={taskDetailed}/>
+        <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments}/>
     </div>
   );
 };

@@ -5,6 +5,12 @@ import { Layout } from 'antd';
 import api from '../../api';
 const { Content, Sider, Header } = Layout;
 
+const emptyAttachments = [
+	{
+		path: '',
+	},
+];
+
 export class TaskDetailForm extends Component {
   state = {
     sortedInfo: null,
@@ -25,6 +31,7 @@ export class TaskDetailForm extends Component {
   }
 
 
+
   tagReturn(status) {
       switch (status) {
           case 'TO BE REVIEWED':
@@ -42,7 +49,7 @@ export class TaskDetailForm extends Component {
     const { taskDetailed } = this.props;
     console.log("taskDetailed>>>>> ", this.props);
     var dateFormat = require('dateformat');
-
+		let attachmentsList = this.props.attachments || emptyAttachments;
 
     const data = {
       assignee: 'Fero Makač',
@@ -60,10 +67,16 @@ export class TaskDetailForm extends Component {
               <span>{taskDetailed.task.description}</span>
             </Row>
             <Divider type='horizontal' orientation='left'><h3>Attachments</h3></Divider>
-            <Row>
-            <Icon type="file-text" />
-            <a href={"../" + taskDetailed.task.attachment.path} download>{taskDetailed.task.attachment.path}</a>
-            </Row>
+
+
+						{attachmentsList.map(function(attachment) {
+							return (
+								<Row>
+								<Icon type="file-text"/>
+								<a href={"../" + attachment.path} download>{attachment.path.replace("uploads/","")}</a>
+								</Row>
+							);
+						})}
           </Content>
           <Sider
           style={{ background: '#fff', margin: '50px 16px 24px 16px'}}>

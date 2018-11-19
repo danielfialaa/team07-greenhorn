@@ -6,27 +6,35 @@ export const taskDetailController = async (req, res) => {
   const data = await req.body;
   const id = await req.params.id;
 
-  const result = db.task_history
-    .findAll({
+  const result = await db.task_history
+    .findOne({
       where: { id: id },
       include: [{
         model: db.tasks,
-        include:[
-          {
-          model: db.attachments,
-          },
-        ],
+        // include:[
+        //   {
+        //   model: db.attachments,
+        //   },
+        // ],
       },
     ],
+	});
 
-    })
-    .then(response => {
-      console.log("BE task detail response: ", response);
-      res.json({
-        response,
-      });
-      console.log(response);
-    });
+	const attachments = await db.attachments.findAll({
+		where: { idTask: result.idTask},
+	});
+
+	res.json({
+		result,
+		attachments,
+	});
+    // .then(response => {
+    //   console.log("BE task detail response: ", response);
+    //   res.json({
+    //     response,
+    //   });
+    //   console.log(response);
+    // });
 
 
 /*

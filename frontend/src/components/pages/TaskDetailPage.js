@@ -10,7 +10,8 @@ export class TaskDetailPage extends Component {
 state = {
   isLoading: true,
   isError: false,
-  taskDetailed: ""
+  taskDetailed: "",
+	attachments: "",
 }
 
 componentDidMount() {
@@ -21,7 +22,8 @@ componentDidMount() {
       console.log("data: ",data);
       this.setState(() => ({
         isLoading: false,
-        taskDetailed: data.response[0]
+        taskDetailed: data.result,
+				attachments: data.attachments,
       }))
     })
 }
@@ -34,6 +36,7 @@ componentDidMount() {
       isLoading= {this.state.isLoading}
       isError={this.state.error}
       taskDetailed={this.state.taskDetailed}
+			attachments={this.state.attachments}
     />
     );
   }
