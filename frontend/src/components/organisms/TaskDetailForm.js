@@ -40,7 +40,7 @@ export class TaskDetailForm extends Component {
 
   render(){
     const { taskDetailed } = this.props;
-    console.log("taskDetailed>>>>> ", taskDetailed);
+    console.log("taskDetailed>>>>> ", this.props);
     var dateFormat = require('dateformat');
 
 
@@ -61,8 +61,8 @@ export class TaskDetailForm extends Component {
             </Row>
             <Divider type='horizontal' orientation='left'><h3>Attachments</h3></Divider>
             <Row>
-            <span> Download link: </span>
-            <a href={taskDetailed.task.attachment.path} download>{taskDetailed.task.attachment.path}</a>
+            <Icon type="file-text" />
+            <a href={"../" + taskDetailed.task.attachment.path} download>{taskDetailed.task.attachment.path}</a>
             </Row>
           </Content>
           <Sider
