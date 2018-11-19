@@ -1,5 +1,5 @@
 body{
-	background: #AED581;
+	background: #E0F7FA;
 }
 
 .hide{
@@ -15,8 +15,11 @@ body{
 	min-width: 500px;
 }
 
-.ant-layout-content > div {
-	box-shadow: 0px 0px 20px #E0E0E0;
+.content-wrapper {
+	box-shadow: 0px 0px 20px rgb(179, 179, 179);
+}
+.main-menu {
+	box-shadow: 0px 0px 20px rgb(161, 161, 161);
 }
 
 /* ----- LOGIN ------ */
@@ -58,7 +61,6 @@ h3{
 }
 .ant-layout-sider {
 	background: #37474F;
-	box-shadow: 0px 0px 20px #E0E0E0;
 }
 .ant-menu-dark, .ant-menu-dark .ant-menu-sub{
 	background: #37474F;
