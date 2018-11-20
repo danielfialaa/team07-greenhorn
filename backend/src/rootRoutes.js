@@ -17,6 +17,7 @@ import contactFormRoutes from './modules/contact-form/routes';
 import loginFormRoutes from './modules/login-form/routes';
 import addUserFormRoutes from './modules/add-user-form/routes';
 import addTaskFormRoutes from './modules/add-task-form/routes';
+import addGroupFormRoutes from './modules/add-group-form/routes';
 import userListRoutes from './modules/user-list/routes';
 import newPassRoutes from './modules/new-pass/routes';
 import resetPassRoutes from './modules/reset-pass/routes';
@@ -60,6 +61,7 @@ router.use('*', (req, res, next) => {
 
 router.use('/api/addUser', addUserFormRoutes);
 router.use('/api/addTask', addTaskFormRoutes);
+router.use('/api/addGroup', addGroupFormRoutes);
 router.use('/api/currentUser', currentUserRoutes);
 router.use('/api/updateUser', updateUserFormRoutes);
 router.use('/api/userList', userListRoutes);

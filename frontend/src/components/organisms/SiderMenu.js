@@ -78,6 +78,7 @@ export class SiderMenu extends Component {
           mode="inline"
           defaultSelectedKeys={window.location.pathname.split('/')}
         >
+				<SubMenu key="user" title={<span><Icon type="user" /><span>Users</span></span>}>
           <MenuItem key="home" title="User List" icon="team" linkTo="/home" />
           <MenuItem
             key="AddUser"
@@ -85,6 +86,8 @@ export class SiderMenu extends Component {
             icon="user-add"
             linkTo="/AddUser"
           />
+					</SubMenu>
+				<SubMenu key="tasks" title={<span><Icon type="file-done" /><span>Tasks</span></span>}>
           <MenuItem
             key="AddTask"
             title="Add task"
@@ -97,6 +100,21 @@ export class SiderMenu extends Component {
             icon="project"
             linkTo="/UserTasks"
           />
+					</SubMenu>
+					<SubMenu key="groups" title={<span><Icon type="team" /><span>Groups</span></span>}>
+						<MenuItem
+							key="AddGroup"
+							title="Add Group"
+							icon="form"
+							linkTo="/AddGroup"
+						/>
+						<MenuItem
+							key="GroupList"
+							title="Groups list"
+							icon="form"
+							linkTo="/GroupList"
+						/>
+					</SubMenu>
           <MenuItem
             key="Settings"
             title="Settings"

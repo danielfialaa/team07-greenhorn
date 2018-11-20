@@ -13,6 +13,7 @@ import { UserTaskPage } from './components/pages/UserTaskPage';
 import { AddTaskPage } from './components/pages/AddTaskPage';
 import { UserAdministrationPage } from './components/pages/UserAdministrationPage';
 import { TaskDetailPage } from './components/pages/TaskDetailPage';
+import { AddGroupPage } from './components/pages/AddGroupPage';
 
 export const AppRoutes = () => (
   <Switch>
@@ -31,7 +32,8 @@ export const AppRoutes = () => (
       />
       <Route path="/AddTask" exact component={AddTaskPage} />
       <Route path="/Settings" exact component={UserSettingsPage} />
-      <Route path="/TaskDetail/:id" exact component={TaskDetailPage} />
+			<Route path="/TaskDetail/:id" exact component={TaskDetailPage} />
+			<Route path="/AddGroup" exact component={AddGroupPage} />
     </PageWrapper>
   </Switch>
 );
