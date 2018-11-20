@@ -61,6 +61,7 @@ export class SiderMenu extends Component {
     }
     return (
       <Sider
+        className="main-menu"
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={broken => {

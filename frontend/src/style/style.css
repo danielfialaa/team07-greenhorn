@@ -1,5 +1,5 @@
 body{
-	background: #AED581;
+	background: #E0F7FA;
 }
 
 .hide{
@@ -9,8 +9,19 @@ body{
 /* ----- MAIN CONTENT ------ */
 #root, .pageWrap, .ant-layout, .ant-layout-has-sider{
 	min-height: 100vh;
-	background: #fff;
+	background: linear-gradient(#E0F7FA,#F1F8E9);
 }
+.ant-form {
+	min-width: 500px;
+}
+
+.content-wrapper {
+	box-shadow: 0px 0px 20px rgb(179, 179, 179);
+}
+.main-menu {
+	box-shadow: 0px 0px 20px rgb(161, 161, 161);
+}
+
 
 /* ----- LOGIN ------ */
 
@@ -29,8 +40,8 @@ h3{
 	margin-bottom: -17px;
 }
 .login-form{
-	border-radius: 5px;
-	background: #C8D8D0;
+	background: #fff;
+	box-shadow: 0px 0px 30px rgb(161, 161, 161);
 	padding: 30px;
 	width: 100%;
 }
@@ -55,10 +66,15 @@ h3{
 .ant-menu-dark, .ant-menu-dark .ant-menu-sub{
 	background: #37474F;
 }
-.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
-	background-color: #263238;
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+	background: #37474F;
 }
-
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+	background-color: rgb(47, 53, 54);
+	color: #E0F7FA;
+	text-decoration: none;
+	font-weight: bold;
+}
 /* ----- Footer ------ */
 .footer{
 	max-height: 100px;
