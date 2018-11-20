@@ -12,6 +12,7 @@ state = {
   isError: false,
   taskDetailed: "",
 	attachments: "",
+  relatedUsers: [{},{},{}],
 }
 
 componentDidMount() {
@@ -24,6 +25,7 @@ componentDidMount() {
         isLoading: false,
         taskDetailed: data.result,
 				attachments: data.attachments,
+        relatedUsers: data.relatedUsers,
       }))
     })
 }
@@ -37,6 +39,7 @@ componentDidMount() {
       isError={this.state.error}
       taskDetailed={this.state.taskDetailed}
 			attachments={this.state.attachments}
+      relatedUsers={this.state.relatedUsers}
     />
     );
   }

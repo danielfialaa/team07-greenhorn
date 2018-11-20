@@ -11,22 +11,32 @@ export const taskDetailController = async (req, res) => {
       where: { id: id },
       include: [{
         model: db.tasks,
-        // include:[
-        //   {
-        //   model: db.attachments,
-        //   },
-        // ],
-      },
+      }
     ],
+    //include
 	});
+
+  console.log("Result>>>>>> ", result);
 
 	const attachments = await db.attachments.findAll({
 		where: { idTask: result.idTask},
 	});
+  const asignee = await db.users.findOne({
+      where: { id: result.idUser },
+    });
+  const reporter = await db.users.findOne({
+      where: { id: result.idReporter },
+    });
+  const requestor = await db.users.findOne({
+      where: { id: result.idRequestor },
+    });
+  const relatedUsers = [asignee, reporter, requestor];
+
 
 	res.json({
 		result,
 		attachments,
+    relatedUsers,
 	});
     // .then(response => {
     //   console.log("BE task detail response: ", response);

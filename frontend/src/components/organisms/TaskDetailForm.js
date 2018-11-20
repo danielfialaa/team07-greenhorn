@@ -52,9 +52,9 @@ export class TaskDetailForm extends Component {
 		let attachmentsList = this.props.attachments || emptyAttachments;
 
     const data = {
-      assignee: 'Fero Makač',
-      requestor: 'Jano Ajťák',
-      reporter: 'Milada Hrhová'
+      assignee: this.props.relatedUsers[0],
+      reporter: this.props.relatedUsers[1],
+      requestor: this.props.relatedUsers[2],
     }
 
     return (
@@ -100,13 +100,13 @@ export class TaskDetailForm extends Component {
               <b>Status: </b>{this.tagReturn(taskDetailed.status)}
             </Row>
             <Row>
-              <span><b>Assignee: </b>{data.assignee}</span>
+              <span><b>Assignee: </b>{data.assignee.firstName} {data.assignee.lastName}</span>
+            </Row>
+						<Row>
+              <span><b>Reporter: </b>{data.reporter.firstName} {data.reporter.lastName}</span>
             </Row>
             <Row>
-              <span><b>Reporter: </b>{data.reporter}</span>
-            </Row>
-            <Row>
-              <span><b>Requestor: </b>{data.requestor}</span>
+              <span><b>Requestor: </b>{data.requestor.firstName} {data.requestor.lastName}</span>
             </Row>
             <Row>
               <Divider type='horizontal' />
