@@ -48,6 +48,7 @@ router.use('*', (req, res, next) => {
     } else {
       console.log(decoded);
       req.user = {
+        id: decoded.id,
         email: decoded.email,
         firstName: decoded.firstName,
         lastName: decoded.lastName,
