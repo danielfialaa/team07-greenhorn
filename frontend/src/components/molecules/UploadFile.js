@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Field } from 'formik';
 import { Row,Col, Form, Button, notification, Select, DatePicker } from 'antd';
 import { Upload, Icon, message } from 'antd';
 
@@ -31,10 +30,6 @@ export class UploadFile extends Component {
 		const { triggerParentUpdate } = this.props.triggerParentUpdate;
     const { label } = this.props;
     return(
-      <Field
-        render={({
-          field,
-        }) =>
       <FormItem label={label}>
       <Dragger onChange={this.onChangeHandler} {...this.props}>
           <p className="ant-upload-drag-icon">
@@ -44,8 +39,6 @@ export class UploadFile extends Component {
           <p className="ant-upload-hint">Select the attachment. Uploaded file will be attached to the task</p>
         </Dragger>
       </FormItem>
-      }
-      />
     );
   }
 }
