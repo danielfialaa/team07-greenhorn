@@ -66,13 +66,15 @@ h3{
 .ant-menu-dark, .ant-menu-dark .ant-menu-sub{
 	background: #37474F;
 }
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+	background: #37474F;
+}
 .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
 	background-color: rgb(47, 53, 54);
 	color: #E0F7FA;
 	text-decoration: none;
 	font-weight: bold;
 }
-
 /* ----- Footer ------ */
 .footer{
 	max-height: 100px;
