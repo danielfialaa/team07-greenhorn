@@ -3,6 +3,8 @@ import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col } from 'ant
 import { Logo } from '../atoms/Logo';
 import { Layout } from 'antd';
 import api from '../../api';
+import { UploadFile } from '../molecules/UploadFile';
+
 const { Content, Sider, Header } = Layout;
 
 const emptyAttachments = [
@@ -11,10 +13,28 @@ const emptyAttachments = [
 	},
 ];
 
+const uploadRoute = {
+  name: 'file',
+  multiple: false,
+  action: '/api/uploadTaskFile',
+  headers: {
+    Authorization: localStorage.getItem('token'),
+  }
+}
+
 export class TaskDetailForm extends Component {
   state = {
+    filePath: '',
     sortedInfo: null,
   };
+
+
+  updateFileData = (filePath) => {
+		console.log('Data from child: ',filePath);
+		this.setState(prevState => ({
+  		filePath: [...prevState.filePath, filePath]
+		}))
+	}
 
   modifyTaskHandler = (id, dofc, status) => {
     api.post('modifyUserTask', {
@@ -76,7 +96,21 @@ export class TaskDetailForm extends Component {
 								<a href={"../" + attachment.path} download>{attachment.path.replace("uploads/","")}</a>
 								</Row>
 							);
-						})}
+            })}
+            {
+              true
+              &&
+              <div>
+                <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>
+                <Row>
+                  <UploadFile
+                  label="Submit files"
+                  {...uploadRoute}
+                  triggerParentUpdate={this.updateFileData.bind(this)} />
+                </Row>
+              </div>
+              
+            }
           </Content>
           <Sider
           style={{ background: '#fff', margin: '50px 16px 24px 16px'}}>
