@@ -52,6 +52,7 @@ export class TaskDetailForm extends Component {
 
 
 
+
   tagReturn(status) {
       switch (status) {
           case 'TO BE REVIEWED':
@@ -109,7 +110,7 @@ export class TaskDetailForm extends Component {
                   triggerParentUpdate={this.updateFileData.bind(this)} />
                 </Row>
               </div>
-              
+
             }
           </Content>
           <Sider
@@ -153,7 +154,8 @@ export class TaskDetailForm extends Component {
                 onClick={() => this.modifyTaskHandler(taskDetailed.id,
                 null, 'TBD')}>Reopen</Button>
                 <Divider type='horizontal' />
-                <Button disabled={taskDetailed.dateOfCompletion === null}>Approve</Button>
+                <Button disabled={taskDetailed.dateOfCompletion === null || taskDetailed.status=='DONE'}
+								onClick={() => this.modifyTaskHandler(taskDetailed.id,null,'DONE')}>Approve</Button>
               </span>
             </Row>
           </Sider>
