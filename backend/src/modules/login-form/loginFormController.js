@@ -18,6 +18,7 @@ export const loginFormController = async (req, res) => {
         bcrypt.compare(data.password, hash, function(error, success) {
           if (success) {
             var tokenData = {
+              id: response.id,
               firstName: response.firstName,
               lastName: response.lastName,
               email: response.email,

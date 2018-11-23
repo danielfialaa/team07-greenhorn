@@ -30,7 +30,8 @@ const modelModules = [
   require('./departments'),
   require('./task_history'),
   require('./groups'),
-  require('./groupBelonging')
+  require('./userGroupBelonging'),
+  require('./taskGroupBelonging')
 ];
 
 modelModules.forEach(modelModule => {

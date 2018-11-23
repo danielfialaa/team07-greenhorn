@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken');
 var path = require('path');
 var multer = require('multer');
 var storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'public/uploads/');
+
+  destination: function (req, file, cb) {
+    cb(null, '../frontend/public/uploads/');
   },
   filename: function(req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -17,6 +18,7 @@ import contactFormRoutes from './modules/contact-form/routes';
 import loginFormRoutes from './modules/login-form/routes';
 import addUserFormRoutes from './modules/add-user-form/routes';
 import addTaskFormRoutes from './modules/add-task-form/routes';
+import addGroupFormRoutes from './modules/add-group-form/routes';
 import userListRoutes from './modules/user-list/routes';
 import newPassRoutes from './modules/new-pass/routes';
 import resetPassRoutes from './modules/reset-pass/routes';
@@ -30,6 +32,9 @@ import userAdministrationRoutes from './modules/user-administration/routes';
 import assignTaskRoutes from './modules/assign-task/routes';
 import deleteUserTaskRoutes from './modules/delete-user-task/routes';
 import uploadTaskFileRoutes from './modules/upload-task-file/routes';
+import modifyUserTaskRoutes from './modules/modify-user-task/routes';
+import taskDetailRoutes from './modules/task-detail/routes';
+
 
 const router = Router({ mergeParams: true });
 
@@ -46,6 +51,7 @@ router.use('*', (req, res, next) => {
     } else {
       console.log(decoded);
       req.user = {
+        id: decoded.id,
         email: decoded.email,
         firstName: decoded.firstName,
         lastName: decoded.lastName,
@@ -59,21 +65,23 @@ router.use('*', (req, res, next) => {
 
 router.use('/api/addUser', addUserFormRoutes);
 router.use('/api/addTask', addTaskFormRoutes);
+router.use('/api/addGroup', addGroupFormRoutes);
 router.use('/api/currentUser', currentUserRoutes);
 router.use('/api/updateUser', updateUserFormRoutes);
 router.use('/api/userList', userListRoutes);
 router.use('/api/assignTask', assignTaskRoutes);
 router.use('/api/products', productRoutes);
 router.use('/api/contactForm', contactFormRoutes);
-router.use('/api/newPass', newPassRoutes);
 router.use('/api/changePass', changePassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
+router.use('/api/taskDetail/:id', taskDetailRoutes);
 router.use('/api/deleteUserTask', deleteUserTaskRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
+router.use('/api/modifyUserTask', modifyUserTaskRoutes);
 
 router.use('/api/', (req, res) => {
   res.json({

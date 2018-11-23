@@ -35,13 +35,15 @@ export class AddTaskForm extends Component {
     departments: "",
     name: "",
     description: "",
-    filePath: "",
+    filePath: [],
     success: false,
   }
 
 	updateFileData = (filePath) => {
 		console.log('Data from child: ',filePath);
-		this.setState({filePath: filePath});
+		this.setState(prevState => ({
+  		filePath: [...prevState.filePath, filePath]
+		}))
 	}
 
   handleSelectChange = (value) => {

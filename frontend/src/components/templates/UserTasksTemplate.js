@@ -14,8 +14,7 @@ export const UserTasksTemplate = ({
   tasks,
   error,
 }) => {
-  console.log(isLoading);
-  console.log(tasks);
+  console.log('isLoading: ',isLoading);
   if (isError && !isLoading) {
     // return <ErrorMessage error={error} />;
     // return <div> Error </div>
@@ -28,6 +27,8 @@ export const UserTasksTemplate = ({
   }
 
   return (
-    <TaskListTable tasks={tasks}/>
+    <TaskListTable
+    tasks={tasks}
+    />
   );
 };

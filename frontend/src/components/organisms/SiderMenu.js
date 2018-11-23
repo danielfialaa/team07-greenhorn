@@ -66,6 +66,7 @@ export class SiderMenu extends Component {
     }
     return (
       <Sider
+        className="main-menu"
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={broken => {
@@ -83,13 +84,8 @@ export class SiderMenu extends Component {
           mode="inline"
           defaultSelectedKeys={window.location.pathname.split('/')}
         >
-          <MenuItem
-            key="home"
-            title="User List"
-            icon="team"
-            linkTo="/home"
-            style={this.state.isAdmin ? {} : { display: 'none' }}
-          />
+				<SubMenu key="user" title={<span><Icon type="user" /><span>Users</span></span>}>
+          <MenuItem key="home" title="User List" icon="team" linkTo="/home" />
           <MenuItem
             key="AddUser"
             title="Add User"
@@ -97,6 +93,8 @@ export class SiderMenu extends Component {
             linkTo="/AddUser"
             style={this.state.isAdmin ? {} : { display: 'none' }}
           />
+					</SubMenu>
+				<SubMenu key="tasks" title={<span><Icon type="file-done" /><span>Tasks</span></span>}>
           <MenuItem
             key="AddTask"
             title="Add task"
@@ -110,6 +108,21 @@ export class SiderMenu extends Component {
             icon="project"
             linkTo="/UserTasks"
           />
+					</SubMenu>
+					<SubMenu key="groups" title={<span><Icon type="team" /><span>Groups</span></span>}>
+						<MenuItem
+							key="AddGroup"
+							title="Add Group"
+							icon="form"
+							linkTo="/AddGroup"
+						/>
+						<MenuItem
+							key="GroupList"
+							title="Groups list"
+							icon="form"
+							linkTo="/GroupList"
+						/>
+					</SubMenu>
           <MenuItem
             key="Settings"
             title="Settings"

@@ -14,7 +14,7 @@ export const PageWrapper = ({ children }) => (
 				</Header>
 			*/}
       <Content style={{ margin: '24px 16px 0' }}>
-        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+        <div className="content-wrapper" style={{ padding: 24, background: '#fff', minHeight: 360 }}>
           {children}
         </div>
       </Content>

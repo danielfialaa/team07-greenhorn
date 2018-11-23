@@ -12,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'idTask',
       as: 'task_history'
     });
+    tasks.belongsToMany(models.groups, {
+      through: 'taskGroupBelonging'
+    });
+    tasks.hasOne(models.attachments, {
+      foreignKey: 'idTask'
+    });
   };
   return tasks;
 };
