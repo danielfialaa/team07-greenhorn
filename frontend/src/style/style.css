@@ -127,6 +127,40 @@ a:hover {
 	background-color: #2E7D32;
 }
 
+.ant-select-selection:hover {
+	border-color: #2E7D32;
+	border-right-width: 1px !important;
+}
+
+.ant-select-dropdown-menu-item:hover {
+	background-color: #C8E6C9;
+}
+
+.ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
+	border-color: #2E7D32;
+	box-shadow: 0px 0px 5px #2E7D32;
+}
+.ant-select-dropdown-menu-item-active {
+	background-color: #C8E6C9;
+}
+
+@-webkit-keyframes transferHighlightIn {
+	0% {
+	  background: #C8E6C9;
+	}
+	100% {
+	  background: transparent;
+	}
+  }
+  @keyframes transferHighlightIn {
+	0% {
+	  background: #C8E6C9;
+	}
+	100% {
+	  background: transparent;
+	}
+  }
+
 /* ----- LOGIN ------ */
 
 h1{
