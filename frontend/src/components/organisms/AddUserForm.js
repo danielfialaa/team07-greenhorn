@@ -12,12 +12,17 @@ import {
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
+import { FormItemWithError } from '../molecules/FormItemWithError';
+import { FormItemDatePicker } from '../molecules/FormItemDatePicker';
+import { UserValidation } from '../atoms/schemas/UserValidation';
 import moment from 'moment';
 
 import api from '../../api';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const dateFormat = 'YYYY/MM/DD';
+const defaultDate = moment('1920/01/01').format(dateFormat);
 
 const emptyDepartments = [
   {
@@ -38,8 +43,10 @@ export class AddUserForm extends Component {
   };
 
   handleDateChange = value => {
+    value ? null : (value = moment(defaultDate));
     this.setState({ dob: value }, function() {});
   };
+
   handleCheckboxChange = () => {
     this.setState({ adminChecked: !this.state.adminChecked }, function() {});
   };
@@ -51,16 +58,18 @@ export class AddUserForm extends Component {
       email: '',
       telephone: '',
       idDepartment: '',
-      dob: null,
+      dob: '',
     };
+
     let departmentList = this.props.departmentList.response || emptyDepartments;
     return (
       <Formik
         initialValues={initialValues}
+        validationSchema={UserValidation}
         onSubmit={(values, actions) => {
           values.idDepartment = this.state.departments;
-          values.dob = this.state.dob.format('YYYY-MM-DD');
           values.isAdmin = this.state.adminChecked;
+          values.dob = moment(this.state.dob).format('YYYY-MM-DD');
           api
             .post('addUser', values)
             .then(({ data }) => {
@@ -87,6 +96,7 @@ export class AddUserForm extends Component {
           handleChange,
           handleSubmit,
           isSubmitting,
+          isValid,
         }) => (
           <Row
             type="flex"
@@ -97,59 +107,48 @@ export class AddUserForm extends Component {
             <Col>
               <h1>Create New User</h1>
               <Form className="addUser-form" onSubmit={handleSubmit}>
-                <FormItem label="First Name">
-                  <InputWithIcon
-                    iconType="user"
-                    placeholder="Enter user first name"
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    value={values.firstName}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormItem>
-                <FormItem label="Last Name">
-                  <InputWithIcon
-                    iconType="user"
-                    placeholder="Enter user last name"
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    value={values.lastName}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormItem>
-                <FormItem label="Email">
-                  <InputWithIcon
-                    iconType="mail"
-                    placeholder="Enter user email"
-                    type="email"
-                    name="email"
-                    id="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormItem>
-                <FormItem label="Tel.">
-                  <InputWithIcon
-                    iconType="phone"
-                    placeholder="Enter user telephone number"
-                    type="tel"
-                    name="telephone"
-                    id="telephone"
-                    value={values.telephone}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </FormItem>
+                <FormItemWithError
+                  label="First Name"
+                  iconType="user"
+                  placeholder="Enter user first name"
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  value={values.firstName}
+                />
+                <FormItemWithError
+                  label="Last Name"
+                  iconType="user"
+                  placeholder="Enter user last name"
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  value={values.lastName}
+                />
+                <FormItemWithError
+                  label="Email"
+                  iconType="mail"
+                  placeholder="Enter user email"
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={values.lastName}
+                />
+                <FormItemWithError
+                  label="Tel."
+                  iconType="phone"
+                  placeholder="Enter user telephone number"
+                  type="tel"
+                  name="telephone"
+                  id="telephone"
+                  value={values.telephone}
+                />
                 <FormItem label="Department">
                   <Select
                     name="departments"
                     id="departments"
                     onChange={this.handleSelectChange}
+                    defaultValue={departmentList[0].id}
                   >
                     {departmentList.map(function(department) {
                       return (
@@ -160,20 +159,20 @@ export class AddUserForm extends Component {
                     })}
                   </Select>
                 </FormItem>
-                <FormItem label="Date of Birth">
-                  <DatePicker
-                    dropdownClassName="dob"
-                    name="dob"
-                    id="dob"
-                    onChange={this.handleDateChange}
-                  />
-                </FormItem>
+                <FormItemDatePicker
+                  label="Date of Birth"
+                  dropdownClassName="dob"
+                  name="dob"
+                  id="dob"
+                  onChange={this.handleDateChange}
+                  defaultValue={moment(defaultDate)}
+                />
                 <FormItem>
                   <Checkbox
                     checked={this.state.adminChecked}
                     onChange={this.handleCheckboxChange}
                   >
-                    admin
+                    Admin
                   </Checkbox>
                 </FormItem>
                 <FormItem>
@@ -181,7 +180,7 @@ export class AddUserForm extends Component {
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
-                    disabled={isSubmitting}
+                    disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
                   >
                     Create

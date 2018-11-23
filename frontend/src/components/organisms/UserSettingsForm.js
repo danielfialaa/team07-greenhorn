@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Button, notification, Select, DatePicker } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import { Notification } from '../atoms/Notification';
 import { FormItemWithError } from '../molecules/FormItemWithError';
+import { FormItemDatePicker } from '../molecules/FormItemDatePicker';
 import { UserValidation } from '../atoms/schemas/UserValidation';
 import moment from 'moment';
-import * as Yup from 'yup';
 
 import api from '../../api';
 
@@ -98,17 +98,14 @@ export class UserSettingsForm extends Component {
                   id="telephone"
                   value={values.telephone}
                 />
-                <FormItem label="Date of Birth">
-                  <DatePicker
-                    dropdownClassName="dob"
-                    name="dob"
-                    allowClear={false}
-                    id="dob"
-                    defaultValue={moment(date, dateFormat)}
-                    format={dateFormat}
-                    onChange={this.handleDateChange}
-                  />
-                </FormItem>
+                <FormItemDatePicker
+                  label="Date of Birth"
+                  dropdownClassName="dob"
+                  name="dob"
+                  id="dob"
+                  onChange={this.handleDateChange}
+                  defaultValue={moment(date, dateFormat)}
+                />
                 <FormItem>
                   <Button
                     type="primary"

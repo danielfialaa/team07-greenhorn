@@ -18,6 +18,10 @@ const MenuItem = ({ title, icon, linkTo, ...rest }) => (
 );
 
 export class SiderMenu extends Component {
+  state = {
+    isAdmin: false,
+  };
+
   componentDidMount() {
     this.setState.authorized = true;
     if (localStorage.getItem('token')) {
@@ -30,6 +34,7 @@ export class SiderMenu extends Component {
           console.log('login check arrived');
           this.setState(() => ({
             authorized: true,
+            isAdmin: localStorage.isAdmin,
           }));
         })
         .catch(e => {
@@ -86,6 +91,7 @@ export class SiderMenu extends Component {
             title="Add User"
             icon="user-add"
             linkTo="/AddUser"
+            style={this.state.isAdmin ? {} : { display: 'none' }}
           />
 					</SubMenu>
 				<SubMenu key="tasks" title={<span><Icon type="file-done" /><span>Tasks</span></span>}>
@@ -94,6 +100,7 @@ export class SiderMenu extends Component {
             title="Add task"
             icon="form"
             linkTo="/AddTask"
+            style={this.state.isAdmin ? {} : { display: 'none' }}
           />
           <MenuItem
             key="My Tasks"

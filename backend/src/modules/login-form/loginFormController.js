@@ -37,6 +37,7 @@ export const loginFormController = async (req, res) => {
             res.json({
               status: true,
               token: encodedToken,
+              isAdmin: response.isAdmin,
             });
           } else {
             res.json({
