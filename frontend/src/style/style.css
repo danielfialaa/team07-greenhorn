@@ -115,6 +115,7 @@ a:hover {
 
 .ant-checkbox-checked .ant-checkbox-inner {
 	background-color: #2E7D32;
+	border-color: #2E7D32;
 }
 .ant-checkbox-wrapper:hover .ant-checkbox-inner,
 .ant-checkbox:hover .ant-checkbox-inner,
@@ -159,7 +160,42 @@ a:hover {
 	100% {
 	  background: transparent;
 	}
-  }
+}
+
+.ant-calendar-date:active {
+	color: #fff;
+	background: #C8E6C9;
+}
+.ant-calendar-today .ant-calendar-date {
+	border-color: #2E7D32;
+	color: #2E7D32;
+}
+
+.ant-calendar-date:hover {
+	background: #C8E6C9;
+	cursor: pointer;
+}
+
+.ant-calendar-selected-day .ant-calendar-date {
+	background: #C8E6C9;
+}
+.ant-calendar-selected-date .ant-calendar-date,
+.ant-calendar-selected-start-date .ant-calendar-date,
+.ant-calendar-selected-end-date .ant-calendar-date {
+	background: #2E7D32;
+	color: #fff;
+	border: 1px solid transparent;
+}
+.ant-calendar-selected-date .ant-calendar-date:hover,
+.ant-calendar-selected-start-date .ant-calendar-date:hover,
+.ant-calendar-selected-end-date .ant-calendar-date:hover {
+	background: #C8E6C9;
+	color: #2E7D32;
+}
+
+.ant-upload-list-item:hover .ant-upload-list-item-info {
+	background: #C8E6C9
+}
 
 /* ----- LOGIN ------ */
 
