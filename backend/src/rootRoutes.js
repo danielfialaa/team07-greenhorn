@@ -2,6 +2,7 @@ import { Router } from 'express';
 const jwt = require('jsonwebtoken');
 var path = require('path');
 var multer = require('multer');
+var isAdmin = false;
 var storage = multer.diskStorage({
 
   destination: function (req, file, cb) {
@@ -56,22 +57,17 @@ router.use('*', (req, res, next) => {
         firstName: decoded.firstName,
         lastName: decoded.lastName,
         department: decoded.department,
+        isAdmin: decoded.isAdmin,
       };
       console.log(req.user);
       next();
     }
   });
 });
-
-router.use('/api/addUser', addUserFormRoutes);
-router.use('/api/addTask', addTaskFormRoutes);
-router.use('/api/addGroup', addGroupFormRoutes);
+/* ROUTES FOR ALL USERS */
 router.use('/api/currentUser', currentUserRoutes);
 router.use('/api/updateUser', updateUserFormRoutes);
 router.use('/api/userList', userListRoutes);
-router.use('/api/assignTask', assignTaskRoutes);
-router.use('/api/products', productRoutes);
-router.use('/api/contactForm', contactFormRoutes);
 router.use('/api/changePass', changePassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
@@ -79,9 +75,23 @@ router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
 router.use('/api/taskDetail/:id', taskDetailRoutes);
-router.use('/api/deleteUserTask', deleteUserTaskRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
+
+/* ROUTES ONLY FOR ADMINS */
+router.use('/api/addUser', addUserFormRoutes);
+router.use('/api/addTask', addTaskFormRoutes);
+router.use('/api/addGroup', addGroupFormRoutes);
+router.use('/api/assignTask', assignTaskRoutes);
+router.use('/api/deleteUserTask', deleteUserTaskRoutes);
 router.use('/api/modifyUserTask', modifyUserTaskRoutes);
+
+
+
+/* SOME OLD SHIT */
+/*
+router.use('/api/products', productRoutes);
+router.use('/api/contactForm', contactFormRoutes);
+*/
 
 router.use('/api/', (req, res) => {
   res.json({

@@ -23,6 +23,7 @@ export const loginFormController = async (req, res) => {
               lastName: response.lastName,
               email: response.email,
               department: response.department,
+              isAdmin: response.isAdmin,
             };
 
             console.log(tokenData);
