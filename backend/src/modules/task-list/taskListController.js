@@ -32,9 +32,11 @@ export const taskListController = async (req, res) => {
             {
               model: db.departments,
             },
-          ],
-        },
-      ],
+        {
+          model: db.attachments,
+          attributes: ['idTask','path'],
+          }
+      ]}],
     })
     .then(response => {
       // response = JSON.stringify(response)
