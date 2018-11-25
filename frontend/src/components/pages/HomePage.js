@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { LocaleProvider, DatePicker, message } from 'antd';
 import { HomeTemplate } from '../templates/HomeTemplate';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import api from '../../api';
 

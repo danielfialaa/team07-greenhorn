@@ -14,26 +14,33 @@ const FormItem = Form.Item;
 export class LoginForm extends Component {
   state = {
     loggedIn: false,
+    isAdmin: false,
   };
 
   render() {
     const initialValues = { email: '', password: '' };
     const isLoggedIn = false;
-    if (this.state.loggedIn === true) {
+
+    if (this.state.loggedIn === true && this.state.isAdmin === true) {
       return <Redirect to="/home" />;
+    } else if (this.state.loggedIn === true) {
+      return <Redirect to="/UserTasks" />;
     }
     return (
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
           api.post('auth', values).then(({ data }) => {
+            console.log(data);
             actions.setSubmitting(false);
             if (data.status) {
               localStorage.setItem('token', data.token);
+              localStorage.setItem('isAdmin', data.isAdmin);
               console.log(localStorage.getItem('token'));
               api.defaults.headers.common['Authorization'] = data.token;
               this.setState(() => ({
                 loggedIn: true,
+                isAdmin: data.isAdmin,
               }));
               Notification(
                 'success',

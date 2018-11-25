@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
-import { Input, Icon } from 'antd';
+import { Icon } from 'antd';
+import { Header4WithIcon } from '../molecules/Header4WithIcon';
 import moment from 'moment';
 
 import api from '../../api';
@@ -19,30 +20,35 @@ export class UserAdministrationForm extends Component {
     return (
       <div>
         <Row>
-          <Col offset={8} span={8}>
-            <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-            <span>
-              {' '}
-              {this.props.userInfo.firstName} {this.props.userInfo.lastName}{' '}
-            </span>
+          <Col span={8}>
+            <Header4WithIcon
+              iconType="user"
+              values={
+                this.props.userInfo.firstName +
+                ' ' +
+                this.props.userInfo.lastName
+              }
+            />
+          </Col>
+          <Col span={6}>
+            <Header4WithIcon
+              iconType="mail"
+              values={this.props.userInfo.email}
+            />
           </Col>
         </Row>
         <Row>
-        <Col offset={8} span={8}>
-            <Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />
-            <span> {this.props.userInfo.email}</span>
+          <Col span={8}>
+            <Header4WithIcon
+              iconType="calendar"
+              values={moment(this.props.userInfo.dob).format(dateFormat)}
+            />
           </Col>
-        </Row>
-        <Row>
-        <Col offset={8} span={8}>
-            <Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />
-            <span> {this.props.userInfo.telephone}</span>
-          </Col>
-        </Row>
-        <Row>
-        <Col offset={8} span={8}>
-            <Icon type="calendar" style={{ color: 'rgba(0,0,0,.25)' }} />
-            <span> {moment(this.props.userInfo.dob).format(dateFormat)}</span>
+          <Col span={6}>
+            <Header4WithIcon
+              iconType="phone"
+              values={this.props.userInfo.telephone}
+            />
           </Col>
         </Row>
       </div>

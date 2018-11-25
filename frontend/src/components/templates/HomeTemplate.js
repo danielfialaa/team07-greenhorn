@@ -21,6 +21,5 @@ export const HomeTemplate = ({ isLoading, isError, users, error }) => {
   if (isLoading) {
     return <Spin indicator={antIcon} />;
   }
-
   return <UserListTable users={users} />;
 };
