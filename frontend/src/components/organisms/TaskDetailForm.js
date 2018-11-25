@@ -70,7 +70,9 @@ export class TaskDetailForm extends Component {
     const { taskDetailed } = this.props;
     console.log("taskDetailed>>>>> ", this.props);
     var dateFormat = require('dateformat');
-		let attachmentsList = this.props.attachments || emptyAttachments;
+    var isAssignedToSelf = this.props.isAssignedToSelf;
+    console.log(isAssignedToSelf + "IS ASSIGNED TO SELF FFS FFS FFS ");
+    let attachmentsList = this.props.attachments || emptyAttachments;
 
     const data = {
       assignee: this.props.relatedUsers[0],
@@ -92,14 +94,14 @@ export class TaskDetailForm extends Component {
 
 						{attachmentsList.map(function(attachment) {
 							return (
-								<Row>
+								<Row key={attachment.path}>
 								<Icon type="file-text"/>
 								<a href={"../" + attachment.path} download>{attachment.path.replace("uploads/","")}</a>
 								</Row>
 							);
             })}
             {
-              true
+              isAssignedToSelf
               &&
               <div>
                 <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>

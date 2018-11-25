@@ -14,6 +14,7 @@ export const TaskDetailTemplate = ({
   taskDetailed,
 	attachments,
   relatedUsers,
+  isAssignedToSelf,
 }) => {
   if (isLoading) {
     return <Spin indicator={antIcon} />;
@@ -21,7 +22,7 @@ export const TaskDetailTemplate = ({
 
   return (
     <div>
-        <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments} relatedUsers={relatedUsers}/>
+        <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments} relatedUsers={relatedUsers} isAssignedToSelf={isAssignedToSelf}/>
     </div>
   );
 };

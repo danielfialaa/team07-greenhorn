@@ -1,9 +1,9 @@
 import db from '../../models/';
+const jwt = require('jsonwebtoken');
+
 
 export const taskDetailController = async (req, res) => {
-  console.log('received id: ', req.params.id);
 
-  const data = await req.body;
   const id = await req.params.id;
 
   const result = await db.task_history
@@ -16,7 +16,6 @@ export const taskDetailController = async (req, res) => {
     //include
 	});
 
-  console.log("Result>>>>>> ", result);
 
 	const attachments = await db.attachments.findAll({
 		where: { idTask: result.idTask},
@@ -33,10 +32,31 @@ export const taskDetailController = async (req, res) => {
   const relatedUsers = [asignee, reporter, requestor];
 
 
+  var isAssignedToSelf;
+
+  const x = jwt.verify(req.get('Authorization'), '2', (err, decoded) => {
+    if (err) {
+
+      isAssignedToSelf = false;
+
+    } else {
+      const requestingUserId = decoded.id;
+
+      if(asignee.id === requestingUserId) {
+        isAssignedToSelf = true;
+      } else {
+        isAssignedToSelf = false;
+      }
+    }
+  });
+
+
+
 	res.json({
 		result,
 		attachments,
     relatedUsers,
+    isAssignedToSelf
 	});
     // .then(response => {
     //   console.log("BE task detail response: ", response);
