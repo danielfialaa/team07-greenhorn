@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Tag } from 'antd';
+import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col } from 'antd';
 import { Logo } from '../atoms/Logo';
 import { Link } from 'react-router-dom';
 
@@ -116,6 +116,41 @@ export class TaskListTable extends Component {
         dataIndex: 'task.department.departmentName',
         key: 'task.department.departmentName',
       },
+      {
+        title: 'File',
+        dataIndex: 'task.attachment',
+        key: 'task.department.departmentName',
+        render: dataIndex =>
+        {console.log("totototoototot: ",dataIndex);
+          if (!dataIndex) {
+          console.log("totototoototot: ",dataIndex);
+          return (<Row><Icon type="file-exclamation" />This task has no files!</Row>);
+        }
+        // else {
+        //   dataIndex.map(function(x) {
+        //     return (
+        //       <Row>
+        //       <Icon type="file-text"/>
+        //       <a href={"../" + x.path} download>{x.path.replace("uploads/","")}</a>
+        //       </Row>
+        //     );
+        //   })
+          return (
+            <Row>
+            <Icon type="file-text"/>
+            <a href={"../" + dataIndex.path} download>{dataIndex.path.replace("uploads/","")}</a>
+            </Row>
+          );
+        // }
+           // dataIndex.map(function(dataIndex) {
+          //   return (
+          //     <Row>
+          //     <Icon type="file-text"/>
+          //     <a href={"../" + dataIndex.path} download>{dataIndex.path.replace("uploads/","")}</a>
+          //     </Row>
+          //   );
+          // })
+       }},
       {
         title: 'Date of Assigment',
         dataIndex: 'dateOfAssignment',
