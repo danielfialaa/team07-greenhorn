@@ -24,7 +24,8 @@ const uploadRoute = {
 
 export class TaskDetailForm extends Component {
   state = {
-    filePath: '',
+    filePath: [],
+    success: false,
     sortedInfo: null,
   };
 
@@ -67,10 +68,12 @@ export class TaskDetailForm extends Component {
 
 
   render(){
+
     const { taskDetailed } = this.props;
-    console.log("taskDetailed>>>>> ", this.props);
+
     var dateFormat = require('dateformat');
-		let attachmentsList = this.props.attachments || emptyAttachments;
+    var isAssignedToSelf = this.props.isAssignedToSelf;
+    let attachmentsList = this.props.attachments || emptyAttachments;
 
     const data = {
       assignee: this.props.relatedUsers[0],
@@ -92,14 +95,16 @@ export class TaskDetailForm extends Component {
 
 						{attachmentsList.map(function(attachment) {
 							return (
-								<Row>
+								<Row key={attachment.path}>
 								<Icon type="file-text"/>
 								<a href={"../" + attachment.path} download>{attachment.path.replace("uploads/","")}</a>
 								</Row>
 							);
             })}
             {
-              true
+              isAssignedToSelf
+              &&
+              taskDetailed.dateOfCompletion === null
               &&
               <div>
                 <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>
@@ -148,8 +153,35 @@ export class TaskDetailForm extends Component {
               <span>
                 <Button
                 disabled={taskDetailed.dateOfCompletion !== null}
-                onClick={() => this.modifyTaskHandler(taskDetailed.id,
-                  dateFormat(Date.now(),'isoUtcDateTime'), 'TO BE REVIEWED')}>Close</Button>
+                onClick={() => {
+
+
+                  const values = {
+                    id: taskDetailed.id,
+                    filePath: this.state.filePath,
+                  }
+
+                  console.log(values);
+
+                  this.modifyTaskHandler(taskDetailed.id,
+                  dateFormat(Date.now(),'isoUtcDateTime'), 'TO BE REVIEWED');
+
+                  api.post('taskDetail/'+taskDetailed.id+'/update', values)
+                  .then(({ data }) => {
+                    if (data.status) {
+                      Notification('success', 'Task Created', 'Task has been created.');
+
+                      this.setState(() => ({
+                        success: true
+                      }))
+
+                    }else{
+                      Notification('error', 'Error', 'Error while creating task!')
+                    }
+                  })
+                  .catch(err => console.log('There was an error:' + err))
+                
+                }}>Close</Button>
                 <Button disabled={taskDetailed.dateOfCompletion === null}
                 onClick={() => this.modifyTaskHandler(taskDetailed.id,
                 null, 'TBD')}>Reopen</Button>
