@@ -14,6 +14,7 @@ export class UserAdministrationPage extends Component {
     userId: this.props.match.params.id,
     reporterId: '',
     requestorList: '',
+    currentUser: '',
   };
 
   componentDidMount() {
@@ -25,6 +26,13 @@ export class UserAdministrationPage extends Component {
           userId: data.response[0].id,
         }));
       });
+
+    api.get('currentUser')
+      .then(({data}) => {
+          this.setState(() => ({
+            currentUser: data.response,
+          }))
+        });
 
     api.get('userList').then(({ data }) => {
       this.setState(() => ({
@@ -41,7 +49,7 @@ export class UserAdministrationPage extends Component {
     api.get('taskList/' + this.props.match.params.id).then(({ data }) => {
       this.setState(() => ({
         isLoading: false,
-        tasks: data,
+        tasks: data.response,
       }));
     });
   }
@@ -55,6 +63,7 @@ export class UserAdministrationPage extends Component {
         tasks={this.state.tasks}
         userId={this.state.userId}
         requestorList={this.state.requestorList}
+        currentUser={this.state.currentUser}
         title="User profile"
       />
     );

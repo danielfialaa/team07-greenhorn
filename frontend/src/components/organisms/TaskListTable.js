@@ -10,6 +10,7 @@ export class TaskListTable extends Component {
     sortedInfo: null,
   };
 
+
   handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
     this.setState({
@@ -47,38 +48,35 @@ export class TaskListTable extends Component {
     console.log("id", id);
   }
 
-  /*setAgeSort = () => {
-    this.setState({
-      sortedInfo: {
-        order: 'descend',
-        columnKey: 'age',
-      },
-    });
-  }*/
+  tagReturn(status) {
+      switch (status) {
+          case 'TO BE REVIEWED':
+            return <Tag color='orange'>TO BE REVIEWED</Tag>;
+          case 'DONE':
+            return <Tag color='green'>DONE</Tag>;
+          case 'TBD':
+            return <Tag color='red'>TBD</Tag>;
+        default: return null;
+      }
+    }
 
   render() {
     const { tasks } = this.props;
-    console.log(this.props);
-
+    const isAdmin = this.props.currentUser[0].isAdmin;
+    console.log('this.props >>>>> ',this.props);
     var dateFormat = require('dateformat');
 
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
-
     const columns = [
       {
         title: 'Status',
-        dataIndex: 'dateOfCompletion',
-        key: 'dateOfCompletion',
+        dataIndex: 'status',
+        key: 'status',
         render: dataIndex => (
           <span>
-            <Tag color="red" visible={dataIndex === null}>
-              TBD
-            </Tag>
-            <Tag color="green" visible={dataIndex !== null}>
-              DONE
-            </Tag>
+          {this.tagReturn(dataIndex)}
           </span>
         ),
         filters: [
@@ -89,6 +87,10 @@ export class TaskListTable extends Component {
           {
             text: 'Done',
             value: 'DONE',
+          },
+          {
+            text: 'To be reviewed',
+            value: 'TO REVIEW',
           },
         ],
         //    filterMultiple: false,
@@ -101,63 +103,11 @@ export class TaskListTable extends Component {
         title: 'Name',
         dataIndex: 'task.name',
         key: 'task.name',
-        // sorter: (a, b) => a.name.length - b.name.length,
-        // sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-      },
-      {
-        title: 'Description',
-        dataIndex: 'task.description',
-        key: 'task.description',
-        // sorter: (a, b) => a.localeCompare(b),
-        // sortOrder: sortedInfo.columnKey === 'description' && sortedInfo.order,
       },
       {
         title: 'Department',
         dataIndex: 'task.department.departmentName',
         key: 'task.department.departmentName',
-      },
-      {
-        title: 'File',
-        dataIndex: 'task.attachment',
-        key: 'task.department.departmentName',
-        render: dataIndex =>
-        {console.log("totototoototot: ",dataIndex);
-          if (!dataIndex) {
-          console.log("totototoototot: ",dataIndex);
-          return (<Row><Icon type="file-exclamation" />This task has no files!</Row>);
-        }
-        // else {
-        //   dataIndex.map(function(x) {
-        //     return (
-        //       <Row>
-        //       <Icon type="file-text"/>
-        //       <a href={"../" + x.path} download>{x.path.replace("uploads/","")}</a>
-        //       </Row>
-        //     );
-        //   })
-          return (
-            <Row>
-            <Icon type="file-text"/>
-            <a href={"../" + dataIndex.path} download>{dataIndex.path.replace("uploads/","")}</a>
-            </Row>
-          );
-        // }
-           // dataIndex.map(function(dataIndex) {
-          //   return (
-          //     <Row>
-          //     <Icon type="file-text"/>
-          //     <a href={"../" + dataIndex.path} download>{dataIndex.path.replace("uploads/","")}</a>
-          //     </Row>
-          //   );
-          // })
-       }},
-      {
-        title: 'Date of Assigment',
-        dataIndex: 'dateOfAssignment',
-        key: 'dateOfAssignment',
-        render: dataIndex => (
-          <span>{dateFormat(dataIndex, 'dddd, mmmm dS, yyyy')}</span>
-        ),
       },
       {
         title: 'Deadline',
@@ -173,9 +123,20 @@ export class TaskListTable extends Component {
         dataIndex: 'id',
         render: (dataIndex) => (
           <span>
-              <Button type="primary" icon="file-search" href={"/TaskDetail/"+dataIndex}>Detail</Button>
-              <Divider type='vertical' />
-              <Button type="danger" icon="delete" onClick={() => {this.deleteTaskHandler(dataIndex)}}>Delete</Button>
+              <Button
+                type="primary"
+                icon="file-search"
+                href={"/TaskDetail/"+dataIndex}
+                >Detail
+              </Button>
+              <Divider type='vertical' style={isAdmin ? {} : {display: 'none'}}/>
+              <Button
+                type="danger"
+                icon="delete"
+                onClick={() => {this.deleteTaskHandler(dataIndex)}}
+                style={isAdmin ? {} : {display: 'none'}}
+                >Delete
+              </Button>
           </span>
         ),
       } /*{
@@ -203,7 +164,7 @@ export class TaskListTable extends Component {
       <div>
         <Table
           columns={columns}
-          dataSource={this.props.tasks.response}
+          dataSource={this.props.tasks}
           onChange={this.handleChange}
           rowKey="id"
         />

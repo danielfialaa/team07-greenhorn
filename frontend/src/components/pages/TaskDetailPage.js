@@ -13,11 +13,19 @@ state = {
   taskDetailed: "",
 	attachments: "",
   relatedUsers: [{},{},{}],
-  isAssignedToSelf: false
+  isAssignedToSelf: false,
+  currentUser: "",
 }
 
 componentDidMount() {
   console.log("this.props.match.params.id: ",this.props.match.params.id);
+  api.get('currentUser')
+    .then(({data}) => {
+        console.log('data>>>>>>>', data.response);
+        this.setState(() => ({
+          currentUser: data.response,
+        }))
+      });
   api.get('taskDetail/'+this.props.match.params.id)
     .then(({ data }) => {
       console.log("data: ",data);
@@ -26,9 +34,9 @@ componentDidMount() {
         taskDetailed: data.result,
 				attachments: data.attachments,
         relatedUsers: data.relatedUsers,
-        isAssignedToSelf: data.isAssignedToSelf 
+        isAssignedToSelf: data.isAssignedToSelf
       }))
-    })
+    });
 }
 
 
@@ -42,6 +50,7 @@ componentDidMount() {
 			attachments={this.state.attachments}
       relatedUsers={this.state.relatedUsers}
       isAssignedToSelf={this.state.isAssignedToSelf}
+      currentUser={this.state.currentUser}
     />
     );
   }

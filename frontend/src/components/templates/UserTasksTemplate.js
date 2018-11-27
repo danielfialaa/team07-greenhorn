@@ -12,6 +12,7 @@ export const UserTasksTemplate = ({
   isLoading,
   isError,
   tasks,
+  currentUser,
   error,
 }) => {
   console.log('isLoading: ',isLoading);
@@ -29,6 +30,7 @@ export const UserTasksTemplate = ({
   return (
     <TaskListTable
     tasks={tasks}
+    currentUser={currentUser}
     />
   );
 };

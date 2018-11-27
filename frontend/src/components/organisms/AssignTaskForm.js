@@ -27,6 +27,7 @@ export class AssignTaskForm extends Component {
     deadline: '',
     userId: '',
     reporterId: '',
+    status: '',
   };
 
   handleTaskSelectChange = value => {
@@ -49,6 +50,7 @@ export class AssignTaskForm extends Component {
       idRequestor: '',
       dateOfAssignment: '',
       dateOfDeadline: '',
+      status: 'TBD',
     };
 
     let requestorList = this.props.requestorList || emptyRequestorList;
