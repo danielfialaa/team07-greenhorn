@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col } from 'antd';
+import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col, Layout } from 'antd';
 import { Logo } from '../atoms/Logo';
 import { Link } from 'react-router-dom';
 
 import api from '../../api';
+
+const { Header, Content } = Layout;
 
 export class TaskListTable extends Component {
   state = {
@@ -62,7 +64,7 @@ export class TaskListTable extends Component {
 
   render() {
     const { tasks } = this.props;
-    const isAdmin = this.props.currentUser[0].isAdmin;
+    const currentUser = this.props.currentUser[0];
     console.log('this.props >>>>> ',this.props);
     var dateFormat = require('dateformat');
 
@@ -129,12 +131,12 @@ export class TaskListTable extends Component {
                 href={"/TaskDetail/"+dataIndex}
                 >Detail
               </Button>
-              <Divider type='vertical' style={isAdmin ? {} : {display: 'none'}}/>
+              <Divider type='vertical' style={currentUser.isAdmin ? {} : {display: 'none'}}/>
               <Button
                 type="danger"
                 icon="delete"
                 onClick={() => {this.deleteTaskHandler(dataIndex)}}
-                style={isAdmin ? {} : {display: 'none'}}
+                style={currentUser.isAdmin ? {} : {display: 'none'}}
                 >Delete
               </Button>
           </span>
@@ -160,15 +162,31 @@ export class TaskListTable extends Component {
     } */,
     ];
 
+
+    // <div style={{ margin: '1px 1px 1px 1px', textAlign: 'left'}} ><h2>Tasks to do</h2></div>
+    // <div style={{ margin: '1px 1px 1px 1px', textAlign: 'right'}} ><h2>You are signed in as {currentUser.firstName} {currentUser.lastName}</h2></div>
     return (
       <div>
-        <Table
+      <Table
           columns={columns}
           dataSource={this.props.tasks}
           onChange={this.handleChange}
           rowKey="id"
-        />
+      />
       </div>
     );
   }
 }
+
+
+// <Layout>
+// <Header
+//   style={{ background: '#fff', padding: 0, textAlign: 'center' }}
+// >{}
+// </Header>
+// <Content>
+
+
+
+// </Content>
+// </Layout>

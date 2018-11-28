@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Tag } from 'antd';
+import { Table, Button, Divider, Tag, Layout } from 'antd';
 import { Logo } from '../atoms/Logo';
 import { Link } from 'react-router-dom';
 
 
 import api from '../../api';
 
-
+const { Header, Content } = Layout
 
 
 export class UserListTable extends Component {
@@ -33,11 +33,12 @@ export class UserListTable extends Component {
 	render() {
 
 		const {users} = this.props;
-		console.log(this.props.users.response);
+		console.log('this.props >>>>> ',this.props);
 
 		let { sortedInfo, filteredInfo } = this.state;
-sortedInfo = sortedInfo || {};
-filteredInfo = filteredInfo || {};
+		sortedInfo = sortedInfo || {};
+		filteredInfo = filteredInfo || {};
+
 const columns = [{
 	title: 'Firstname',
 	dataIndex: 'firstName',
@@ -94,10 +95,11 @@ const columns = [{
     </span>
   ),
 }];
+//currentUser.firstName
 	    return (
 				<div>
         <div className="table-operations">
-          <Button onClick={this.clearAll}>Clear filters and sorters</Button>
+          <Button onClick={this.clearAll} style={{margin: '5px 5px 5px 50px '}}>Clear filters and sorters</Button>
         </div>
         <Table columns={columns} dataSource={this.props.users.response} onChange={this.handleChange} rowKey="id" />
       </div>
