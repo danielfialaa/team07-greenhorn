@@ -3,6 +3,7 @@ import { Row, Col, Layout } from 'antd';
 import { Footer } from '../atoms/Footer';
 import { Spin, Icon } from 'antd';
 import { TaskDetailForm } from '../organisms/TaskDetailForm';
+import { HeaderUser } from '../molecules/HeaderUser';
 
 
 const { Header, Content } = Layout;
@@ -23,7 +24,8 @@ export const TaskDetailTemplate = ({
 
   return (
     <div>
-        <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments} relatedUsers={relatedUsers} isAssignedToSelf={isAssignedToSelf} currentUser={currentUser}/>
+      <HeaderUser currentUser={currentUser} title={''}/>
+      <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments} relatedUsers={relatedUsers} isAssignedToSelf={isAssignedToSelf} currentUser={currentUser}/>
     </div>
   );
 };

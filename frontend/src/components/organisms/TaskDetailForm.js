@@ -88,7 +88,7 @@ export class TaskDetailForm extends Component {
 
     return (
       <div>
-      <Header style={{ background: '#ffffff', float: 'centre'}}><h1>Task detail</h1></Header>
+      <Header style={{ background: '#ffffff', float: 'centre'}}><h1>TASK DETAIL</h1></Header>
         <Layout style={{ background: '#fff' }}>
           <Content style={{ margin: '16px 36px 24px 16px' }}>
             <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>

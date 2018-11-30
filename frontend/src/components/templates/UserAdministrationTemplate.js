@@ -6,6 +6,7 @@ import { UserAdministrationForm } from '../organisms/UserAdministrationForm';
 import { AssignTaskForm } from '../organisms/AssignTaskForm';
 import { TaskListTable } from '../organisms/TaskListTable';
 import { Spin, Icon } from 'antd';
+import { HeaderUser } from '../molecules/HeaderUser';
 
 const { Header, Content } = Layout;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
@@ -26,7 +27,8 @@ export const UserAdministrationTemplate = ({
 
   return (
     <div>
-      <h1>User administration profile</h1>
+    <HeaderUser currentUser={currentUser} title={''} />
+      <h1>USER ADMINISTRATION PROFILE</h1>
       <Row>
         <Col>
           <UserAdministrationForm userInfo={userInfo} />

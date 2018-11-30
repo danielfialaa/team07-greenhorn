@@ -32,7 +32,7 @@ export const UserTasksTemplate = ({
   //<HeaderUserHomePage currentUser={currentUser} />
   return (
     <div>
-    <HeaderUser currentUser={currentUser} title={'User tasks overview'}/>
+    <HeaderUser currentUser={currentUser} title={'USER TASKS OVERVIEW'}/>
     <TaskListTable tasks={tasks} currentUser={currentUser} />
     </div>
   );

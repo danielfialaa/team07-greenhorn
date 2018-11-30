@@ -8,7 +8,7 @@ export class HeaderUser extends Component {
     const title = this.props.title;
     return(
           <div>
-            <h1 style={{ float: 'left' }}>{title}</h1>
+            <h1 style={{ float: 'left'}}>{title}</h1>
             <div style={{ float: 'right'}}>
               <Col>
                 <Avatar size={45} icon="user" shape='square' style={{ float: 'right', verticalAlign: 'middle', margin: '1px 20px 1px 1px'}}/>
