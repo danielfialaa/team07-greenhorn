@@ -11,7 +11,7 @@ state = {
   isLoading: true,
   isError: false,
   taskDetailed: "",
-	attachments: "",
+	attachments: [{},{}],
   relatedUsers: [{},{},{}],
   isAssignedToSelf: false,
   currentUser: "",

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import { Table, Button, Divider, Tag } from 'antd';
-=======
 import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col, Layout } from 'antd';
->>>>>>> dev_pepa
 import { Logo } from '../atoms/Logo';
 import { Link } from 'react-router-dom';
 
@@ -116,17 +112,6 @@ export class TaskListTable extends Component {
         key: 'task.department.departmentName',
       },
       {
-<<<<<<< HEAD
-        title: 'Date of Assigment',
-        dataIndex: 'dateOfAssignment',
-        key: 'dateOfAssignment',
-        render: dataIndex => (
-          <span>{dateFormat(dataIndex, 'dddd, mmmm dS, yyyy')}</span>
-        ),
-      },
-      {
-=======
->>>>>>> dev_pepa
         title: 'Deadline',
         dataIndex: 'dateOfDeadline',
         key: 'dateOfDeadline',

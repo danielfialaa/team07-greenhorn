@@ -77,7 +77,10 @@ export class TaskDetailForm extends Component {
 
     var dateFormat = require('dateformat');
     var isAssignedToSelf = this.props.isAssignedToSelf;
-    let attachmentsList = this.props.attachments || emptyAttachments;
+    let attachmentsList = this.props.attachments[1] || emptyAttachments;
+		let attachmentsByUserList = this.props.attachments[0] || emptyAttachments;
+
+		console.log('od usera>',attachmentsByUserList);
 
 
     const data = {
@@ -106,13 +109,22 @@ export class TaskDetailForm extends Component {
 								</Row>
 							);
             })}
-            {
+
+						<Divider type='horizontal' orientation='left'><h3>Uploads</h3></Divider>
+						{attachmentsByUserList.map(function(attachment) {
+							return (
+								<Row key={attachment.path}>
+								<Icon type="file-text"/>
+								<a href={"../" + attachment.path} download>{attachment.path.replace("uploads/","")}</a>
+								</Row>
+							);
+						})}
+						{
               isAssignedToSelf
               &&
               taskDetailed.dateOfCompletion === null
               &&
               <div>
-                <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>
                 <Row>
                   <UploadFile
                   label="Submit files"
@@ -122,6 +134,63 @@ export class TaskDetailForm extends Component {
               </div>
 
             }
+						<Divider type='horizontal' orientation='left' />
+						<Row>
+							<span>
+							<Button
+								type="primary"
+								style={{ margin:'1px 3px 5px 3px' }}
+								disabled={taskDetailed.dateOfCompletion !== null}
+								onClick={() => {
+
+									const values = {
+										id: taskDetailed.id,
+										filePath: this.state.filePath,
+									}
+
+									console.log(values);
+
+									this.modifyTaskHandler(taskDetailed.id,
+										dateFormat(Date.now(),'isoUtcDateTime'), 'TO BE REVIEWED');
+
+										api.post('taskDetail/'+taskDetailed.id+'/update', values)
+										.then(({ data }) => {
+											if (data.status) {
+												Notification('success', 'Task Created', 'Task has been created.');
+
+									this.setState(() => ({
+										success: true
+									}))
+
+									}else{
+									Notification('error', 'Error', 'Error while creating task!')
+									}
+									})
+									.catch(err => console.log('There was an error:' + err))
+
+								}}>Submit task</Button>
+							<Divider type='vertical' />
+							<Button
+							type="primary"
+							style={{ margin:'1px 3px 5px 3px' }}
+							disabled={taskDetailed.dateOfCompletion === null}
+							onClick={	() => this.modifyTaskHandler(taskDetailed.id, null, 'TBD')}
+							>Reopen
+							</Button>
+							<Divider
+								type='vertical'
+								style={currentUser.isAdmin ? {} : { display: 'none' }}
+							/>
+							<Button
+								type="primary"
+								style={{ margin:'1px 3px 5px 3px' }}
+								disabled={taskDetailed.dateOfCompletion === null || taskDetailed.status=='DONE'}
+								onClick={() => this.modifyTaskHandler(taskDetailed.id,null,'DONE')}
+								style={currentUser.isAdmin ? {} : { display: 'none' }}
+							>Approve
+							</Button>
+							</span>
+						</Row>
           </Content>
           <Sider
           style={{ background: '#fff', margin: '50px 16px 24px 16px'}}>
@@ -154,61 +223,7 @@ export class TaskDetailForm extends Component {
             <Row>
               <span><b>Requestor: </b>{data.requestor.firstName} {data.requestor.lastName}</span>
             </Row>
-            <Row>
-              <Divider type='horizontal' />
-              <span>
-                <Button
-									type="primary"
-									style={{ margin:'1px 10px 5px 1px' }}
-                	disabled={taskDetailed.dateOfCompletion !== null}
-                	onClick={() => {
-
-                  const values = {
-                    id: taskDetailed.id,
-                    filePath: this.state.filePath,
-                  }
-
-                  console.log(values);
-
-                  this.modifyTaskHandler(taskDetailed.id,
-                  dateFormat(Date.now(),'isoUtcDateTime'), 'TO BE REVIEWED');
-
-                  api.post('taskDetail/'+taskDetailed.id+'/update', values)
-                  .then(({ data }) => {
-                    if (data.status) {
-                      Notification('success', 'Task Created', 'Task has been created.');
-
-                      this.setState(() => ({
-                        success: true
-                      }))
-
-                    }else{
-                      Notification('error', 'Error', 'Error while creating task!')
-                    }
-                  })
-                  .catch(err => console.log('There was an error:' + err))
-
-                }}>Submit task</Button>
-                <Button
-									type="primary"
-									disabled={taskDetailed.dateOfCompletion === null}
-                	onClick={	() => this.modifyTaskHandler(taskDetailed.id, null, 'TBD')}
-								>Reopen
-								</Button>
-                <Divider
-									type='horizontal'
-            			style={currentUser.isAdmin ? {} : { display: 'none' }}
-								/>
-                <Button
-									type="primary"
-									disabled={taskDetailed.dateOfCompletion === null || taskDetailed.status=='DONE'}
-									onClick={() => this.modifyTaskHandler(taskDetailed.id,null,'DONE')}
-									style={currentUser.isAdmin ? {} : { display: 'none' }}
-								>Approve
-								</Button>
-
-              </span>
-            </Row>
+						<Divider type='horizontal' />
           </Sider>
         </Layout>
       </div>
