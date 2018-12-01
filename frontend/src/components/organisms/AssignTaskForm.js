@@ -27,6 +27,7 @@ export class AssignTaskForm extends Component {
     deadline: '',
     userId: '',
     reporterId: '',
+    status: '',
   };
 
   handleTaskSelectChange = value => {
@@ -49,6 +50,7 @@ export class AssignTaskForm extends Component {
       idRequestor: '',
       dateOfAssignment: '',
       dateOfDeadline: '',
+      status: 'TBD',
     };
 
     let requestorList = this.props.requestorList || emptyRequestorList;
@@ -98,6 +100,7 @@ export class AssignTaskForm extends Component {
           <Form className="assignTask-form" onSubmit={handleSubmit}>
             <Row>
               <Col offset={6} span={8}>
+              <label style={{ margin:'5px 5px 5px 5px' }}>Task</label>
                 <Select
                   name="tasks"
                   id="tasks"
@@ -105,7 +108,7 @@ export class AssignTaskForm extends Component {
                   placeholder="Select a task"
                   style={{
                     width: '-webkit-fill-available',
-                    margin: '5px 5px 5px 5px',
+                    margin: '1px 5px 5px 5px',
                   }}
                 >
                   {taskList.map(function(task) {
@@ -118,6 +121,7 @@ export class AssignTaskForm extends Component {
                 </Select>
               </Col>
               <Col span={6}>
+              <label style={{ margin:'5px 5px 5px 5px' }}>Requestor</label>
                 <Select
                   name="tasks"
                   id="tasks"
@@ -125,7 +129,7 @@ export class AssignTaskForm extends Component {
                   placeholder="Select a requestor"
                   style={{
                     width: '-webkit-fill-available',
-                    margin: '5px 5px 5px 5px',
+                    margin: '1px 5px 5px 5px',
                   }}
                 >
                   {requestorList.map(function(requestor) {
@@ -142,6 +146,7 @@ export class AssignTaskForm extends Component {
             </Row>
             <Row>
               <Col offset={6} span={8}>
+              <label style={{ margin:'5px 5px 5px 5px' }}>Deadline</label>
                 <FormItemDatePicker
                   dropdownClassName="dateOfDeadline"
                   name="dateOfDeadline"
@@ -152,7 +157,7 @@ export class AssignTaskForm extends Component {
                   allowClear={true}
                   style={{
                     width: '-webkit-fill-available',
-                    margin: '5px 5px 5px 5px',
+                    margin: '1px 5px 5px 5px',
                   }}
                   onChange={this.handleDeadlineDateChange}
                 />
@@ -166,7 +171,7 @@ export class AssignTaskForm extends Component {
                   loading={isSubmitting}
                   style={{
                     width: '-webkit-fill-available',
-                    margin: '5px 5px 5px 5px',
+                    margin: '24px 5px 5px 5px',
                   }}
                 >
                   Assign

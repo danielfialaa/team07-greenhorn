@@ -38,6 +38,7 @@ export class TaskDetailForm extends Component {
 	}
 
   modifyTaskHandler = (id, dofc, status) => {
+		console.log('modifyTaskHandler: status >>>>>>>>>> ',status);
     api.post('modifyUserTask', {
       'id':id,
       'dateOfCompletion': dofc,
@@ -70,10 +71,14 @@ export class TaskDetailForm extends Component {
   render(){
 
     const { taskDetailed } = this.props;
+		const currentUser = this.props.currentUser[0];
+		console.log('this.props>>>> ',this.props);
+		console.log('this.props.currentUser>>>> ',this.props.currentUser);
 
     var dateFormat = require('dateformat');
     var isAssignedToSelf = this.props.isAssignedToSelf;
     let attachmentsList = this.props.attachments || emptyAttachments;
+
 
     const data = {
       assignee: this.props.relatedUsers[0],
@@ -83,7 +88,7 @@ export class TaskDetailForm extends Component {
 
     return (
       <div>
-      <Header style={{ background: '#F3F3F3' }}><h1>Task detail</h1></Header>
+      <Header style={{ background: '#ffffff', float: 'centre'}}><h1>TASK DETAIL</h1></Header>
         <Layout style={{ background: '#fff' }}>
           <Content style={{ margin: '16px 36px 24px 16px' }}>
             <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>
@@ -123,15 +128,15 @@ export class TaskDetailForm extends Component {
             <Row>
               <Timeline>
                 <Timeline.Item>
-                {<b>Date of assignment: </b>}
-                {dateFormat(taskDetailed.dateOfAssignment, 'dddd, mmmm dS, yyyy')}
+                	{<b>Date of assignment: </b>}
+                	{dateFormat(taskDetailed.dateOfAssignment, 'dddd, mmmm dS, yyyy')}
                 </Timeline.Item>
                 <Timeline.Item dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />} color="green">
-                {dateFormat(Date.now(), 'dddd, mmmm dS, yyyy')}
+                	{dateFormat(Date.now(), 'dddd, mmmm dS, yyyy')}
                 </Timeline.Item>
                 <Timeline.Item color='red'>
-                {<b>Date of deadline: </b>}
-                {dateFormat(taskDetailed.dateOfDeadline, 'dddd, mmmm dS, yyyy')}
+                	{<b>Date of deadline: </b>}
+                	{dateFormat(taskDetailed.dateOfDeadline, 'dddd, mmmm dS, yyyy')}
                 </Timeline.Item>
               </Timeline>
             </Row>
@@ -140,6 +145,7 @@ export class TaskDetailForm extends Component {
               <b>Status: </b>{this.tagReturn(taskDetailed.status)}
             </Row>
             <Row>
+              <Divider type='horizontal' />
               <span><b>Assignee: </b>{data.assignee.firstName} {data.assignee.lastName}</span>
             </Row>
 						<Row>
@@ -152,9 +158,10 @@ export class TaskDetailForm extends Component {
               <Divider type='horizontal' />
               <span>
                 <Button
-                disabled={taskDetailed.dateOfCompletion !== null}
-                onClick={() => {
-
+									type="primary"
+									style={{ margin:'1px 10px 5px 1px' }}
+                	disabled={taskDetailed.dateOfCompletion !== null}
+                	onClick={() => {
 
                   const values = {
                     id: taskDetailed.id,
@@ -180,14 +187,26 @@ export class TaskDetailForm extends Component {
                     }
                   })
                   .catch(err => console.log('There was an error:' + err))
-                
-                }}>Close</Button>
-                <Button disabled={taskDetailed.dateOfCompletion === null}
-                onClick={() => this.modifyTaskHandler(taskDetailed.id,
-                null, 'TBD')}>Reopen</Button>
-                <Divider type='horizontal' />
-                <Button disabled={taskDetailed.dateOfCompletion === null || taskDetailed.status=='DONE'}
-								onClick={() => this.modifyTaskHandler(taskDetailed.id,null,'DONE')}>Approve</Button>
+
+                }}>Submit task</Button>
+                <Button
+									type="primary"
+									disabled={taskDetailed.dateOfCompletion === null}
+                	onClick={	() => this.modifyTaskHandler(taskDetailed.id, null, 'TBD')}
+								>Reopen
+								</Button>
+                <Divider
+									type='horizontal'
+            			style={currentUser.isAdmin ? {} : { display: 'none' }}
+								/>
+                <Button
+									type="primary"
+									disabled={taskDetailed.dateOfCompletion === null || taskDetailed.status=='DONE'}
+									onClick={() => this.modifyTaskHandler(taskDetailed.id,null,'DONE')}
+									style={currentUser.isAdmin ? {} : { display: 'none' }}
+								>Approve
+								</Button>
+
               </span>
             </Row>
           </Sider>

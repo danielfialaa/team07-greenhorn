@@ -1,5 +1,6 @@
 import React from 'react';
 import { TaskListTable } from '../organisms/TaskListTable';
+import { HeaderUser } from '../molecules/HeaderUser';
 import { SiderMenu } from '../organisms/SiderMenu';
 import { Footer } from '../atoms/Footer';
 import { Spin, Icon } from 'antd';
@@ -12,6 +13,7 @@ export const UserTasksTemplate = ({
   isLoading,
   isError,
   tasks,
+  currentUser,
   error,
 }) => {
   console.log('isLoading: ',isLoading);
@@ -26,9 +28,12 @@ export const UserTasksTemplate = ({
     return <Spin indicator={antIcon} />
   }
 
+
+  //<HeaderUserHomePage currentUser={currentUser} />
   return (
-    <TaskListTable
-    tasks={tasks}
-    />
+    <div>
+    <HeaderUser currentUser={currentUser} title={'USER TASKS OVERVIEW'}/>
+    <TaskListTable tasks={tasks} currentUser={currentUser} />
+    </div>
   );
 };
