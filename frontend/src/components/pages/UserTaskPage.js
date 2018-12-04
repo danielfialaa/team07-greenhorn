@@ -5,36 +5,32 @@ import { connect } from 'react-redux';
 
 import api from '../../api';
 
-
 export class UserTaskPage extends Component {
   state = {
-		isLoading: true,
-		isError: false,
-		tasks: "",
-    }
+    isLoading: true,
+    isError: false,
+    tasks: '',
+  };
 
-	componentDidMount() {
-		api.get('taskList/'+this.props.match.params.id)
-			.then(({ data }) => {
-        console.log('task list data: ', data);
-				this.setState(() => ({
-					isLoading: false,
-          tasks: data
-				}))
-			});
-	}
+  componentDidMount() {
+    api.get('taskList/' + this.props.match.params.id).then(({ data }) => {
+      console.log('task list data: ', data);
+      this.setState(() => ({
+        isLoading: false,
+        tasks: data,
+      }));
+    });
+  }
 
   render() {
-		const { isLoading, tasks, isLoaded, isError, error } = this.props;
+    const { isLoading, tasks, isLoaded, isError, error } = this.props;
     return (
       <UserTasksTemplate
-				isLoading= {this.state.isLoading}
+        isLoading={this.state.isLoading}
         isError={this.state.error}
         tasks={this.state.tasks}
         error={error}
       />
-
-
     );
   }
 }

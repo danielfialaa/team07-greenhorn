@@ -4,25 +4,21 @@ import { AddGroupTemplate } from '../templates/AddGroupTemplate';
 import api from '../../api';
 
 export class AddGroupPage extends Component {
-	state = {
-		tasks: "",
-	};
+  state = {
+    tasks: null,
+  };
 
-	componentDidMount(){
-		api.get('tasks').then(({ data }) => {
+  componentDidMount() {
+    api.get('tasks').then(({ data }) => {
       this.setState(() => ({
         tasks: data.response,
       }));
     });
-	}
-
-
+  }
 
   render() {
     return (
-      <AddGroupTemplate
-        title="Create New Group" tasks={this.state.tasks}
-      />
+      <AddGroupTemplate title="Create New Group" tasks={this.state.tasks} />
     );
   }
 }

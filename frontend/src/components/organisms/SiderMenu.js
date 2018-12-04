@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
-import { Logo } from '../atoms/Logo.js';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 
+import { authLogin, startLogin } from '../../services/Auth/actions';
+import { getIsAdmin, getToken } from '../../services/Auth/reducer';
+import { Logo } from '../atoms/Logo.js';
 import api from '../../api';
 
 const { Sider } = Layout;
@@ -17,9 +20,16 @@ const MenuItem = ({ title, icon, linkTo, ...rest }) => (
   </Link>
 );
 
-export class SiderMenu extends Component {
+export class SiderMenuBase extends Component {
   state = {
     isAdmin: false,
+  };
+
+  onLoginFormSubmit = values => {
+    const { username, password } = values;
+    const { startLogin } = this.props;
+
+    startLogin({ username, password });
   };
 
   componentDidMount() {
@@ -64,14 +74,13 @@ export class SiderMenu extends Component {
     if (!this.state.authorized) {
       return <Redirect to="/" />;
     }
-    if (this.state.isAdmin === "true") {
-      console.log("jsi admin pico");
-      
-    }else{
-      console.log("nejsi admin");
+    if (this.state.isAdmin === 'true') {
+      console.log('jsi admin pico');
+    } else {
+      console.log('nejsi admin');
     }
     console.log(this.state.isAdmin);
-    
+
     return (
       <Sider
         className="main-menu"
@@ -92,49 +101,75 @@ export class SiderMenu extends Component {
           mode="inline"
           defaultSelectedKeys={window.location.pathname.split('/')}
         >
-				<SubMenu key="user" title={<span><Icon type="user" /><span>Users</span></span>}>
-        {this.state.isAdmin === "true" && 
-          <MenuItem
-            key="AddUser"
-            title="Add User"
-            icon="user-add"
-            linkTo="/AddUser"
-            style={this.state.isAdmin ? {} : { display: 'none' }}
-          />}
-          <MenuItem key="home" title="User List" icon="team" linkTo="/home" />
-
-					</SubMenu>
-				<SubMenu key="tasks" title={<span><Icon type="file-done" /><span>Tasks</span></span>}>
-        {this.state.isAdmin === "true" && 
-          <MenuItem
-            key="AddTask"
-            title="Add task"
-            icon="form"
-            linkTo="/AddTask"
-            style={this.state.isAdmin ? {} : { display: 'none' }}
-          />}
-          <MenuItem
-            key="My Tasks"
-            title="My Tasks"
-            icon="project"
-            linkTo="/UserTasks"
-          />
-					</SubMenu>
-					<SubMenu key="groups" title={<span><Icon type="team" /><span>Groups</span></span>}>
-          {this.state.isAdmin === "true" && 
-						<MenuItem
-							key="AddGroup"
-							title="Add Group"
-							icon="form"
-							linkTo="/AddGroup"
-						/>}
-						<MenuItem
-							key="GroupList"
-							title="Groups list"
-							icon="form"
-							linkTo="/GroupList"
-						/>
-					</SubMenu>
+          <SubMenu
+            key="user"
+            title={
+              <span>
+                <Icon type="user" />
+                <span>Users</span>
+              </span>
+            }
+          >
+            {this.state.isAdmin === 'true' && (
+              <MenuItem
+                key="AddUser"
+                title="Add User"
+                icon="user-add"
+                linkTo="/AddUser"
+                style={this.state.isAdmin ? {} : { display: 'none' }}
+              />
+            )}
+            <MenuItem key="home" title="User List" icon="team" linkTo="/home" />
+          </SubMenu>
+          <SubMenu
+            key="tasks"
+            title={
+              <span>
+                <Icon type="file-done" />
+                <span>Tasks</span>
+              </span>
+            }
+          >
+            {this.state.isAdmin === 'true' && (
+              <MenuItem
+                key="AddTask"
+                title="Add task"
+                icon="form"
+                linkTo="/AddTask"
+                style={this.state.isAdmin ? {} : { display: 'none' }}
+              />
+            )}
+            <MenuItem
+              key="My Tasks"
+              title="My Tasks"
+              icon="project"
+              linkTo="/UserTasks"
+            />
+          </SubMenu>
+          <SubMenu
+            key="groups"
+            title={
+              <span>
+                <Icon type="team" />
+                <span>Groups</span>
+              </span>
+            }
+          >
+            {this.state.isAdmin === 'true' && (
+              <MenuItem
+                key="AddGroup"
+                title="Add Group"
+                icon="form"
+                linkTo="/AddGroup"
+              />
+            )}
+            <MenuItem
+              key="GroupList"
+              title="Groups list"
+              icon="form"
+              linkTo="/GroupList"
+            />
+          </SubMenu>
           <MenuItem
             key="Settings"
             title="Settings"
@@ -155,3 +190,21 @@ export class SiderMenu extends Component {
     );
   }
 }
+
+const mapStateToProps = storeState => {
+  const { auth } = storeState;
+  return {
+    isAdmin: getIsAdmin(auth),
+    token: getToken(auth),
+  };
+};
+
+const mapDispatchToProps = {
+  authLogin,
+  startLogin,
+};
+
+export const SiderMenu = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SiderMenuBase);
