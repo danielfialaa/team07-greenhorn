@@ -17,14 +17,13 @@ export class UserAdministrationPage extends Component {
   };
 
   componentDidMount() {
-    api
-      .get('userAdministration/' + this.props.match.params.id)
-      .then(({ data }) => {
-        this.setState(() => ({
-          userInfo: data.response[0],
-          userId: data.response[0].id,
-        }));
-      });
+    const { id } = this.props.match.params;
+    api.get(`userAdministration/${id}`).then(({ data: { response } }) => {
+      this.setState(() => ({
+        userInfo: response[0],
+        userId: response[0].id,
+      }));
+    });
 
     api.get('userList').then(({ data }) => {
       this.setState(() => ({
@@ -38,7 +37,7 @@ export class UserAdministrationPage extends Component {
       }));
     });
 
-    api.get('taskList/' + this.props.match.params.id).then(({ data }) => {
+    api.get(`taskList/${id}`).then(({ data }) => {
       this.setState(() => ({
         isLoading: false,
         tasks: data,
