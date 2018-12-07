@@ -22,7 +22,7 @@ export const taskListController = async (req, res) => {
   // .then((responseFirst) => {
   //   console.log(responseFirst);
   //
-  const result = db.task_history
+  const tasks = await db.task_history
     .findAll({
       where: { idUser: id },
       include: [
@@ -31,26 +31,14 @@ export const taskListController = async (req, res) => {
           include: [
             {
               model: db.departments,
-            },
-      //     ],
-      //   },
-      // ],
-       {
-         model:db.attachments,
-         attributes: ['idTask', 'path'],
-       }
+            }
       ]}],
-    })
-    .then(response => {
-      // response = JSON.stringify(response)
-      // response = JSON.parse(response)
+    }).then(response => {
       res.json({
         response,
       });
-      console.log(response);
-      //
     });
-  //  });
+
 };
 
 /*
