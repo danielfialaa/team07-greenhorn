@@ -1,23 +1,43 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col, Avatar, Divider } from 'antd';
+import { Layout, Row, Col, Avatar, Divider, Menu, Dropdown, Button, Icon } from 'antd';
+import { Link } from 'react-router-dom'
+
+import api from '../../api';
+
+
+const menu = (
+  <Menu>
+    <Menu.Item
+            key="Logout"
+            linkTo="/"
+            onClick={() => {
+              localStorage.removeItem('token');
+            }}
+          ><Link to="/">Logout</Link></Menu.Item>
+  </Menu>
+)
 
 export class HeaderUser extends Component {
+  state = {
+    firstName: '',
+    lastName: ''
+  }
+  componentDidMount() {
+    api.get('currentUser').then(({ data }) => {
+      this.setState(({
+        firstName: data.response[0].firstName,
+        lastName: data.response[0].lastName
+      }));
+    })
+  }
   render(){
     console.log('this.props >>>>> ', this.props);
-    const currentUser = this.props.currentUser[0];
     const title = this.props.title;
     return(
           <div>
-            <h1 style={{ float: 'left'}}>{title}</h1>
-            <div style={{ float: 'right'}}>
-              <Col>
-                <Avatar size={45} icon="user" shape='square' style={{ float: 'right', verticalAlign: 'middle', margin: '1px 20px 1px 1px'}}/>
-              </Col>
-              <Col>
-                <h5 style={{ margin: '1px 10px 1px 1px', float: 'right' }}>Signed in as</h5>
-                <h3 style={{ margin: '1px 5px 1px 1px', float: 'right' }}>{currentUser.firstName} {currentUser.lastName}</h3>
-              </Col>
-            </div>
+            <Dropdown.Button overlay={menu} style={{float: 'right'}}>
+              {this.state.firstName + ' ' + this.state.lastName}
+            </Dropdown.Button>
           </div>
   )};
 }

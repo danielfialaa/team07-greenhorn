@@ -1,8 +1,5 @@
 import React from 'react';
 import { TaskListTable } from '../organisms/TaskListTable';
-import { HeaderUser } from '../molecules/HeaderUser';
-import { SiderMenu } from '../organisms/SiderMenu';
-import { Footer } from '../atoms/Footer';
 import { Spin, Icon } from 'antd';
 import { Layout } from 'antd';
 
@@ -32,7 +29,7 @@ export const UserTasksTemplate = ({
   //<HeaderUserHomePage currentUser={currentUser} />
   return (
     <div>
-    <HeaderUser currentUser={currentUser} title={'USER TASKS OVERVIEW'}/>
+    
     <TaskListTable tasks={tasks} currentUser={currentUser} />
     </div>
   );

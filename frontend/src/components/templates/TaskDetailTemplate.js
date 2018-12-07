@@ -24,7 +24,6 @@ export const TaskDetailTemplate = ({
 
   return (
     <div>
-      <HeaderUser currentUser={currentUser} title={''}/>
       <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments} relatedUsers={relatedUsers} isAssignedToSelf={isAssignedToSelf} currentUser={currentUser}/>
     </div>
   );
