@@ -4,10 +4,9 @@ import {
   Col,
   Form,
   Button,
-  notification,
   Select,
-  DatePicker,
   Checkbox,
+  Transfer
 } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
@@ -36,7 +35,41 @@ export class AddUserForm extends Component {
     departments: '',
     dob: '',
     adminChecked: false,
+    mockData: [],
+    targetKeys: [],
   };
+
+  componentDidMount() {
+		this.getMockData();
+	}
+
+  getMockData = () => {
+		const targetKeys = [];
+		const mockData = [];
+		api.get('groupList').then(({ data }) => {
+			console.log(data);
+			data.response.map(function(group){
+				const data = {
+					key: group.id.toString(),
+					title: group.groupName,
+					description: group.groupName,
+					chosen: false,
+				}
+			mockData.push(data)
+			});
+      this.setState({ mockData: mockData});
+      console.log(this.state.mockData);
+      
+		});
+  }
+  
+  filterOption = (inputValue, option) => {
+		return option.description.indexOf(inputValue) > -1;
+	}
+
+	handleGroupChange = (targetKeys) => {
+		this.setState({ targetKeys });
+	}
 
   handleSelectChange = value => {
     this.setState({ departments: value }, function() {});
@@ -59,6 +92,7 @@ export class AddUserForm extends Component {
       telephone: '',
       idDepartment: '',
       dob: '',
+      selectedGroup: '',
     };
 
     let departmentList = this.props.departmentList.response || emptyDepartments;
@@ -70,6 +104,9 @@ export class AddUserForm extends Component {
           values.idDepartment = this.state.departments;
           values.isAdmin = this.state.adminChecked;
           values.dob = moment(this.state.dob).format('YYYY-MM-DD');
+          values.selectedGroup = this.state.targetKeys;
+          console.log(values);
+          
           api
             .post('addUser', values)
             .then(({ data }) => {
@@ -175,6 +212,16 @@ export class AddUserForm extends Component {
                     Admin
                   </Checkbox>
                 </FormItem>
+                <FormItem label="Select Tasks for Your Group">
+											<Transfer
+												dataSource={this.state.mockData}
+												showSearch
+												filterOption={this.filterOption}
+												targetKeys={this.state.targetKeys}
+												onChange={this.handleGroupChange}
+												render={item => item.title}
+											/>
+										</FormItem>
                 <FormItem>
                   <Button
                     type="primary"
