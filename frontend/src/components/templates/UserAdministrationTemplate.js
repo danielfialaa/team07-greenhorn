@@ -27,7 +27,6 @@ export const UserAdministrationTemplate = ({
 
   return (
     <div>
-    <HeaderUser currentUser={currentUser} title={''} />
       <h1>USER ADMINISTRATION PROFILE</h1>
       <Row>
         <Col>

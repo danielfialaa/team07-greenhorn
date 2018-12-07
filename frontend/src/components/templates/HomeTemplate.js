@@ -24,7 +24,6 @@ export const HomeTemplate = ({ isLoading, isError, users, currentUser, error }) 
   }
   return (
     <div>
-    <HeaderUser currentUser={currentUser} title={'USER LIST'} />
     <UserListTable users={users} />
     </div>
   );
