@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Logo } from '../atoms/Logo';
+import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
 import api from '../../api';
