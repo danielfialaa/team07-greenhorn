@@ -13,6 +13,7 @@ export const TaskDetailTemplate = ({
   isError,
   taskDetailed,
 	attachments,
+  DoneAttachments,
   relatedUsers,
   isAssignedToSelf,
 }) => {
@@ -22,7 +23,7 @@ export const TaskDetailTemplate = ({
 
   return (
     <div>
-        <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments} relatedUsers={relatedUsers} isAssignedToSelf={isAssignedToSelf}/>
+        <TaskDetailForm taskDetailed={taskDetailed} attachments={attachments} DoneAttachments={DoneAttachments} relatedUsers={relatedUsers} isAssignedToSelf={isAssignedToSelf}/>
     </div>
   );
 };

@@ -74,6 +74,7 @@ export class TaskDetailForm extends Component {
     var dateFormat = require('dateformat');
     var isAssignedToSelf = this.props.isAssignedToSelf;
     let attachmentsList = this.props.attachments || emptyAttachments;
+		let DoneAttachmentsList = this.props.DoneAttachments || emptyAttachments;
 
     const data = {
       assignee: this.props.relatedUsers[0],
@@ -90,10 +91,21 @@ export class TaskDetailForm extends Component {
             <Row>
               <span>{taskDetailed.task.description}</span>
             </Row>
-            <Divider type='horizontal' orientation='left'><h3>Attachments</h3></Divider>
+            <Divider type='horizontal' orientation='left'><h3>Templates</h3></Divider>
 
 
 						{attachmentsList.map(function(attachment) {
+							return (
+								<Row key={attachment.path}>
+								<Icon type="file-text"/>
+								<a href={"../" + attachment.path} download>{attachment.path.replace("uploads/","")}</a>
+								</Row>
+							);
+            })}
+						<Divider type='horizontal' orientation='left'><h3>User Attachments</h3></Divider>
+
+
+						{DoneAttachmentsList.map(function(attachment) {
 							return (
 								<Row key={attachment.path}>
 								<Icon type="file-text"/>
@@ -180,7 +192,7 @@ export class TaskDetailForm extends Component {
                     }
                   })
                   .catch(err => console.log('There was an error:' + err))
-                
+
                 }}>Close</Button>
                 <Button disabled={taskDetailed.dateOfCompletion === null}
                 onClick={() => this.modifyTaskHandler(taskDetailed.id,

@@ -16,6 +16,12 @@ export const taskDetailController = async (req, res) => {
     //include
 	});
 
+// TEST
+const DoneAttachments = await db.attachments.findAll({
+  where: { idAssignedTask: result.idTask},
+});
+
+//
 
 	const attachments = await db.attachments.findAll({
 		where: { idTask: result.idTask},
@@ -55,6 +61,7 @@ export const taskDetailController = async (req, res) => {
 	res.json({
 		result,
 		attachments,
+    DoneAttachments,
     relatedUsers,
     isAssignedToSelf
 	});

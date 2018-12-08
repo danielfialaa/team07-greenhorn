@@ -12,6 +12,7 @@ state = {
   isError: false,
   taskDetailed: "",
 	attachments: "",
+  DoneAttachments: "",
   relatedUsers: [{},{},{}],
   isAssignedToSelf: false
 }
@@ -25,8 +26,9 @@ componentDidMount() {
         isLoading: false,
         taskDetailed: data.result,
 				attachments: data.attachments,
+        DoneAttachments: data.DoneAttachments,
         relatedUsers: data.relatedUsers,
-        isAssignedToSelf: data.isAssignedToSelf 
+        isAssignedToSelf: data.isAssignedToSelf
       }))
     })
 }
@@ -40,6 +42,7 @@ componentDidMount() {
       isError={this.state.error}
       taskDetailed={this.state.taskDetailed}
 			attachments={this.state.attachments}
+      DoneAttachments={this.state.DoneAttachments}
       relatedUsers={this.state.relatedUsers}
       isAssignedToSelf={this.state.isAssignedToSelf}
     />
