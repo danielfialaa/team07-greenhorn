@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'formik';
 import { Row, Col, Form, Button, notification, Select, DatePicker } from 'antd';
 import moment from 'moment';
 
@@ -31,18 +32,22 @@ export class FormItemDatePicker extends Component {
       ...filed
     } = this.props;
     return (
-      <FormItem label={label}>
-        <DatePicker
-          disabledDate={defaultDisabledDate}
-          dropdownClassName={dropdownClassName}
-          name={name}
-          allowClear={false}
-          id={id}
-          format={dateFormat}
-          onChange={onChange}
-          {...filed}
-        />
-      </FormItem>
+      <Field
+        name={name}
+        id={id}
+        render={({ field }) => (
+          <FormItem label={label}>
+            <DatePicker
+              disabledDate={defaultDisabledDate}
+              dropdownClassName={dropdownClassName}
+              allowClear={false}
+              format={dateFormat}
+              onChange={onChange}
+              {...filed}
+            />
+          </FormItem>
+        )}
+      />
     );
   }
 }

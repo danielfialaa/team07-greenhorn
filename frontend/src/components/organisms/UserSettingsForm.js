@@ -19,18 +19,15 @@ export class UserSettingsForm extends Component {
     dob: '',
   };
 
-  handleDateChange = value => {
-    value ? null : (value = moment(this.props.userInfo.dob));
-    this.setState({ dob: value }, function() {});
-  };
-
   render() {
+    console.log(this.props.userInfo);
     const initialValues = {
       firstName: this.props.userInfo.firstName,
       lastName: this.props.userInfo.lastName,
       telephone: this.props.userInfo.telephone,
       dob: this.props.userInfo.dob,
     };
+
     var date = moment(this.props.userInfo.dob).format('YYYY-MM-DD');
     return (
       <Formik
@@ -38,6 +35,7 @@ export class UserSettingsForm extends Component {
         initialValues={initialValues}
         validationSchema={UserValidation}
         onSubmit={(values, actions) => {
+          console.log(values.dob);
           api
             .post('updateUser', values)
             .then(({ data }) => {
@@ -47,6 +45,7 @@ export class UserSettingsForm extends Component {
                   'User Updated',
                   'User information has been succesfully updated',
                 );
+                window.location.reload();
               } else {
                 Notification('error', 'Error', 'Error while updating user!');
               }
@@ -59,6 +58,7 @@ export class UserSettingsForm extends Component {
           handleBlur,
           handleChange,
           handleSubmit,
+          setFieldValue,
           isSubmitting,
           isValid,
         }) => (
@@ -103,7 +103,7 @@ export class UserSettingsForm extends Component {
                   dropdownClassName="dob"
                   name="dob"
                   id="dob"
-                  onChange={this.handleDateChange}
+                  onChange={value => setFieldValue('dob', value)}
                   defaultValue={moment(date, dateFormat)}
                 />
                 <FormItem>
@@ -111,7 +111,7 @@ export class UserSettingsForm extends Component {
                     type="primary"
                     htmlType="submit"
                     className="submit-changes-button"
-                    disabled={!isValid || isSubmitting}
+                    // disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
                   >
                     Confirm changes

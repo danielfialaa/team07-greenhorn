@@ -10,11 +10,12 @@ import {
   Checkbox,
 } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import { Notification } from '../atoms/Notification';
 import { FormItemWithError } from '../molecules/FormItemWithError';
 import { FormItemDatePicker } from '../molecules/FormItemDatePicker';
 import { UserValidation } from '../atoms/schemas/UserValidation';
+import { FormItemDepartmentsSelect } from '../molecules/FormItemDepartmentsSelect';
 import moment from 'moment';
 
 import api from '../../api';
@@ -23,13 +24,6 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const dateFormat = 'YYYY/MM/DD';
 const defaultDate = moment('1920/01/01').format(dateFormat);
-
-const emptyDepartments = [
-  {
-    id: '',
-    departmentName: '',
-  },
-];
 
 export class AddUserForm extends Component {
   state = {
@@ -43,7 +37,7 @@ export class AddUserForm extends Component {
   };
 
   handleDateChange = value => {
-    value ? null : (value = moment(defaultDate));
+    value ? null : (value = moment(defaultDate).format('YYYY-MM-DD'));
     this.setState({ dob: value }, function() {});
   };
 
@@ -61,15 +55,16 @@ export class AddUserForm extends Component {
       dob: '',
     };
 
-    let departmentList = this.props.departmentList.response || emptyDepartments;
     return (
       <Formik
         initialValues={initialValues}
         validationSchema={UserValidation}
-        onSubmit={(values, actions) => {
-          values.idDepartment = this.state.departments;
+        onSubmit={(values, actions, resetForm, setFieldValue) => {
           values.isAdmin = this.state.adminChecked;
           values.dob = moment(this.state.dob).format('YYYY-MM-DD');
+          this.state.dob
+            ? null
+            : (values.dob = moment(defaultDate).format('YYYY-MM-DD'));
           api
             .post('addUser', values)
             .then(({ data }) => {
@@ -79,6 +74,8 @@ export class AddUserForm extends Component {
                   'User Created',
                   'User has been created and has received an email with link to complete registration.',
                 );
+                this.state = { adminChecked: false };
+                actions.resetForm();
               } else {
                 Notification('error', 'Error', 'Error while creating user!');
               }
@@ -96,6 +93,7 @@ export class AddUserForm extends Component {
           handleChange,
           handleSubmit,
           isSubmitting,
+          setFieldValue,
           isValid,
         }) => (
           <Row
@@ -114,6 +112,7 @@ export class AddUserForm extends Component {
                   type="text"
                   name="firstName"
                   id="firstName"
+                  initialValues={''}
                   value={values.firstName}
                 />
                 <FormItemWithError
@@ -123,6 +122,7 @@ export class AddUserForm extends Component {
                   type="text"
                   name="lastName"
                   id="lastName"
+                  initialValues={''}
                   value={values.lastName}
                 />
                 <FormItemWithError
@@ -132,6 +132,7 @@ export class AddUserForm extends Component {
                   type="email"
                   name="email"
                   id="email"
+                  initialValues={''}
                   value={values.lastName}
                 />
                 <FormItemWithError
@@ -141,40 +142,38 @@ export class AddUserForm extends Component {
                   type="tel"
                   name="telephone"
                   id="telephone"
+                  initialValues={''}
                   value={values.telephone}
                 />
-                <FormItem label="Department">
-                  <Select
-                    name="departments"
-                    id="departments"
-                    onChange={this.handleSelectChange}
-                    defaultValue={departmentList[0].id}
-                  >
-                    {departmentList.map(function(department) {
-                      return (
-                        <Option key={department.id} value={department.id}>
-                          {department.departmentName}
-                        </Option>
-                      );
-                    })}
-                  </Select>
-                </FormItem>
+                <FormItemDepartmentsSelect
+                  list={this.props.departmentList.response}
+                  onChange={value => setFieldValue('idDepartment', value)}
+                  name="idDepartment"
+                />
                 <FormItemDatePicker
                   label="Date of Birth"
                   dropdownClassName="dob"
                   name="dob"
                   id="dob"
                   onChange={this.handleDateChange}
+                  initialValues={moment(defaultDate)}
                   defaultValue={moment(defaultDate)}
                 />
-                <FormItem>
-                  <Checkbox
-                    checked={this.state.adminChecked}
-                    onChange={this.handleCheckboxChange}
-                  >
-                    Admin
-                  </Checkbox>
-                </FormItem>
+                <Field
+                  name="checkbox"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Checkbox
+                        checked={this.state.adminChecked}
+                        defaultChecked={this.state.adminChecked}
+                        onChange={this.handleCheckboxChange}
+                      >
+                        Admin
+                      </Checkbox>
+                    </FormItem>
+                  )}
+                />
+
                 <FormItem>
                   <Button
                     type="primary"
