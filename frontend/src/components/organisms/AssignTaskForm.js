@@ -91,15 +91,14 @@ export class AssignTaskForm extends Component {
         }) => (
           <Form className="assignTask-form" onSubmit={handleSubmit}>
             <Row>
-              <Col span={12}>
+              <Col span={8}>
                 <Field
                   name="idTask"
                   id="tasks"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem label="Select a task:">
                       <Select
                         {...field}
-                        placeholder="Select a task"
                         onChange={value => setFieldValue('idTask', value)}
                         onBlur={handleBlur}
                         style={{
@@ -119,15 +118,14 @@ export class AssignTaskForm extends Component {
                   )}
                 />
               </Col>
-              <Col span={12}>
+              <Col span={8}>
                 <Field
                   name="idRequestor"
                   id="requestor"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem label="Select a requestor: ">
                       <Select
                         onBlur={handleBlur}
-                        placeholder="Select a requestor"
                         {...field}
                         onChange={value => setFieldValue('idRequestor', value)}
                         style={{
@@ -149,10 +147,9 @@ export class AssignTaskForm extends Component {
                   )}
                 />
               </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
+              <Col span={8}>
                 <FormItemDatePicker
+                  label="Select a deadline:"
                   dropdownClassName="dateOfDeadline"
                   name="dateOfDeadline"
                   id="dateOfDeadline"
@@ -166,7 +163,9 @@ export class AssignTaskForm extends Component {
                   onChange={this.handleDeadlineDateChange}
                 />
               </Col>
-              <Col span={12}>
+            </Row>
+            <Row>
+              <Col span={6} offset={18}>
                 <FormItem>
                   <Button
                     type="primary"
