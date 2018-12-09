@@ -131,7 +131,7 @@ export class AddGroupForm extends Component {
                     onBlur={handleBlur}
                   />
 									</FormItem>
-										<FormItem label="Group Name">
+										<FormItem label="Select Tasks for Your Group">
 											<Transfer
 												dataSource={this.state.mockData}
 												showSearch

@@ -28,6 +28,7 @@ export class AssignTaskForm extends Component {
     dateOfDeadline: moment(defaultDeadline).format('YYYY-MM-DD'),
     userId: '',
     reporterId: '',
+    status: '',
   };
 
   handleDeadlineDateChange = value => {
@@ -46,6 +47,7 @@ export class AssignTaskForm extends Component {
       idRequestor: '',
       dateOfAssignment: '',
       dateOfDeadline: '',
+      status: 'TBD',
     };
 
     let requestorList = this.props.requestorList || emptyRequestorList;
@@ -159,7 +161,7 @@ export class AssignTaskForm extends Component {
                   disabledDate={disabledDate}
                   style={{
                     width: '-webkit-fill-available',
-                    margin: '5px 5px 5px 5px',
+                    margin: '1px 5px 5px 5px',
                   }}
                   onChange={this.handleDeadlineDateChange}
                 />

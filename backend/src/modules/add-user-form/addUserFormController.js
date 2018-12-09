@@ -2,8 +2,47 @@ import db from '../../models/';
 import randomstring from 'randomstring';
 
 export const addUserFormController = async (req, res) => {
+  // const selectGroupTasks = db.taskGroupBelonging.findAll({
+  //   where : {
+  //     groupId: 1,
+  //   }
+  // }).then((data) => {
+  //   console.log(data);
+    
+  //   res.json({
+  //     data
+  //   })
+  // });
   req.body.password = randomstring.generate(20);
-  const form = await db.users.create(req.body);
+  const form = await db.users.create(req.body).then((data) => {
+    let id = data.get('id');
+    req.body.selectedGroup.map( (groupId) => {
+      const insertUserIntoGroup = db.userGroupBelonging.create({userId: id, groupId: groupId})
+        .then((data) => {
+          const selectGroupTasks = db.taskGroupBelonging.findAll({
+            where : {
+              groupId: data.get('groupId'),
+            }
+          }).then((data)=>{
+            data.map((taskInGroup)=> {
+              const assignTasksFromGroup = db.task_history.create({
+                idUser: id,
+                idTask: taskInGroup.taskId,
+                dateOfAssignment: Date.now(),
+                dateOfDeadline: (Date.now() + 12096e5), // adds 14 days
+                status: "TBD",
+                idRequestor: req.user.id,
+                idReporter: req.user.id,
+              })
+            });
+            console.log("aha?");
+            console.log(data);
+          });
+        })
+
+      
+    });
+  });
   // const form = await req.body;
   const sendmail = require('sendmail')();
 

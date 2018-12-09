@@ -6,6 +6,7 @@ import { UserAdministrationForm } from '../organisms/UserAdministrationForm';
 import { AssignTaskForm } from '../organisms/AssignTaskForm';
 import { TaskListTable } from '../organisms/TaskListTable';
 import { Spin, Icon } from 'antd';
+import { HeaderUser } from '../molecules/HeaderUser';
 
 const { Header, Content } = Layout;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
@@ -18,6 +19,7 @@ export const UserAdministrationTemplate = ({
   currentUserId,
   isLoading,
   requestorList,
+  currentUser,
 }) => {
   if (isLoading) {
     return <Spin indicator={antIcon} />;
@@ -25,7 +27,7 @@ export const UserAdministrationTemplate = ({
 
   return (
     <div>
-      <h1>User administration profile</h1>
+      <h1>USER ADMINISTRATION PROFILE</h1>
       <Row>
         <Col>
           <UserAdministrationForm userInfo={userInfo} />
@@ -44,7 +46,7 @@ export const UserAdministrationTemplate = ({
       <Row>
         <h2>User task history</h2>
         <Col>
-          <TaskListTable tasks={tasks} userId={userId} />
+          <TaskListTable tasks={tasks} currentUser={currentUser} />
         </Col>
       </Row>
     </div>

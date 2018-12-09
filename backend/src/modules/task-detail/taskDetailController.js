@@ -16,8 +16,10 @@ export const taskDetailController = async (req, res) => {
     //include
 	});
 
-
-	const attachments = await db.attachments.findAll({
+  const attachmentsByUser = await db.attachments.findAll({
+    where: { idAssignedTask: id }
+  });
+	const attachmentsDefault = await db.attachments.findAll({
 		where: { idTask: result.idTask},
 	});
   const asignee = await db.users.findOne({
@@ -30,6 +32,7 @@ export const taskDetailController = async (req, res) => {
       where: { id: result.idRequestor },
     });
   const relatedUsers = [asignee, reporter, requestor];
+  const attachments = [attachmentsByUser, attachmentsDefault];
 
 
   var isAssignedToSelf;

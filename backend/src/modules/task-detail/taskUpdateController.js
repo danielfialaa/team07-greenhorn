@@ -11,7 +11,7 @@ export const taskUpdateController = async (req, res) => {
         console.log("FilePath: ",filePath);
         const file = db.attachments.create({
             path: filePath,
-            idTask: id,
+            idAssignedTask: id
         }).then(console.log(idTask, path));
     });
 }

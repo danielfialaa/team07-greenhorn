@@ -14,8 +14,6 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-import productRoutes from './modules/products/routes';
-import contactFormRoutes from './modules/contact-form/routes';
 import loginFormRoutes from './modules/login-form/routes';
 import addUserFormRoutes from './modules/add-user-form/routes';
 import addTaskFormRoutes from './modules/add-task-form/routes';
@@ -35,6 +33,7 @@ import deleteUserTaskRoutes from './modules/delete-user-task/routes';
 import uploadTaskFileRoutes from './modules/upload-task-file/routes';
 import modifyUserTaskRoutes from './modules/modify-user-task/routes';
 import taskDetailRoutes from './modules/task-detail/routes';
+import groupListRoutes from './modules/group-list/routes';
 
 
 const router = Router({ mergeParams: true });
@@ -76,6 +75,7 @@ router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
 router.use('/api/taskDetail/:id', taskDetailRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
+router.use('/api/groupList', groupListRoutes);
 
 /* ROUTES ONLY FOR ADMINS */
 router.use('/api/addUser', addUserFormRoutes);

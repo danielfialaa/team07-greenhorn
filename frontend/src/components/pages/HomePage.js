@@ -11,8 +11,16 @@ export class HomePage extends Component {
     isLoading: true,
     isError: false,
     users: '',
+    currentUser: '',
   };
   componentDidMount() {
+    api.get('currentUser')
+      .then(({data}) => {
+          console.log('data.response >>>>>>>', data.response);
+          this.setState(() => ({
+            currentUser: data.response,
+          }))
+        });
     api.get('userList').then(({ data }) => {
       this.setState(() => ({
         isLoading: false,
@@ -22,12 +30,13 @@ export class HomePage extends Component {
   }
 
   render() {
-    const { isLoading, users, isLoaded, isError, error } = this.props;
+    const { isLoading, users, isLoaded, isError, currentUser, error } = this.props;
     return (
       <HomeTemplate
         isLoading={this.state.isLoading}
         isError={this.state.error}
         users={this.state.users}
+        currentUser={this.state.currentUser}
         error={error}
       />
     );
