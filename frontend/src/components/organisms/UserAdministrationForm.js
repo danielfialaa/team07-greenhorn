@@ -20,7 +20,7 @@ export class UserAdministrationForm extends Component {
     return (
       <div>
         <Row>
-          <Col span={8}>
+          <Col span={12}>
             <Header4WithIcon
               iconType="user"
               values={
@@ -30,21 +30,21 @@ export class UserAdministrationForm extends Component {
               }
             />
           </Col>
-          <Col span={6}>
-            <Header4WithIcon
-              iconType="mail"
-              values={this.props.userInfo.email}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={8}>
+          <Col span={12}>
             <Header4WithIcon
               iconType="calendar"
               values={moment(this.props.userInfo.dob).format(dateFormat)}
             />
           </Col>
-          <Col span={6}>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <Header4WithIcon
+              iconType="mail"
+              values={this.props.userInfo.email}
+            />
+          </Col>
+          <Col span={12}>
             <Header4WithIcon
               iconType="phone"
               values={this.props.userInfo.telephone}

@@ -64,13 +64,6 @@ export class SiderMenu extends Component {
     if (!this.state.authorized) {
       return <Redirect to="/" />;
     }
-    if (this.state.isAdmin === "true") {
-      console.log("jsi admin pico");
-
-    }else{
-      console.log("nejsi admin");
-    }
-    console.log(this.state.isAdmin);
 
     return (
       <Sider
