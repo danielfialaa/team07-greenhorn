@@ -26,7 +26,6 @@ import api from '../../api';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const Dragger = Upload.Dragger;
 const { TextArea } = Input;
 
 const uploadRoute = {
@@ -36,8 +35,6 @@ const uploadRoute = {
   headers: {
     Authorization: localStorage.getItem('token'),
   },
-  defaultFileList: [],
-  initialValues: [],
 };
 
 export class AddTaskForm extends Component {
@@ -48,7 +45,6 @@ export class AddTaskForm extends Component {
     filePath: [],
     success: false,
     fileList: [],
-    selectValues: [],
   };
 
   updateFileData = filePath => {
@@ -87,6 +83,7 @@ export class AddTaskForm extends Component {
                 this.setState(() => ({
                   success: true,
                 }));
+                this.state = { fileList: [] };
                 actions.resetForm();
               } else {
                 Notification('error', 'Error', 'Error while creating task!');
@@ -139,16 +136,11 @@ export class AddTaskForm extends Component {
                     onBlur={handleBlur}
                   />
                 </FormItem>
-                <FormItem>
-                  <UploadFile
-                    id="uploadForm"
-                    label="Template form"
-                    {...uploadRoute}
-                    triggerParentUpdate={this.updateFileData.bind(this)}
-                    onChange={handleChange}
-                    initialValues={this.state.fileList}
-                  />
-                </FormItem>
+                <UploadFile
+                  {...uploadRoute}
+                  triggerParentUpdate={this.updateFileData.bind(this)}
+                  defaultFileList={this.state.fileList}
+                />
                 <FormItem>
                   <Button
                     type="primary"

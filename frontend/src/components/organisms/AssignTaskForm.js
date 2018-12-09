@@ -25,7 +25,7 @@ export class AssignTaskForm extends Component {
   state = {
     task: '',
     requestor: '',
-    dateOfDeadline: '',
+    dateOfDeadline: moment(defaultDeadline).format('YYYY-MM-DD'),
     userId: '',
     reporterId: '',
   };
@@ -54,6 +54,7 @@ export class AssignTaskForm extends Component {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions, resetForm) => {
+          console.log(moment(this.state.dateOfDeadline).format('YYYY-MM-DD'));
           values.dateOfDeadline = this.state.dateOfDeadline;
           values.idUser = this.props.userId;
           values.dateOfAssignment = moment().format('YYYY-MM-DD');
