@@ -19,8 +19,12 @@ export class UserSettingsForm extends Component {
     dob: '',
   };
 
+  handleDateChange = value => {
+    value ? null : (value = moment(this.props.userInfo.dob));
+    this.setState({ dob: moment(value).format('YYYY-MM-DD') }, function() {});
+  };
+
   render() {
-    console.log(this.props.userInfo);
     const initialValues = {
       firstName: this.props.userInfo.firstName,
       lastName: this.props.userInfo.lastName,
@@ -40,6 +44,7 @@ export class UserSettingsForm extends Component {
             : (values.dob = moment(this.props.userInfo.dob).format(
                 'YYYY-MM-DD',
               ));
+          values.dob = this.state.dob;
           api
             .post('updateUser', values)
             .then(({ data }) => {
@@ -107,7 +112,7 @@ export class UserSettingsForm extends Component {
                   dropdownClassName="dob"
                   name="dob"
                   id="dob"
-                  onChange={value => setFieldValue('dob', value)}
+                  onChange={this.handleDateChange}
                   defaultValue={moment(date, dateFormat)}
                 />
                 <FormItem>
