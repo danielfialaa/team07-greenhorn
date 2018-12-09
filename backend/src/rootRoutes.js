@@ -43,13 +43,10 @@ router.use('/api/auth', loginFormRoutes);
 
 router.use('/api/newPass', newPassRoutes);
 router.use('*', (req, res, next) => {
-  console.log(req.get('Authorization'));
   const x = jwt.verify(req.get('Authorization'), '2', (err, decoded) => {
     if (err) {
-      console.log('unauthorized');
       res.status(401).send('unauthorized');
     } else {
-      console.log(decoded);
       req.user = {
         id: decoded.id,
         email: decoded.email,
@@ -58,7 +55,6 @@ router.use('*', (req, res, next) => {
         department: decoded.department,
         isAdmin: decoded.isAdmin,
       };
-      console.log(req.user);
       next();
     }
   });
