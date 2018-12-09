@@ -10,7 +10,7 @@ export const userGroupsController = async (req, res) => {
         }
     })
     .then(response => {
-        console.log("PRIHLOUPLY SKUPINY UZIVATELE", response)
+        console.log(response)
       res.json({
         response,
       });

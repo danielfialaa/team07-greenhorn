@@ -12,7 +12,6 @@ export class GroupForm extends Component {
 
     componentDidMount() {
         api.get('groupList').then(({ data }) => {
-
             const treeDataArray = [];
 
             data.response.map(group => {
@@ -30,29 +29,31 @@ export class GroupForm extends Component {
         });
 
         api.get('userGroups/'+this.props.userId).then(({ data }) => {
-
-
             const valueArray = []
 
             data.response.map((group) => {
                 valueArray.push(group.groupId)
             });
 
-
             this.setState(() => ({
                 value: valueArray
             }));
-            console.log(this.state.value)
-
         });
-
-        console.log(this.state.value)
         
     }
 
     onChange = (value) => {
-        console.log('onChange ', value, this.state);
         this.setState({ value });
+
+        value.forEach((current) => {
+            const reqData = {
+                userId: this.props.userId,
+                groupId: current
+            }
+            
+            api.post('userGroups/' + this.props.userId + '/update', reqData);
+            console.log(value);
+        })
         
     }
 

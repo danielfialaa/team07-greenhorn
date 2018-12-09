@@ -47,9 +47,7 @@ export const UserAdministrationTemplate = ({
       <Row>
         <Col>
         <h2>Assign user to a group</h2>
-        <GroupForm userId={userId}>
-          
-        </GroupForm>
+        <GroupForm userId={userId} />
         </Col>
       </Row>
       <Row>
