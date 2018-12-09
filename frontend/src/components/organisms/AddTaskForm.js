@@ -87,8 +87,6 @@ export class AddTaskForm extends Component {
                 this.setState(() => ({
                   success: true,
                 }));
-                console.log('values.attachments:', values.attachments);
-                values.attachments = '';
                 actions.resetForm();
               } else {
                 Notification('error', 'Error', 'Error while creating task!');

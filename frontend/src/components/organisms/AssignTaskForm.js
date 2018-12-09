@@ -25,14 +25,17 @@ export class AssignTaskForm extends Component {
   state = {
     task: '',
     requestor: '',
-    deadline: '',
+    dateOfDeadline: '',
     userId: '',
     reporterId: '',
   };
 
   handleDeadlineDateChange = value => {
     value ? null : (value = moment(defaultDeadline));
-    this.setState({ dateOfDeadline: value }, function() {});
+    this.setState(
+      { dateOfDeadline: moment(value).format('YYYY-MM-DD') },
+      function() {},
+    );
   };
 
   render() {
@@ -51,10 +54,8 @@ export class AssignTaskForm extends Component {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions, resetForm) => {
+          values.dateOfDeadline = this.state.dateOfDeadline;
           values.idUser = this.props.userId;
-          values.dateOfDeadline = moment(this.state.dateOfDeadline).format(
-            'YYYY-MM-DD',
-          );
           values.dateOfAssignment = moment().format('YYYY-MM-DD');
           api
             .post('assignTask', values)
@@ -155,7 +156,6 @@ export class AssignTaskForm extends Component {
                   id="dateOfDeadline"
                   defaultValue={moment(defaultDeadline)}
                   disabledDate={disabledDate}
-                  allowClear={true}
                   style={{
                     width: '-webkit-fill-available',
                     margin: '5px 5px 5px 5px',
