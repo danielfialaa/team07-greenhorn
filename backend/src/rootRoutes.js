@@ -34,6 +34,7 @@ import uploadTaskFileRoutes from './modules/upload-task-file/routes';
 import modifyUserTaskRoutes from './modules/modify-user-task/routes';
 import taskDetailRoutes from './modules/task-detail/routes';
 import groupListRoutes from './modules/group-list/routes';
+import userGroupsRoutes from './modules/user-groups/routes';
 
 
 const router = Router({ mergeParams: true });
@@ -69,6 +70,7 @@ router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
+router.use('/api/userGroups/:id', userGroupsRoutes)
 router.use('/api/taskDetail/:id', taskDetailRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
 router.use('/api/groupList', groupListRoutes);

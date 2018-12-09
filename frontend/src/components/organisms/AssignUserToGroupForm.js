@@ -4,10 +4,6 @@ import { TreeSelect } from 'antd';
 import api from '../../api';
 
 
-
-
-
-
 export class GroupForm extends Component {
     state = {
         value: [],
@@ -33,11 +29,29 @@ export class GroupForm extends Component {
             }));
         });
 
+        api.get('userGroups/'+this.props.userId).then(({ data }) => {
+
+
+            const valueArray = []
+
+            data.response.map((group) => {
+                valueArray.push(group.groupId)
+            });
+
+
+            this.setState(() => ({
+                value: valueArray
+            }));
+            console.log(this.state.value)
+
+        });
+
+        console.log(this.state.value)
         
     }
 
     onChange = (value) => {
-        console.log('onChange ', value);
+        console.log('onChange ', value, this.state);
         this.setState({ value });
         
     }
@@ -53,7 +67,7 @@ export class GroupForm extends Component {
             searchPlaceholder: 'Select groups...',
             style: {
                 width: 300,
-              },
+            },
         }
         return (
             <div>
