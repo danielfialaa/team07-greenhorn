@@ -25,7 +25,7 @@ export class UserSettingsPage extends Component {
       <UserSettingsTemplate
         isLoading={this.state.isLoading}
         userInfo={this.state.userInfo}
-        title="Edit profile"
+        title="EDIT PROFILE"
       />
     );
   }

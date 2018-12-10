@@ -27,14 +27,14 @@ export const UserAdministrationTemplate = ({
 
   return (
     <div>
-      <h1>USER ADMINISTRATION PROFILE</h1>
+      <h1>User Administration Profile</h1>
       <Row>
         <Col>
           <UserAdministrationForm userInfo={userInfo} />
         </Col>
       </Row>
       <Row>
-        <h2>Assign new task</h2>
+        <h2>Assign New Task</h2>
         <Col>
           <AssignTaskForm
             taskList={taskList}
@@ -44,7 +44,7 @@ export const UserAdministrationTemplate = ({
         </Col>
       </Row>
       <Row>
-        <h2>User task history</h2>
+        <h2>User Task History</h2>
         <Col>
           <TaskListTable tasks={tasks} currentUser={currentUser} />
         </Col>

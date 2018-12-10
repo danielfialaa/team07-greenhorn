@@ -35,7 +35,8 @@ export class HeaderUser extends Component {
     const title = this.props.title;
     return(
           <div>
-            <Dropdown.Button overlay={menu} style={{float: 'right'}}>
+            <Dropdown.Button icon="user" overlay={menu} style={{float: 'right'}}>
+            <Icon type="user" />
               {this.state.firstName + ' ' + this.state.lastName}
             </Dropdown.Button>
           </div>

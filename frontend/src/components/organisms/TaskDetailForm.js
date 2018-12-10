@@ -73,7 +73,6 @@ export class TaskDetailForm extends Component {
     const { taskDetailed } = this.props;
 		const currentUser = this.props.currentUser[0];
 		console.log('this.props>>>> ',this.props);
-		console.log('this.props.currentUser>>>> ',this.props.currentUser);
 
     var dateFormat = require('dateformat');
     var isAssignedToSelf = this.props.isAssignedToSelf;
@@ -91,7 +90,7 @@ export class TaskDetailForm extends Component {
 
     return (
       <div>
-      <Header style={{ background: '#ffffff', float: 'centre'}}><h1>TASK DETAIL</h1></Header>
+      <Header style={{ background: '#ffffff', float: 'centre'}}><h1>Task Detail</h1></Header>
         <Layout style={{ background: '#fff' }}>
           <Content style={{ margin: '16px 36px 24px 16px' }}>
             <Divider type='horizontal' orientation='left'><h2>{taskDetailed.task.name}</h2></Divider>

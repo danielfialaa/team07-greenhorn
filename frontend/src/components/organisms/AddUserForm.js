@@ -53,10 +53,10 @@ export class AddUserForm extends Component {
 			});
       this.setState({ mockData: mockData});
       console.log(this.state.mockData);
-      
+
 		});
   }
-  
+
   filterOption = (inputValue, option) => {
 		return option.description.indexOf(inputValue) > -1;
 	}
