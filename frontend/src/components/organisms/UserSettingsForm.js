@@ -21,7 +21,7 @@ export class UserSettingsForm extends Component {
 
   handleDateChange = value => {
     value ? null : (value = moment(this.props.userInfo.dob));
-    this.setState({ dob: value }, function() {});
+    this.setState({ dob: moment(value).format('YYYY-MM-DD') }, function() {});
   };
 
   render() {
@@ -31,6 +31,7 @@ export class UserSettingsForm extends Component {
       telephone: this.props.userInfo.telephone,
       dob: this.props.userInfo.dob,
     };
+
     var date = moment(this.props.userInfo.dob).format('YYYY-MM-DD');
     return (
       <Formik
@@ -38,6 +39,12 @@ export class UserSettingsForm extends Component {
         initialValues={initialValues}
         validationSchema={UserValidation}
         onSubmit={(values, actions) => {
+          this.state.dob
+            ? null
+            : (values.dob = moment(this.props.userInfo.dob).format(
+                'YYYY-MM-DD',
+              ));
+          values.dob = this.state.dob;
           api
             .post('updateUser', values)
             .then(({ data }) => {
@@ -47,6 +54,7 @@ export class UserSettingsForm extends Component {
                   'User Updated',
                   'User information has been succesfully updated',
                 );
+                window.location.reload();
               } else {
                 Notification('error', 'Error', 'Error while updating user!');
               }
@@ -59,6 +67,7 @@ export class UserSettingsForm extends Component {
           handleBlur,
           handleChange,
           handleSubmit,
+          setFieldValue,
           isSubmitting,
           isValid,
         }) => (
@@ -111,7 +120,7 @@ export class UserSettingsForm extends Component {
                     type="primary"
                     htmlType="submit"
                     className="submit-changes-button"
-                    disabled={!isValid || isSubmitting}
+                    // disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
                   >
                     Confirm changes
