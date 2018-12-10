@@ -10,7 +10,7 @@ export const PageWrapper = ({ children }) => (
   <Layout className="container">
     <SiderMenu />
     <Layout>
-			<Header style={{ background: '#3D6A52' }}>
+			<Header>
         <HeaderUser title={''}></HeaderUser>
 			</Header>
       <Content style={{ margin: '24px 16px 0' }}>
