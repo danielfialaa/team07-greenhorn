@@ -64,7 +64,7 @@ export class TaskListTable extends Component {
 
   render() {
     const { tasks } = this.props;
-    const currentUser = this.props.currentUser[0];
+    const currentUser = this.props.currentUser[0] ? this.props.currentUser[0] : false;
     console.log('this.props >>>>> ',this.props);
     var dateFormat = require('dateformat');
 
