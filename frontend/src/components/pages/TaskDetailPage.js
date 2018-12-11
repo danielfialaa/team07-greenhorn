@@ -19,7 +19,6 @@ state = {
 }
 
 componentDidMount() {
-  console.log("this.props.match.params.id: ",this.props.match.params.id);
   api.get('currentUser')
     .then(({data}) => {
         console.log('data>>>>>>>', data.response);

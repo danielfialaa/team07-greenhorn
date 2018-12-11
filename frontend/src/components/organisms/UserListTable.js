@@ -99,6 +99,7 @@ const columns = [{
 	    return (
 				<div>
         <div className="table-operations">
+	      <h1 style={{float:'left'}}>User List</h1>
           <Button onClick={this.clearAll} style={{margin: '5px 5px 5px 50px '}}>Clear filters and sorters</Button>
         </div>
         <Table columns={columns} dataSource={this.props.users.response} onChange={this.handleChange} rowKey="id" />

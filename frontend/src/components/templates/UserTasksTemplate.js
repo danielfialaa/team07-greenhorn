@@ -29,7 +29,7 @@ export const UserTasksTemplate = ({
   //<HeaderUserHomePage currentUser={currentUser} />
   return (
     <div>
-    
+    <div style={{float:'left'}}><h1>User Tasks</h1></div>
     <TaskListTable tasks={tasks} currentUser={currentUser} />
     </div>
   );

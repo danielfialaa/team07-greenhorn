@@ -19,7 +19,6 @@ const currenUser = [{...userInfo}];
 console.log('userInfo >>>>> ', userInfo);
   return (
     <div>
-      <HeaderUser currentUser={currenUser} title={''} />
       <UserSettingsForm userInfo={userInfo} />
       <ChangePasswordForm />
     </div>
