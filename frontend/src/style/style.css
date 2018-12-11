@@ -11,6 +11,10 @@ body{
 	min-height: 100vh;
 	background: linear-gradient(#E0F7FA,#F1F8E9);
 }
+.ant-layout-header {
+	background: rgb(36, 36, 36);
+	box-shadow: 0px 0px 20px rgb(179, 179, 179);
+}
 .ant-form {
 	min-width: 500px;
 }
@@ -19,7 +23,7 @@ body{
 	box-shadow: 0px 0px 20px rgb(179, 179, 179);
 }
 .main-menu {
-	box-shadow: 0px 0px 20px rgb(161, 161, 161);
+	/* box-shadow: 0px 0px 20px rgb(161, 161, 161); */
 }
 
 a {
