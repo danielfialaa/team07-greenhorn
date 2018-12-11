@@ -9,7 +9,6 @@ export class TaskDetailPage extends Component {
 
 state = {
   isLoading: true,
-  isLoading2: true,
   isError: false,
   taskDetailed: "",
 	attachments: [{},{}],
@@ -23,7 +22,6 @@ componentDidMount() {
     .then(({data}) => {
         console.log('data>>>>>>>', data.response);
         this.setState(() => ({
-          isLoading2: false,
           currentUser: data.response,
         }))
       });
@@ -45,7 +43,7 @@ componentDidMount() {
 
     return (
     <TaskDetailTemplate
-      isLoading= {this.state.isLoading || this.state.isLoading2}
+      isLoading= {this.state.isLoading}
       isError={this.state.error}
       taskDetailed={this.state.taskDetailed}
 			attachments={this.state.attachments}
