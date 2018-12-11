@@ -7,6 +7,7 @@ import { AssignTaskForm } from '../organisms/AssignTaskForm';
 import { TaskListTable } from '../organisms/TaskListTable';
 import { Spin, Icon } from 'antd';
 import { HeaderUser } from '../molecules/HeaderUser';
+import { GroupForm } from '../organisms/AssignUserToGroupForm'
 
 const { Header, Content } = Layout;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;

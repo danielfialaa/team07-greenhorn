@@ -18,7 +18,8 @@ export const TaskDetailTemplate = ({
   isAssignedToSelf,
   currentUser,
 }) => {
-  if (isLoading) {
+  // if (isLoading) {
+    if(currentUser.length == 0 || taskDetailed.length == 0) {
     return <Spin indicator={antIcon} />;
   }
 

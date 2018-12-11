@@ -34,6 +34,8 @@ import uploadTaskFileRoutes from './modules/upload-task-file/routes';
 import modifyUserTaskRoutes from './modules/modify-user-task/routes';
 import taskDetailRoutes from './modules/task-detail/routes';
 import groupListRoutes from './modules/group-list/routes';
+import userGroupsRoutes from './modules/user-groups/routes';
+import assignUserUploadsRoutes from './modules/assign-user-uploads/routes';
 
 
 const router = Router({ mergeParams: true });
@@ -43,13 +45,10 @@ router.use('/api/auth', loginFormRoutes);
 
 router.use('/api/newPass', newPassRoutes);
 router.use('*', (req, res, next) => {
-  console.log(req.get('Authorization'));
   const x = jwt.verify(req.get('Authorization'), '2', (err, decoded) => {
     if (err) {
-      console.log('unauthorized');
       res.status(401).send('unauthorized');
     } else {
-      console.log(decoded);
       req.user = {
         id: decoded.id,
         email: decoded.email,
@@ -58,7 +57,6 @@ router.use('*', (req, res, next) => {
         department: decoded.department,
         isAdmin: decoded.isAdmin,
       };
-      console.log(req.user);
       next();
     }
   });
@@ -73,9 +71,12 @@ router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
+router.use('/api/userGroups/:id', userGroupsRoutes)
 router.use('/api/taskDetail/:id', taskDetailRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
 router.use('/api/groupList', groupListRoutes);
+router.use('/api/assignUserUploads', assignUserUploadsRoutes);
+
 
 /* ROUTES ONLY FOR ADMINS */
 router.use('/api/addUser', addUserFormRoutes);

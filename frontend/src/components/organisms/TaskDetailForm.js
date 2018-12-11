@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col } from 'antd';
+import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col, Form, message } from 'antd';
 import { Logo } from '../atoms/Logo';
 import { Layout } from 'antd';
 import api from '../../api';
 import { UploadFile } from '../molecules/UploadFile';
+import { Formik } from 'formik';
 
 const { Content, Sider, Header } = Layout;
+const FormItem = Form.Item;
 
 const emptyAttachments = [
 	{
@@ -124,12 +126,57 @@ export class TaskDetailForm extends Component {
               taskDetailed.dateOfCompletion === null
               &&
               <div>
-                <Row>
-                  <UploadFile
-                  label="Submit files"
-                  {...uploadRoute}
-                  triggerParentUpdate={this.updateFileData.bind(this)} />
-                </Row>
+                  
+                <Formik
+                  initialValues={{filePath: ''}}
+                  onSubmit={(values, actions, resetForm) => {
+                   values.filePath = this.state.filePath;
+                   values.assignedTaskId = taskDetailed.id;
+                   api
+                   .post('assignUserUploads', values)
+                   .then(({data}) => {
+                      if (data.status) {
+                        message.success(`Files assigned successfully.`);
+                      } else {
+                        message.error(`File assign failed.`);
+                      }
+                      actions.setSubmitting(false);
+                   }).catch((e) => {
+                    message.error(`File assign failed.`);
+                    actions.setSubmitting(false);
+                   });
+                    console.log(values);
+                    
+                   // API CALL
+                  }}
+                  render={({
+                    values,
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    isSubmitting,
+                  }) => (
+                  <Row>
+                    <Form className="addTask-form" onSubmit={handleSubmit}>
+                      <UploadFile
+                      label="Submit files"
+                      {...uploadRoute}
+                      triggerParentUpdate={this.updateFileData.bind(this)} />
+                      <FormItem>
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          className="login-form-button"
+                          // disabled={values.filePath.length == 0}
+                          loading={isSubmitting}
+                        >
+                          Confirm upload
+                        </Button>
+                      </FormItem>
+                    </Form>
+                  </Row>
+                  )}
+                  />
               </div>
 
             }
