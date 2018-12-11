@@ -54,7 +54,7 @@ export const UserAdministrationTemplate = ({
         
         <Col>
         <h2>User task history</h2>
-          <TaskListTable tasks={tasks} currentUser={currentUser} />
+          {/* <TaskListTable tasks={tasks} currentUser={currentUser} /> */}
         </Col>
       </Row>
     </div>

@@ -4,6 +4,8 @@ export const userGroupsUpdateController = async (req, res) => {
   const userId = await req.body.userId;
   const groupId = await req.body.groupId;
 
+  
+
   const result = db.userGroupBelonging
     .destroy({
       where: {
