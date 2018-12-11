@@ -62,7 +62,9 @@ export class SiderMenu extends Component {
     if (!this.state.authorized) {
       return <Redirect to="/" />;
     }
+
     console.log(this.state.isAdmin);
+
 
     return (
       <Sider
