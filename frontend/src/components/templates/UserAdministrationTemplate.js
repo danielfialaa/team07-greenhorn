@@ -28,15 +28,15 @@ export const UserAdministrationTemplate = ({
 
   return (
     <div>
-      <h1>User Administration Profile</h1>
+      <h1>USER ADMINISTRATION PROFILE</h1>
       <Row>
         <Col>
           <UserAdministrationForm userInfo={userInfo} />
         </Col>
       </Row>
       <Row>
-        <h2>Assign New Task</h2>
         <Col>
+        <h2>Assign new task</h2>
           <AssignTaskForm
             taskList={taskList}
             requestorList={requestorList}
@@ -45,9 +45,16 @@ export const UserAdministrationTemplate = ({
         </Col>
       </Row>
       <Row>
-        <h2>User Task History</h2>
         <Col>
-          <TaskListTable tasks={tasks} currentUser={currentUser} />
+        <h2>Assign user to a group</h2>
+        <GroupForm userId={userId} />
+        </Col>
+      </Row>
+      <Row>
+
+        <Col>
+        <h2>User task history</h2>
+          {/* <TaskListTable tasks={tasks} currentUser={currentUser} /> */}
         </Col>
       </Row>
     </div>
