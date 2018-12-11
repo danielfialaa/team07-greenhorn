@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { TreeSelect } from 'antd';
+import { TreeSelect, Transfer, Form } from 'antd';
 
 import api from '../../api';
+const FormItem = Form.item;
 
 
 export class GroupForm extends Component {
@@ -52,28 +53,25 @@ export class GroupForm extends Component {
             }
             
             api.post('userGroups/' + this.props.userId + '/update', reqData);
-            console.log(value);
+            console.log(reqData);
         })
         
     }
 
     render () {
 
-        const treeSelectProps = {
-            value: this.state.value,
-            treeData: this.state.treeData,
-            onChange: this.onChange,
-            treeCheckable: true,
-            showCheckedStrategy: TreeSelect.SHOW_PARENT,
-            searchPlaceholder: 'Select groups...',
-            style: {
-                width: 300,
-            },
-        }
         return (
             <div>
-                <TreeSelect {...treeSelectProps}
-                 />
+                <Transfer
+                    //ty vlevo
+                    dataSource={this.state.treeData}
+                    showSearch
+                    filterOption={this.filterOption}
+                    //ty vpravo
+                    targetKeys={this.state.value}
+                    onChange={this.onChange}
+                    render={item => item.title}
+                />
             </div>
         );
     }
