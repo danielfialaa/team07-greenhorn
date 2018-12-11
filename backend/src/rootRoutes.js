@@ -35,6 +35,7 @@ import modifyUserTaskRoutes from './modules/modify-user-task/routes';
 import taskDetailRoutes from './modules/task-detail/routes';
 import groupListRoutes from './modules/group-list/routes';
 import userGroupsRoutes from './modules/user-groups/routes';
+import assignUserUploadsRoutes from './modules/assign-user-uploads/routes';
 
 
 const router = Router({ mergeParams: true });
@@ -74,6 +75,8 @@ router.use('/api/userGroups/:id', userGroupsRoutes)
 router.use('/api/taskDetail/:id', taskDetailRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
 router.use('/api/groupList', groupListRoutes);
+router.use('/api/assignUserUploads', assignUserUploadsRoutes);
+
 
 /* ROUTES ONLY FOR ADMINS */
 router.use('/api/addUser', addUserFormRoutes);

@@ -30,17 +30,26 @@ componentDidMount() {
     .then(({ data }) => {
       console.log("data: ",data);
       this.setState(() => ({
-        isLoading: false,
         taskDetailed: data.result,
 				attachments: data.attachments,
         relatedUsers: data.relatedUsers,
         isAssignedToSelf: data.isAssignedToSelf
       }))
     });
+    // if (this.state.currentUser.length > 0 && this.state.taskDetailed.length != 0) {
+    //   this.setState(() => ({
+    //     isLoading: false,
+    //   }))
+    // }
+
 }
 
 
   render() {
+    console.log("currentUser length: ", this.state.currentUser.length);
+    console.log("taskDetailed: ", this.state.taskDetailed.length);
+    
+    
 
     return (
     <TaskDetailTemplate
