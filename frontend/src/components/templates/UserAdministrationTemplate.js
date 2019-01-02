@@ -7,7 +7,7 @@ import { AssignTaskForm } from '../organisms/AssignTaskForm';
 import { TaskListTable } from '../organisms/TaskListTable';
 import { Spin, Icon } from 'antd';
 import { HeaderUser } from '../molecules/HeaderUser';
-import { GroupForm } from '../organisms/AssignUserToGroupForm'
+import { GroupForm } from '../organisms/AssignUserToGroupForm';
 
 const { Header, Content } = Layout;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
@@ -35,9 +35,8 @@ export const UserAdministrationTemplate = ({
         </Col>
       </Row>
       <Row>
-        <h2>Assign New Task</h2>
         <Col>
-        <h2>Assign new task</h2>
+          <h2>Assign new task</h2>
           <AssignTaskForm
             taskList={taskList}
             requestorList={requestorList}
@@ -46,16 +45,14 @@ export const UserAdministrationTemplate = ({
         </Col>
       </Row>
       <Row>
-        <h2>User Task History</h2>
         <Col>
-        <h2>Assign user to a group</h2>
-        <GroupForm userId={userId} />
+          <h2>Assign user to a group</h2>
+          <GroupForm userId={userId} />
         </Col>
       </Row>
       <Row>
-        
         <Col>
-        <h2>User task history</h2>
+          <h2>User task history</h2>
           <TaskListTable tasks={tasks} currentUser={currentUser} />
         </Col>
       </Row>
