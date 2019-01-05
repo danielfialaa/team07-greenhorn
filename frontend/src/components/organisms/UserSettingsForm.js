@@ -45,11 +45,6 @@ export class UserSettingsForm extends Component {
             : (values.dob = moment(this.props.userInfo.dob).format(
                 'YYYY-MM-DD',
               ));
-          console.log('this.props.userInfo.dob: ' + this.props.userInfo.dob);
-          console.log('this.state.dob: ' + this.state.dob);
-          console.log('values.dob: ' + values.dob);
-          console.log('values.firstName: ' + values.firstName);
-          console.log('values.lastName: ' + values.lastName);
           api
             .post('updateUser', values)
             .then(({ data }) => {
