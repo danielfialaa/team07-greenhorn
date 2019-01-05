@@ -39,12 +39,17 @@ export class UserSettingsForm extends Component {
         initialValues={initialValues}
         validationSchema={UserValidation}
         onSubmit={(values, actions) => {
+          values.dob = this.state.dob;
           this.state.dob
             ? null
             : (values.dob = moment(this.props.userInfo.dob).format(
                 'YYYY-MM-DD',
               ));
-          values.dob = this.state.dob;
+          console.log('this.props.userInfo.dob: ' + this.props.userInfo.dob);
+          console.log('this.state.dob: ' + this.state.dob);
+          console.log('values.dob: ' + values.dob);
+          console.log('values.firstName: ' + values.firstName);
+          console.log('values.lastName: ' + values.lastName);
           api
             .post('updateUser', values)
             .then(({ data }) => {
