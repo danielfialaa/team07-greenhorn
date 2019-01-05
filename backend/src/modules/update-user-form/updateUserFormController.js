@@ -1,7 +1,7 @@
 import db from '../../models/';
 
 export const updateUserFormController = async (req, res) => {
-  const form = await db.users
+  const result = await db.users
     .update(
       {
         firstName: req.body.firstName,

@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col, Layout } from 'antd';
+import {
+  Table,
+  Button,
+  Divider,
+  Tag,
+  Icon,
+  Timeline,
+  List,
+  Row,
+  Col,
+  Layout,
+} from 'antd';
 import { Logo } from '../atoms/Logo';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +22,6 @@ export class TaskListTable extends Component {
   state = {
     sortedInfo: null,
   };
-
 
   handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
@@ -28,44 +38,48 @@ export class TaskListTable extends Component {
     });
   };
 
-  deleteTaskHandler = (id) => {
-    api.post('deleteUserTask', {'id':id})
-    .then(({ response }) => {
-      // new Notification(
-      //   'success',
-      //   'Task has been deleted',
-      //   'Task has been succesfully deleted',
-      // );
-      console.log("Proslo to");
-      this.forceUpdate();
-    }).catch(error => {
-      //   Notification(
-      //   'error',
-      //   'Error occured while deleting task',
-      //   'Error occured while deleting task',
-      // );
-      console.log("Velký špatný");
-
-    });
-    console.log("id", id);
-  }
+  deleteTaskHandler = id => {
+    api
+      .post('deleteUserTask', { id: id })
+      .then(({ response }) => {
+        // new Notification(
+        //   'success',
+        //   'Task has been deleted',
+        //   'Task has been succesfully deleted',
+        // );
+        console.log('Proslo to');
+        window.location.reload();
+      })
+      .catch(error => {
+        //   Notification(
+        //   'error',
+        //   'Error occured while deleting task',
+        //   'Error occured while deleting task',
+        // );
+        console.log('Velký špatný');
+      });
+    console.log('id', id);
+  };
 
   tagReturn(status) {
-      switch (status) {
-          case 'TO BE REVIEWED':
-            return <Tag color='orange'>TO BE REVIEWED</Tag>;
-          case 'DONE':
-            return <Tag color='green'>DONE</Tag>;
-          case 'TBD':
-            return <Tag color='red'>TBD</Tag>;
-        default: return null;
-      }
+    switch (status) {
+      case 'TO BE REVIEWED':
+        return <Tag color="orange">TO BE REVIEWED</Tag>;
+      case 'DONE':
+        return <Tag color="green">DONE</Tag>;
+      case 'TBD':
+        return <Tag color="red">TBD</Tag>;
+      default:
+        return null;
     }
+  }
 
   render() {
     const { tasks } = this.props;
-    const currentUser = this.props.currentUser[0] ? this.props.currentUser[0] : false;
-    console.log('this.props >>>>> ',this.props);
+    const currentUser = this.props.currentUser[0]
+      ? this.props.currentUser[0]
+      : false;
+    console.log('this.props >>>>> ', this.props);
     var dateFormat = require('dateformat');
 
     let { sortedInfo, filteredInfo } = this.state;
@@ -76,11 +90,7 @@ export class TaskListTable extends Component {
         title: 'Status',
         dataIndex: 'status',
         key: 'status',
-        render: dataIndex => (
-          <span>
-          {this.tagReturn(dataIndex)}
-          </span>
-        ),
+        render: dataIndex => <span>{this.tagReturn(dataIndex)}</span>,
         filters: [
           {
             text: 'To be done',
@@ -123,22 +133,29 @@ export class TaskListTable extends Component {
         title: 'Action',
         key: 'action',
         dataIndex: 'id',
-        render: (dataIndex) => (
+        render: dataIndex => (
           <span>
-              <Button
-                type="primary"
-                icon="file-search"
-                href={"/TaskDetail/"+dataIndex}
-                >Detail
-              </Button>
-              <Divider type='vertical' style={currentUser.isAdmin ? {} : {display: 'none'}}/>
-              <Button
-                type="danger"
-                icon="delete"
-                onClick={() => {this.deleteTaskHandler(dataIndex)}}
-                style={currentUser.isAdmin ? {} : {display: 'none'}}
-                >Delete
-              </Button>
+            <Button
+              type="primary"
+              icon="file-search"
+              href={'/TaskDetail/' + dataIndex}
+            >
+              Detail
+            </Button>
+            <Divider
+              type="vertical"
+              style={currentUser.isAdmin ? {} : { display: 'none' }}
+            />
+            <Button
+              type="danger"
+              icon="delete"
+              onClick={() => {
+                this.deleteTaskHandler(dataIndex);
+              }}
+              style={currentUser.isAdmin ? {} : { display: 'none' }}
+            >
+              Delete
+            </Button>
           </span>
         ),
       } /*{
@@ -162,22 +179,20 @@ export class TaskListTable extends Component {
     } */,
     ];
 
-
     // <div style={{ margin: '1px 1px 1px 1px', textAlign: 'left'}} ><h2>Tasks to do</h2></div>
     // <div style={{ margin: '1px 1px 1px 1px', textAlign: 'right'}} ><h2>You are signed in as {currentUser.firstName} {currentUser.lastName}</h2></div>
     return (
       <div>
-      <Table
+        <Table
           columns={columns}
           dataSource={this.props.tasks}
           onChange={this.handleChange}
           rowKey="id"
-      />
+        />
       </div>
     );
   }
 }
-
 
 // <Layout>
 // <Header
@@ -185,8 +200,6 @@ export class TaskListTable extends Component {
 // >{}
 // </Header>
 // <Content>
-
-
 
 // </Content>
 // </Layout>
