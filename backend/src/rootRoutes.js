@@ -36,6 +36,7 @@ import taskDetailRoutes from './modules/task-detail/routes';
 import groupListRoutes from './modules/group-list/routes';
 import userGroupsRoutes from './modules/user-groups/routes';
 import assignUserUploadsRoutes from './modules/assign-user-uploads/routes';
+import assignedTasksRoutes from './modules/assigned-tasks/routes';
 
 
 const router = Router({ mergeParams: true });
@@ -69,6 +70,7 @@ router.use('/api/changePass', changePassRoutes);
 router.use('/api/resetPass', resetPassRoutes);
 router.use('/api/departmentList', departmentListRoutes);
 router.use('/api/taskList/:id', taskListRoutes);
+router.use('/api/assignedTasks/:id', assignedTasksRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
 router.use('/api/userGroups/:id', userGroupsRoutes)
@@ -88,7 +90,7 @@ router.use('/api/modifyUserTask', modifyUserTaskRoutes);
 
 
 
-/* SOME OLD SHIT */
+/* SOME OLD STUFF */
 /*
 router.use('/api/products', productRoutes);
 router.use('/api/contactForm', contactFormRoutes);

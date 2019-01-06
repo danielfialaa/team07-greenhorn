@@ -13,8 +13,6 @@ export const userListController = async (req, res) => {
       ],
     })
     .then(response => {
-      // response = JSON.stringify(response)
-      // response = JSON.parse(response)
       res.json({
         response,
       });
