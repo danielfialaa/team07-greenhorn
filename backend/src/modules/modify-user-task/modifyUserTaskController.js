@@ -87,7 +87,7 @@ export const modifyUserTaskController = async (req, res) => {
           req.body.status +
           ' - TO BE DONE, with deadline date set to [' +
           moment(taskHistory.dateOfDeadline).format('YYYY-MM-DD') +
-          ']. For futher information visit GreenHorn application.',
+          ']. For futher information visit GreenHorn application http://dev.frontend.team07.vse.handson.pro/.',
       },
       function(err, reply) {
         console.log(err && err.stack);
