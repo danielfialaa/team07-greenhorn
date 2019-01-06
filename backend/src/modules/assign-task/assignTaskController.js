@@ -21,17 +21,26 @@ export const assignTaskController = async (req, res) => {
     });
 
   const user = await db.users.findOne({
+    attributes: ['firstName', 'lastName', 'email'],
     where: { id: req.body.idUser },
   });
 
   const task = await db.tasks.findOne({
+    attributes: ['name'],
     where: { id: req.body.idTask },
+  });
+
+  const requestor = await db.users.findOne({
+    attributes: ['email'],
+    where: { id: req.body.idRequestor },
   });
 
   res.json({
     status: true,
     reporter,
     user,
+    task,
+    requestor,
   });
 
   const notificationDate = moment(req.body.dateOfDeadline, 'YYYY-MM-DD')
@@ -57,8 +66,9 @@ export const assignTaskController = async (req, res) => {
         '" with deadline on [' +
         req.body.dateOfDeadline +
         '] was assigned to you. Please do not forget to close task in time! \n' +
-        'In case of any question visit GreenHorn application for detailed task description or contact by email task requestor - ' +
-        req.user.email +
+        'In case of any question visit GreenHorn application http://dev.frontend.team07.vse.handson.pro/' +
+        ' for detailed task description or contact by email task requestor - ' +
+        requestor.email +
         '. ',
     },
     function(err, reply) {
@@ -88,8 +98,9 @@ export const assignTaskController = async (req, res) => {
             '" is close to defined deadline: ' +
             req.body.dateOfDeadline +
             '. Verify your task is completed and closed! \n' +
-            'In case of any question visit GreenHorn application for detailed task description or contact by email task requestor - ' +
-            req.user.email +
+            'In case of any question visit GreenHorn application http://dev.frontend.team07.vse.handson.pro/' +
+            ' for detailed task description or contact by email task requestor - ' +
+            requestor.email +
             '. ',
         },
         function(err, reply) {
