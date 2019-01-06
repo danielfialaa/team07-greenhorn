@@ -37,6 +37,9 @@ import groupListRoutes from './modules/group-list/routes';
 import userGroupsRoutes from './modules/user-groups/routes';
 import assignUserUploadsRoutes from './modules/assign-user-uploads/routes';
 import assignedTasksRoutes from './modules/assigned-tasks/routes';
+import allTasksRoutes from './modules/all-tasks/routes';
+import tbdTasksRoutes from './modules/tbd-tasks/routes';
+import doneTasksRoutes from './modules/done-tasks/routes';
 
 
 const router = Router({ mergeParams: true });
@@ -73,8 +76,11 @@ router.use('/api/taskList/:id', taskListRoutes);
 router.use('/api/assignedTasks/:id', assignedTasksRoutes);
 router.use('/api/tasks', tasksRoutes);
 router.use('/api/userAdministration/:id', userAdministrationRoutes);
-router.use('/api/userGroups/:id', userGroupsRoutes)
+router.use('/api/userGroups/:id', userGroupsRoutes);
 router.use('/api/taskDetail/:id', taskDetailRoutes);
+router.use('/api/allTasks/:id', allTasksRoutes);
+router.use('/api/tbdTasks/:id', tbdTasksRoutes);
+router.use('/api/doneTasks/:id', doneTasksRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
 router.use('/api/groupList', groupListRoutes);
 router.use('/api/assignUserUploads', assignUserUploadsRoutes);
