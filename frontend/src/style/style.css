@@ -44,6 +44,10 @@ a:hover {
 	color: #2E7D32;
 }
 
+.ant-card-head {
+	border: 0;
+}
+
 .ant-upload:hover.ant-upload-drag:hover {
 	border: 1px dashed #2E7D32;
 }

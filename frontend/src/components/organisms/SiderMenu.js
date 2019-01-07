@@ -86,6 +86,12 @@ export class SiderMenu extends Component {
           mode="inline"
           defaultSelectedKeys={window.location.pathname.split('/')}
         >
+        <MenuItem
+            key="Dashboard"
+            title="Dashboard"
+            icon="dashboard"
+            linkTo="/Dashboard"
+          />
         {this.state.isAdmin === "true" &&
 				<SubMenu key="user" title={<span><Icon type="user" /><span>Users</span></span>}>
           <MenuItem

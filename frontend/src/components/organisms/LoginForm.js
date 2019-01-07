@@ -22,7 +22,7 @@ export class LoginForm extends Component {
     const isLoggedIn = false;
 
     if (this.state.loggedIn === true && this.state.isAdmin === true) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/Dashboard" />;
     } else if (this.state.loggedIn === true) {
       return <Redirect to="/UserTasks" />;
     }
