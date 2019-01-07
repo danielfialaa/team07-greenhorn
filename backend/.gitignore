@@ -18,7 +18,6 @@ npm-debug.log
 # DB Config
 /src/config/config.js
 
-package-json
 
 /public/uploads/*
 !/public/uploads/.gitkeep

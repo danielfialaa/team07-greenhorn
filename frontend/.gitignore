@@ -24,7 +24,6 @@ yarn-error.log*
 /tmp/
 !/tmp/.gitkeep
 
-package-json
 
 /public/uploads/*
 !public/uploads/.gitkeep
