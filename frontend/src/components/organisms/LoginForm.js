@@ -23,7 +23,7 @@ export class LoginForm extends Component {
     if (this.state.loggedIn === true && this.state.isAdmin === true) {
       return <Redirect to="/Dashboard" />;
     } else if (this.state.loggedIn === true) {
-      return <Redirect to="/UserTasks" />;
+      return <Redirect to="/Dashboard" />;
     }
     return (
       <Formik
