@@ -16,52 +16,42 @@ export class DashboardPage extends Component {
   componentDidMount() {
     api.get('currentUser')
       .then(({data}) => {
-            console.log('data.response >>>>>>>', data.response);
             this.setState(() => ({
                 currentUser: data.response,
                 isLoading: false,
             }))
-            console.log('data.response STATE>>>>>>>', this.state.currentUser);
             
     });
     api.get('allTasks/'+this.props.match.params.id)
         .then(({ data }) => {
-            console.log('TASK COUNT', data);
             this.setState(() => ({
                 isLoading: false,
                 allTasks: data,
             }))
-            console.log('TASK COUNT STATE>>>>>>>', this.state.allTasks);
     });
 
     api.get('doneTasks/'+this.props.match.params.id)
         .then(({ data }) => {
-            console.log('TASK DONE', data);
             this.setState(() => ({
                 isLoading: false,
                 doneTasks: data,
             }))
-            console.log('TASK DONE STATE>>>>>>>', this.state.doneTasks);
     });
 
     api.get('tbdTasks/'+this.props.match.params.id)
         .then(({ data }) => {
-            console.log('TASK TBD', data);
             this.setState(() => ({
                 isLoading: false,
                 tbdTasks: data,
             }))
-            console.log('TASK TBD STATE>>>>>>>', this.state.tbdTasks);
     });
 
     api.get('assignedTasks/'+this.props.match.params.id)
         .then(({ data }) => {
-            console.log('DATA', data);
             this.setState(() => ({
                 isLoading: false,
                 tasks: data,
             }))
-            console.log('DATA STATE>>>>>>>', this.state.tasks);
     });
 }
 

@@ -121,20 +121,12 @@ export class SiderMenu extends Component {
             linkTo="/UserTasks"
           />}
           {this.state.isAdmin === "true" &&
-					<SubMenu key="groups" title={<span><Icon type="team" /><span>Groups</span></span>}>
 						<MenuItem
 							key="AddGroup"
 							title="Add Group"
 							icon="form"
 							linkTo="/AddGroup"
 						/>
-						<MenuItem
-							key="GroupList"
-							title="Groups list"
-							icon="form"
-							linkTo="/GroupList"
-						/>
-					</SubMenu>
           }
           <MenuItem
             key="Settings"

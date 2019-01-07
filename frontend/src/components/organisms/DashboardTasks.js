@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Tag, Table, Progress, Alert, Card, Col, Row } from 'antd';
 import { Link } from 'react-router-dom';
 
-  
-
-
-
-
 export class DashboardTasks extends Component {
 
     tagReturn(status) {
@@ -33,14 +28,13 @@ export class DashboardTasks extends Component {
             return <span><Alert message={dateFormat(date, 'dddd, mmmm dS, yyyy')} type="warning" /></span>
         }
     }
-
+    
     render() {
-        
         const columns = [
             {
                 title: 'Name',
                 dataIndex: 'task',
-                key: 'task',
+                key: 'task.id',
                 render: dataIndex => (
                     <Link to={'taskDetail/' + dataIndex.id}>{dataIndex.name}</Link>
                 ),
@@ -48,7 +42,7 @@ export class DashboardTasks extends Component {
             {
                 title: 'Assignee',
                 dataIndex: 'user',
-                key: 'user',
+                key: 'user.id',
                 render: dataIndex => (
                     <Link to={'userAdministration/' + dataIndex.id}>{dataIndex.firstName + ' ' + dataIndex.lastName}</Link>
                 ),
@@ -93,7 +87,7 @@ export class DashboardTasks extends Component {
                 <br></br>
                 <Row>
                     <h2>Incomplete assigned tasks</h2>
-                    <Table columns={columns} dataSource={this.props.tasks.response} size="small" pageSize="6"/>
+                    <Table columns={columns} dataSource={this.props.tasks.response} rowKey="id" size="small" pageSize="6"/>
                 </Row>
             </div>
             

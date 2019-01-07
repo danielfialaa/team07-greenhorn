@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   Tag,
+  message
 } from 'antd';
 
 import api from '../../api';
@@ -31,21 +32,11 @@ export class TaskListTable extends Component {
     api
       .post('deleteUserTask', { id: id })
       .then(({ response }) => {
-        // new Notification(
-        //   'success',
-        //   'Task has been deleted',
-        //   'Task has been succesfully deleted',
-        // );
-        console.log('Proslo to');
+        message.success(`Task has been succesfully deleted'`);
         window.location.reload();
       })
       .catch(error => {
-        //   Notification(
-        //   'error',
-        //   'Error occured while deleting task',
-        //   'Error occured while deleting task',
-        // );
-        console.log('Velký špatný');
+        message.error(`Error occured while deleting task`);
       });
   };
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, notification } from 'antd';
+import { Row, Col, Form, Button } from 'antd';
 import { Formik } from 'formik';
 
 import api from '../../api';

@@ -87,7 +87,6 @@ export class AssignTaskForm extends Component {
         }}
         render={({
           values,
-          handleBlur,
           handleSubmit,
           setFieldValue,
           isSubmitting,
@@ -103,7 +102,6 @@ export class AssignTaskForm extends Component {
                       <Select
                         {...field}
                         onChange={value => setFieldValue('idTask', value)}
-                        onBlur={handleBlur}
                         style={{
                           width: '-webkit-fill-available',
                           margin: '5px 5px 5px 5px',
@@ -128,7 +126,6 @@ export class AssignTaskForm extends Component {
                   render={({ field }) => (
                     <FormItem label="Select a requestor: ">
                       <Select
-                        onBlur={handleBlur}
                         {...field}
                         onChange={value => setFieldValue('idRequestor', value)}
                         style={{
