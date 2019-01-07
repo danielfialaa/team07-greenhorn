@@ -13,6 +13,22 @@ export const DashboardTemplate = ({ isLoading, isError, tasks, allTasks, tbdTask
     console.log(isError);
     return <Spin indicator={antIcon} />;
   }
+
+  if(!tbdTasks || !allTasks || !doneTasks) {
+    console.log("SPIIIN");
+    console.log(tbdTasks);
+    console.log(allTasks);
+    console.log(doneTasks);
+    console.log(currentUser);
+    console.log(tasks);
+    return <Spin indicator={antIcon} />;
+  }
+
+  console.log(tbdTasks);
+  console.log(allTasks);
+  console.log(doneTasks);
+  console.log(currentUser);
+  console.log(tasks);
   return (
     <div>
         <DashboardTasks allTasks={allTasks} isLoading={isLoading} tbdTasks={tbdTasks} doneTasks={doneTasks} tasks={tasks} currentUser={currentUser}/>

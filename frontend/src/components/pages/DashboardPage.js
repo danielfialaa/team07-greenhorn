@@ -7,11 +7,11 @@ export class DashboardPage extends Component {
   state = {
     isLoading: true,
     isError: false,
-    allTasks: 0,
-    tbdTasks: 0,
-    doneTasks: 0,
-    currentUser: '',
-    tasks: "",
+    allTasks: {},
+    tbdTasks: {},
+    doneTasks: {},
+    currentUser: [],
+    tasks: [],
   };
   componentDidMount() {
     api.get('currentUser')
@@ -20,7 +20,9 @@ export class DashboardPage extends Component {
             this.setState(() => ({
                 currentUser: data.response,
                 isLoading: false,
-        }))
+            }))
+            console.log('data.response STATE>>>>>>>', this.state.currentUser);
+            
     });
     api.get('allTasks/'+this.props.match.params.id)
         .then(({ data }) => {
@@ -29,6 +31,7 @@ export class DashboardPage extends Component {
                 isLoading: false,
                 allTasks: data,
             }))
+            console.log('TASK COUNT STATE>>>>>>>', this.state.allTasks);
     });
 
     api.get('doneTasks/'+this.props.match.params.id)
@@ -38,6 +41,7 @@ export class DashboardPage extends Component {
                 isLoading: false,
                 doneTasks: data,
             }))
+            console.log('TASK DONE STATE>>>>>>>', this.state.doneTasks);
     });
 
     api.get('tbdTasks/'+this.props.match.params.id)
@@ -47,6 +51,7 @@ export class DashboardPage extends Component {
                 isLoading: false,
                 tbdTasks: data,
             }))
+            console.log('TASK TBD STATE>>>>>>>', this.state.tbdTasks);
     });
 
     api.get('assignedTasks/'+this.props.match.params.id)
@@ -56,6 +61,7 @@ export class DashboardPage extends Component {
                 isLoading: false,
                 tasks: data,
             }))
+            console.log('DATA STATE>>>>>>>', this.state.tasks);
     });
 }
 
@@ -66,8 +72,10 @@ export class DashboardPage extends Component {
         isLoading={this.state.isLoading}
         isError={this.state.error}
         tasks={this.state.tasks}
-        myTasks={this.state.myTasks}
         currentUser={this.state.currentUser}
+        allTasks={this.state.allTasks}
+        tbdTasks={this.state.tbdTasks}
+        doneTasks={this.state.doneTasks}
         error={error}
       />
     );
