@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import { TreeSelect, Transfer, Form } from 'antd';
+import { Transfer } from 'antd';
 
 import api from '../../api';
-const FormItem = Form.item;
-
 
 export class GroupForm extends Component {
     state = {
@@ -22,6 +20,7 @@ export class GroupForm extends Component {
                     value: group.id
                 }
                 treeDataArray.push(treeData);
+                return treeDataArray;
             })
 
             this.setState(() => ({
@@ -34,6 +33,7 @@ export class GroupForm extends Component {
 
             data.response.map((group) => {
                 valueArray.push(group.groupId)
+                return valueArray;
             });
 
             this.setState(() => ({
@@ -53,7 +53,6 @@ export class GroupForm extends Component {
             }
             
             api.post('userGroups/' + this.props.userId + '/update', reqData);
-            console.log(reqData);
         })
         
     }
@@ -63,11 +62,9 @@ export class GroupForm extends Component {
         return (
             <div>
                 <Transfer
-                    //ty vlevo
                     dataSource={this.state.treeData}
                     showSearch
                     filterOption={this.filterOption}
-                    //ty vpravo
                     targetKeys={this.state.value}
                     onChange={this.onChange}
                     render={item => item.title}

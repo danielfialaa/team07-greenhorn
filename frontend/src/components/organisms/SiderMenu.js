@@ -37,7 +37,6 @@ export class SiderMenu extends Component {
           }));
         })
         .catch(e => {
-          console.log(e);
           this.setState(() => ({
             authorized: false,
           }));
@@ -54,7 +53,6 @@ export class SiderMenu extends Component {
   };
 
   onCollapse = collapsed => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
 
@@ -63,7 +61,6 @@ export class SiderMenu extends Component {
       return <Redirect to="/" />;
     }
 
-    console.log(this.state.isAdmin);
 
 
     return (
@@ -72,10 +69,8 @@ export class SiderMenu extends Component {
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={broken => {
-          console.log(broken);
         }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
         }}
       >
         <div className="logoMenu">

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Tag, Icon, Timeline, List, Row, Col, Form, message } from 'antd';
-import { Logo } from '../atoms/Logo';
+import { Button, Divider, Tag, Icon, Timeline, Row, Form, message } from 'antd';
 import { Layout } from 'antd';
 import api from '../../api';
 import { UploadFile } from '../molecules/UploadFile';
@@ -33,24 +32,20 @@ export class TaskDetailForm extends Component {
 
 
   updateFileData = (filePath) => {
-		console.log('Data from child: ',filePath);
 		this.setState(prevState => ({
   		filePath: [...prevState.filePath, filePath]
 		}))
 	}
 
   modifyTaskHandler = (id, dofc, status) => {
-		console.log('modifyTaskHandler: status >>>>>>>>>> ',status);
     api.post('modifyUserTask', {
       'id':id,
       'dateOfCompletion': dofc,
       'status': status
     })
     .then(({ response }) => {
-      console.log("Response >>>>>> ",response);
       window.location.reload();
       }).catch(error => {
-        console.log('chyba');
     });
   }
 
@@ -74,14 +69,12 @@ export class TaskDetailForm extends Component {
 
     const { taskDetailed } = this.props;
 		const currentUser = this.props.currentUser[0];
-		console.log('this.props>>>> ',this.props);
 
     var dateFormat = require('dateformat');
     var isAssignedToSelf = this.props.isAssignedToSelf;
     let attachmentsList = this.props.attachments[1] || emptyAttachments;
 		let attachmentsByUserList = this.props.attachments[0] || emptyAttachments;
 
-		console.log('od usera>',attachmentsByUserList);
 
 
     const data = {
@@ -145,14 +138,9 @@ export class TaskDetailForm extends Component {
                     message.error(`File assign failed.`);
                     actions.setSubmitting(false);
                    });
-                    console.log(values);
                     
-                   // API CALL
                   }}
                   render={({
-                    values,
-                    handleBlur,
-                    handleChange,
                     handleSubmit,
                     isSubmitting,
                   }) => (
@@ -167,7 +155,6 @@ export class TaskDetailForm extends Component {
                           type="primary"
                           htmlType="submit"
                           className="login-form-button"
-                          // disabled={values.filePath.length == 0}
                           loading={isSubmitting}
                         >
                           Confirm upload
@@ -194,7 +181,6 @@ export class TaskDetailForm extends Component {
 										filePath: this.state.filePath,
 									}
 
-									console.log(values);
 
 									this.modifyTaskHandler(taskDetailed.id,
 										dateFormat(Date.now(),'isoUtcDateTime'), 'TO BE REVIEWED');
@@ -209,10 +195,10 @@ export class TaskDetailForm extends Component {
 									}))
 
 									}else{
-									Notification('error', 'Error', 'Error while creating task!')
+									Notification('error', 'Error', 'Error while creating task!');
 									}
 									})
-									.catch(err => console.log('There was an error:' + err))
+									.catch(err => Notification('error', 'Error', 'Error while creating task!'))
 
 								}}>Submit task</Button>
 							<Divider type='vertical' />
@@ -223,18 +209,22 @@ export class TaskDetailForm extends Component {
 							onClick={	() => this.modifyTaskHandler(taskDetailed.id, null, 'TBD')}
 							>Reopen
 							</Button>
-							<Divider
-								type='vertical'
-								style={currentUser.isAdmin ? {} : { display: 'none' }}
-							/>
-							<Button
-								type="primary"
-								style={{ margin:'1px 3px 5px 3px' }}
-								disabled={taskDetailed.dateOfCompletion === null || taskDetailed.status=='DONE'}
-								onClick={() => this.modifyTaskHandler(taskDetailed.id,null,'DONE')}
-								style={currentUser.isAdmin ? {} : { display: 'none' }}
-							>Approve
-							</Button>
+              {currentUser.isAdmin
+              && 
+              <Divider
+              type='vertical'
+              />
+              }
+              {currentUser.isAdmin
+              && 
+              <Button
+              type="primary"
+              style={{ margin:'1px 3px 5px 3px' }}
+              disabled={taskDetailed.dateOfCompletion === null || taskDetailed.status === 'DONE'}
+              onClick={() => this.modifyTaskHandler(taskDetailed.id,null,'DONE')}
+            >Approve
+            </Button>
+              }
 							</span>
 						</Row>
           </Content>

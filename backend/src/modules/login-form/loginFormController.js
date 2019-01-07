@@ -26,14 +26,12 @@ export const loginFormController = async (req, res) => {
               isAdmin: response.isAdmin,
             };
 
-            console.log(tokenData);
 
             //jwt env promenna nejde
             var encodedToken = jwt.sign(tokenData, '2', {
               expiresIn: 60 * 60 * 12, // expires in 12 hours
             });
 
-            console.log(encodedToken);
 
             res.json({
               status: true,

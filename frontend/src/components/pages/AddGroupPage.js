@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { LocaleProvider, DatePicker, message } from 'antd';
 import { AddGroupTemplate } from '../templates/AddGroupTemplate';
 import api from '../../api';
 

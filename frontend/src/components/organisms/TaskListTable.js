@@ -4,19 +4,9 @@ import {
   Button,
   Divider,
   Tag,
-  Icon,
-  Timeline,
-  List,
-  Row,
-  Col,
-  Layout,
 } from 'antd';
-import { Logo } from '../atoms/Logo';
-import { Link } from 'react-router-dom';
 
 import api from '../../api';
-
-const { Header, Content } = Layout;
 
 export class TaskListTable extends Component {
   state = {
@@ -24,7 +14,6 @@ export class TaskListTable extends Component {
   };
 
   handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
     this.setState({
       filteredInfo: filters,
       sortedInfo: sorter,
@@ -58,7 +47,6 @@ export class TaskListTable extends Component {
         // );
         console.log('Velký špatný');
       });
-    console.log('id', id);
   };
 
   tagReturn(status) {
@@ -75,16 +63,11 @@ export class TaskListTable extends Component {
   }
 
   render() {
-    const { tasks } = this.props;
     const currentUser = this.props.currentUser[0]
       ? this.props.currentUser[0]
       : false;
-    console.log('this.props >>>>> ', this.props);
     var dateFormat = require('dateformat');
 
-    let { sortedInfo, filteredInfo } = this.state;
-    sortedInfo = sortedInfo || {};
-    filteredInfo = filteredInfo || {};
     const columns = [
       {
         title: 'Status',
@@ -105,11 +88,7 @@ export class TaskListTable extends Component {
             value: 'TO REVIEW',
           },
         ],
-        //    filterMultiple: false,
         onFilter: (value, record) => record.status === value,
-        //    defaultSortOrder: 'ascend',
-        //sorter: (a, b) => a.status.length - b.status.length,
-        // sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
       },
       {
         title: 'Name',
@@ -158,29 +137,9 @@ export class TaskListTable extends Component {
             </Button>
           </span>
         ),
-      } /*{
-      title: 'Requestor',
-      dataIndex: 'idRequestor',
-      key: 'idRequestor',
-      // sorter: (a, b) => a.idRequestor.length - b.idRequestor.length,
-      // sortOrder: sortedInfo.columnKey === 'idRequestor' && sortedInfo.order,
-    }  , {
-      title: 'Completor',
-      dataIndex: 'idCompletor',
-      key: 'idCompletor',
-      sorter: (a, b) => a.idCompletor.length - b.idCompletor.length,
-      sortOrder: sortedInfo.columnKey === 'idCompletor' && sortedInfo.order,
-    }, {
-      title: 'User',
-      dataIndex: 'idUser',
-      key: 'idUser',
-      sorter: (a, b) => a.idUser.length - b.idUser.length,
-      sortOrder: sortedInfo.columnKey === 'idUser' && sortedInfo.order,
-    } */,
+      },
     ];
 
-    // <div style={{ margin: '1px 1px 1px 1px', textAlign: 'left'}} ><h2>Tasks to do</h2></div>
-    // <div style={{ margin: '1px 1px 1px 1px', textAlign: 'right'}} ><h2>You are signed in as {currentUser.firstName} {currentUser.lastName}</h2></div>
     return (
       <div>
         <Table
@@ -193,13 +152,3 @@ export class TaskListTable extends Component {
     );
   }
 }
-
-// <Layout>
-// <Header
-//   style={{ background: '#fff', padding: 0, textAlign: 'center' }}
-// >{}
-// </Header>
-// <Content>
-
-// </Content>
-// </Layout>

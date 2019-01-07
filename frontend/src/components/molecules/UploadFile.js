@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, notification, Select, DatePicker } from 'antd';
+import { Form } from 'antd';
 import { Upload, Icon, message } from 'antd';
 import { Field } from 'formik';
-import api from '../../api';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 const Dragger = Upload.Dragger;
 
 export class UploadFile extends Component {
   onChangeHandler = info => {
     const status = info.file.status;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
     if (status === 'done') {
-      // triggerParentUpdate(info);
       this.props.triggerParentUpdate(info.file.response.filePath);
       message.success(`${info.file.name} file uploaded successfully.`);
     } else if (status === 'error') {
@@ -24,7 +18,6 @@ export class UploadFile extends Component {
   };
 
   render() {
-    const { triggerParentUpdate } = this.props.triggerParentUpdate;
     const { label, name } = this.props;
     return (
       <Field

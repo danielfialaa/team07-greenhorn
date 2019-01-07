@@ -4,11 +4,9 @@ import {
   Col,
   Form,
   Button,
-  Select,
   Checkbox,
   Transfer
 } from 'antd';
-import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik, Field } from 'formik';
 import { Notification } from '../atoms/Notification';
 import { FormItemWithError } from '../molecules/FormItemWithError';
@@ -20,7 +18,6 @@ import moment from 'moment';
 import api from '../../api';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 const dateFormat = 'YYYY/MM/DD';
 const defaultDate = moment('1920/01/01').format(dateFormat);
 
@@ -38,10 +35,8 @@ export class AddUserForm extends Component {
 	}
 
   getMockData = () => {
-		const targetKeys = [];
 		const mockData = [];
 		api.get('groupList').then(({ data }) => {
-			console.log(data);
 			data.response.map(function(group){
 				const data = {
 					key: group.id.toString(),
@@ -49,10 +44,9 @@ export class AddUserForm extends Component {
 					description: group.groupName,
 					chosen: false,
 				}
-			mockData.push(data)
+      return mockData.push(data)
 			});
       this.setState({ mockData: mockData});
-      console.log(this.state.mockData);
 
 		});
   }
@@ -70,7 +64,9 @@ export class AddUserForm extends Component {
   };
 
   handleDateChange = value => {
-    value ? null : (value = moment(defaultDate).format('YYYY-MM-DD'));
+    if(!value){
+      value = moment(defaultDate).format('YYYY-MM-DD');
+    }
     this.setState({ dob: value }, function() {});
   };
 
@@ -96,11 +92,10 @@ export class AddUserForm extends Component {
         onSubmit={(values, actions, resetForm, setFieldValue) => {
           values.isAdmin = this.state.adminChecked;
           values.dob = moment(this.state.dob).format('YYYY-MM-DD');
-          this.state.dob
-            ? null
-            : (values.dob = moment(defaultDate).format('YYYY-MM-DD'));
+          if(!this.state.dob){
+            values.dob = moment(defaultDate).format('YYYY-MM-DD')
+          }
           values.selectedGroup = this.state.targetKeys;
-          console.log(values);
           api
             .post('addUser', values)
             .then(({ data }) => {
@@ -110,7 +105,7 @@ export class AddUserForm extends Component {
                   'User Created',
                   'User has been created and has received an email with link to complete registration.',
                 );
-                this.state = { adminChecked: false };
+                this.setState({ adminChecked: false });
                 actions.resetForm();
               } else {
                 Notification('error', 'Error', 'Error while creating user!');
@@ -118,15 +113,12 @@ export class AddUserForm extends Component {
               actions.setSubmitting(false);
             })
             .catch(err => {
-              console.log('There was an error:' + err);
               actions.setSubmitting(false);
               Notification('error', 'Error', 'Error while creating user!');
             });
         }}
         render={({
           values,
-          handleBlur,
-          handleChange,
           handleSubmit,
           isSubmitting,
           setFieldValue,

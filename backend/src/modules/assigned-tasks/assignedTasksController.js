@@ -10,11 +10,9 @@ export const assignedTasksController = async (req, res) => {
           where: { email: req.user.email },
         })
         .then(response => {
-          console.log('preResult: ', response.id);
           id = response.id;
         });
     }
-    console.log('id:', id);
 
     const tasks = await db.task_history
     .findAll({

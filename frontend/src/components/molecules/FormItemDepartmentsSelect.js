@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Form, Select } from 'antd';
 import { Field } from 'formik';
 
-import api from '../../api';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -22,7 +21,7 @@ export class FormItemDepartmentsSelect extends Component {
   };
 
   render() {
-    const { list, name, handleBlur, onChange, ...filed } = this.props;
+    const { list, name, handleBlur, onChange } = this.props;
 
     let listedItems = list || emptyDepartments;
     return (

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { LocaleProvider, DatePicker, message } from 'antd';
 import { UserAdministrationTemplate } from '../templates/UserAdministrationTemplate';
-import { connect } from 'react-redux';
 
 import api from '../../api';
 

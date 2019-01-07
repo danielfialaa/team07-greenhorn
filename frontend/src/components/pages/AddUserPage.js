@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { LocaleProvider, DatePicker, message } from 'antd';
 import { AddUserTemplate } from '../templates/AddUserTemplate';
 import api from '../../api';
 

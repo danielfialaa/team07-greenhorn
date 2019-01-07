@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Tag, Layout } from 'antd';
-import { Logo } from '../atoms/Logo';
-import { Link } from 'react-router-dom';
+import { Table, Button, Divider, Tag } from 'antd';
 
 
-import api from '../../api';
 
-const { Header, Content } = Layout
 
 
 export class UserListTable extends Component {
@@ -14,7 +10,6 @@ export class UserListTable extends Component {
 	 sortedInfo: null,
  };
  handleChange = (pagination, filters, sorter) => {
-     console.log('Various parameters', pagination, filters, sorter);
      this.setState({
        filteredInfo: filters,
        sortedInfo: sorter,
@@ -31,9 +26,6 @@ export class UserListTable extends Component {
 
 
 	render() {
-
-		const {users} = this.props;
-		console.log('this.props >>>>> ',this.props);
 
 		let { sortedInfo, filteredInfo } = this.state;
 		sortedInfo = sortedInfo || {};
@@ -95,7 +87,6 @@ const columns = [{
     </span>
   ),
 }];
-//currentUser.firstName
 	    return (
 				<div>
         <div className="table-operations">

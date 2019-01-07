@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Col, Icon } from 'antd';
+import { Icon } from 'antd';
 
 export class Header4WithIcon extends Component {
   render() {
-    const { iconType, values, ...rest } = this.props;
+    const { iconType, values } = this.props;
     return (
       <h4>
         <Icon

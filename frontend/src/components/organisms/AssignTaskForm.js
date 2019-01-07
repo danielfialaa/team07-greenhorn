@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Select, DatePicker, Button, Form } from 'antd';
-import { Input, Icon } from 'antd';
+import { Row, Col, Select, Button, Form } from 'antd';
 import moment from 'moment';
 import { Formik, Field } from 'formik';
 import { Notification } from '../atoms/Notification';
@@ -32,7 +31,10 @@ export class AssignTaskForm extends Component {
   };
 
   handleDeadlineDateChange = value => {
-    value ? null : (value = moment(defaultDeadline));
+    if(!value){
+      value = moment(defaultDeadline)
+    }
+
     this.setState(
       { dateOfDeadline: moment(value).format('YYYY-MM-DD') },
       function() {},
@@ -56,7 +58,6 @@ export class AssignTaskForm extends Component {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions, resetForm) => {
-          console.log(moment(this.state.dateOfDeadline).format('YYYY-MM-DD'));
           values.dateOfDeadline = this.state.dateOfDeadline;
           values.idUser = this.props.userId;
           values.dateOfAssignment = moment().format('YYYY-MM-DD');
@@ -80,7 +81,6 @@ export class AssignTaskForm extends Component {
               actions.setSubmitting(false);
             })
             .catch(err => {
-              console.log('There was an error:' + err);
               actions.setSubmitting(false);
               Notification('error', 'Error', 'Error while assigning task!');
             });
@@ -88,7 +88,6 @@ export class AssignTaskForm extends Component {
         render={({
           values,
           handleBlur,
-          handleChange,
           handleSubmit,
           setFieldValue,
           isSubmitting,
@@ -145,6 +144,7 @@ export class AssignTaskForm extends Component {
                               </Option>
                             );
                           }
+                          return false
                         })}
                       </Select>
                     </FormItem>

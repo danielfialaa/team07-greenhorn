@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, notification, Select, DatePicker } from 'antd';
-import { InputWithIcon } from '../molecules/Login/InputWithIcon';
+import { Row, Col, Form, Button } from 'antd';
 import { FormItemWithError } from '../molecules/FormItemWithError';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
 import { PasswordValidation } from '../atoms/schemas/PasswordValidation';
-import moment from 'moment';
-import * as Yup from 'yup';
 
 import api from '../../api';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 export class ChangePasswordForm extends Component {
   state = {
@@ -48,9 +44,6 @@ export class ChangePasswordForm extends Component {
         }}
         render={({
           values,
-          errors,
-          handleBlur,
-          handleChange,
           handleSubmit,
           isSubmitting,
           isValid,

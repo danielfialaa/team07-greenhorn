@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Button, notification } from 'antd';
-import { Logo } from '../atoms/Logo';
-import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
 
 import api from '../../api';
@@ -22,12 +20,8 @@ export class UserList extends Component {
           });
         }}
         render={({
-          values,
-          handleBlur,
-          handleChange,
           handleSubmit,
           isSubmitting,
-          loggedIn,
         }) => (
           <Row
             type="flex"

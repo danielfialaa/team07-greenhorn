@@ -5,27 +5,17 @@ import {
   Form,
   Button,
   Input,
-  Select,
-  DatePicker,
-  Upload,
-  Icon,
-  message,
-  notification,
 } from 'antd';
-import { InputWithIcon } from '../molecules/Login/InputWithIcon';
-import { Formik, Field } from 'formik';
+import { Formik} from 'formik';
 import { Notification } from '../atoms/Notification';
 import { AddTaskValidation } from '../atoms/schemas/AddTaskValidation';
-import * as Yup from 'yup';
 import { FormItemWithError } from '../molecules/FormItemWithError';
 import { FormItemDepartmentsSelect } from '../molecules/FormItemDepartmentsSelect';
 import { UploadFile } from '../molecules/UploadFile';
-import moment from 'moment';
 
 import api from '../../api';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 const { TextArea } = Input;
 
 const uploadRoute = {
@@ -48,7 +38,6 @@ export class AddTaskForm extends Component {
   };
 
   updateFileData = filePath => {
-    console.log('Data from child: ', filePath);
     this.setState(prevState => ({
       filePath: [...prevState.filePath, filePath],
     }));
@@ -82,15 +71,15 @@ export class AddTaskForm extends Component {
                 values.description = '';
                 this.setState(() => ({
                   success: true,
+                  fileList: [] 
                 }));
-                this.state = { fileList: [] };
                 actions.resetForm();
               } else {
                 Notification('error', 'Error', 'Error while creating task!');
               }
               actions.setSubmitting(false);
             })
-            .catch(err => console.log('There was an error:' + err));
+            .catch(err => Notification('error', 'Error', 'Error while creating task!'));
         }}
         render={({
           values,

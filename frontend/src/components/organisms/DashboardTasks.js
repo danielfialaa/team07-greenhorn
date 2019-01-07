@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { List, Tag, Table, Progress, Alert, Card, Col, Row } from 'antd';
+import { Tag, Table, Progress, Alert, Card, Col, Row } from 'antd';
 import { Link } from 'react-router-dom';
-import { TaskListTable } from '../organisms/TaskListTable'
 
   
-import api from '../../api';
 
 
 
@@ -38,12 +36,6 @@ export class DashboardTasks extends Component {
 
     render() {
         
-        console.log('DASHBOARD POČET: ', this.props);
-        console.log('DASHBOARD TBD: ', this.props.tbdTasks);
-        console.log('DASHBOARD POČET: ', this.props.doneTasks);
-
-
-
         const columns = [
             {
                 title: 'Name',
@@ -74,24 +66,8 @@ export class DashboardTasks extends Component {
                 dataIndex: 'status',
                 key: 'status',
                 render: dataIndex => <span>{this.tagReturn(dataIndex)}</span>,
-                // filters: [
-                // {
-                //     text: 'To be done',
-                //     value: 'TBD',
-                // },
-                // {
-                //     text: 'Done',
-                //     value: 'DONE',
-                // },
-                // {
-                //     text: 'To be reviewed',
-                //     value: 'TO REVIEW',
-                // },
-                // ],
             }
         ];
-
-
 
         return (
             <div>
@@ -119,8 +95,6 @@ export class DashboardTasks extends Component {
                     <h2>Incomplete assigned tasks</h2>
                     <Table columns={columns} dataSource={this.props.tasks.response} size="small" pageSize="6"/>
                 </Row>
-                
-                    
             </div>
             
         )

@@ -24,7 +24,6 @@ export const modifyUserTaskController = async (req, res) => {
         });
       })
       .catch(error => {
-        console.log(error);
       });
   }
 
@@ -43,7 +42,6 @@ export const modifyUserTaskController = async (req, res) => {
       )
       .then(response => {})
       .catch(error => {
-        console.log(error);
       });
 
     const taskHistory = await db.task_history.findOne({

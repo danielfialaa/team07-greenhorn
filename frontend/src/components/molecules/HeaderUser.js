@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col, Avatar, Divider, Menu, Dropdown, Button, Icon } from 'antd';
+import { Menu, Dropdown, Icon } from 'antd';
 import { Link } from 'react-router-dom'
 
 import api from '../../api';
@@ -31,8 +31,6 @@ export class HeaderUser extends Component {
     })
   }
   render(){
-    console.log('this.props >>>>> ', this.props);
-    const title = this.props.title;
     return(
           <div>
             <Dropdown.Button icon="user" overlay={menu} style={{float: 'right'}}>

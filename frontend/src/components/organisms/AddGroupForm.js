@@ -52,10 +52,8 @@ export class AddGroupForm extends Component {
 	}
 
 	getMockData = () => {
-		const targetKeys = [];
 		const mockData = [];
 		api.get('tasks').then(({ data }) => {
-			console.log(data);
 			data.response.map(function(task){
 				const data = {
 					key: task.id.toString(),
@@ -63,7 +61,7 @@ export class AddGroupForm extends Component {
 					description: task.name,
 					chosen: false,
 				}
-			mockData.push(data)
+			return mockData.push(data)
 			});
 			this.setState({ mockData: mockData});
 		});
@@ -75,15 +73,11 @@ export class AddGroupForm extends Component {
 			selectedTasks: '',
     };
 
-		console.log(this.state.mockData);
-		console.log(this.props.tasks);
-
     return (
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
 					values.selectedTasks = this.state.targetKeys;
-					console.log(values);
           api.post('addGroup', values)
 						.then(({ data }) => {
               if (data.status) {
@@ -98,7 +92,6 @@ export class AddGroupForm extends Component {
               actions.setSubmitting(false);
             })
             .catch(err => {
-              console.log('There was an error:' + err);
               actions.setSubmitting(false);
               Notification('error', 'Error', 'Error while creating group!');
             });

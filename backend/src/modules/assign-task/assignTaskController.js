@@ -11,13 +11,10 @@ export const assignTaskController = async (req, res) => {
     .then(response => {
       req.body.idReporter = response[0].id;
       const form = db.task_history.create(req.body).catch(e => {
-        console.log('e:', e);
         res.json({
           status: false,
         });
       });
-      console.log('form' + form);
-      console.log('response' + response);
     });
 
   const user = await db.users.findOne({
@@ -49,7 +46,6 @@ export const assignTaskController = async (req, res) => {
     .toDate();
 
   const taskSummaryMail = require('sendmail')();
-  console.log('notificationDate: ' + notificationDate);
   taskSummaryMail(
     {
       from: 'no-reply@greenhorn.com',

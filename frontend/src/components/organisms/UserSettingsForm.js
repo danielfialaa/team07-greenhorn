@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, notification, Select, DatePicker } from 'antd';
-import { InputWithIcon } from '../molecules/Login/InputWithIcon';
-import { Formik, Field } from 'formik';
+import { Row, Col, Form, Button } from 'antd';
+import { Formik } from 'formik';
 import { Notification } from '../atoms/Notification';
 import { FormItemWithError } from '../molecules/FormItemWithError';
 import { FormItemDatePicker } from '../molecules/FormItemDatePicker';
@@ -11,7 +10,6 @@ import moment from 'moment';
 import api from '../../api';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 const dateFormat = 'YYYY/MM/DD';
 
 export class UserSettingsForm extends Component {
@@ -20,7 +18,9 @@ export class UserSettingsForm extends Component {
   };
 
   handleDateChange = value => {
-    value ? null : (value = moment(this.props.userInfo.dob));
+    if(!value){
+      moment(this.props.userInfo.dob)
+    }
     this.setState({ dob: moment(value).format('YYYY-MM-DD') }, function() {});
   };
 
@@ -40,11 +40,11 @@ export class UserSettingsForm extends Component {
         validationSchema={UserValidation}
         onSubmit={(values, actions) => {
           values.dob = this.state.dob;
-          this.state.dob
-            ? null
-            : (values.dob = moment(this.props.userInfo.dob).format(
-                'YYYY-MM-DD',
-              ));
+          if(!this.state.dob){
+            values.dob = moment(this.props.userInfo.dob).format(
+              'YYYY-MM-DD',
+            );
+          }
           api
             .post('updateUser', values)
             .then(({ data }) => {
@@ -60,16 +60,12 @@ export class UserSettingsForm extends Component {
               }
               actions.setSubmitting(false);
             })
-            .catch(err => console.log('There was an error:' + err));
+            .catch(err => Notification('error', 'Error', 'Error while updating user!'));
         }}
         render={({
           values,
-          handleBlur,
-          handleChange,
           handleSubmit,
-          setFieldValue,
           isSubmitting,
-          isValid,
         }) => (
           <Row
             type="flex"
@@ -120,7 +116,6 @@ export class UserSettingsForm extends Component {
                     type="primary"
                     htmlType="submit"
                     className="submit-changes-button"
-                    // disabled={!isValid || isSubmitting}
                     loading={isSubmitting}
                   >
                     Confirm changes

@@ -30,14 +30,12 @@ export const changePassController = async (req, res) => {
                 }
               )
               .then(result => {
-                console.log('pass');
                 res.json({
                   status: true,
                   result,
                 });
               })
               .catch(e => {
-                console.log('not-pass');
                 res.json({
                   status: false,
                   result,
@@ -50,7 +48,6 @@ export const changePassController = async (req, res) => {
           }
         });
       } else {
-        console.log('not-pass');
         res.json({
           status: false,
         });

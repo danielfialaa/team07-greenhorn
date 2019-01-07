@@ -66,7 +66,6 @@ export class DashboardPage extends Component {
 }
 
   render() {
-    const { isLoading, myTasks, isLoaded, isError, currentUser, error } = this.props;
     return (
       <DashboardTemplate
         isLoading={this.state.isLoading}
@@ -76,7 +75,7 @@ export class DashboardPage extends Component {
         allTasks={this.state.allTasks}
         tbdTasks={this.state.tbdTasks}
         doneTasks={this.state.doneTasks}
-        error={error}
+        error={this.props.error}
       />
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, notification } from 'antd';
+import { Row, Col, Form, Button } from 'antd';
 import { Logo } from '../atoms/Logo';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';

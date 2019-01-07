@@ -2,7 +2,6 @@ import db from '../../models/';
 import randomstring from 'randomstring';
 
 export const resetPassController = async (req, res) => {
-  console.log('here');
 
   var rPass = randomstring.generate(20);
   db.users
@@ -33,14 +32,12 @@ export const resetPassController = async (req, res) => {
           });
         }
       );
-      console.log('pass');
       res.json({
         status: true,
         result,
       });
     })
     .catch(e => {
-      console.log('not-pass');
       res.json({
         status: false,
         result,

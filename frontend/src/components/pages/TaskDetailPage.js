@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { LocaleProvider, DatePicker, message } from 'antd';
 import { TaskDetailTemplate } from '../templates/TaskDetailTemplate';
-import { connect } from 'react-redux';
 
 import api from '../../api';
 
@@ -21,7 +19,6 @@ state = {
 componentDidMount() {
   api.get('currentUser')
     .then(({data}) => {
-        console.log('data>>>>>>>', data.response);
         this.setState(() => ({
           isLoading2: false,
           currentUser: data.response,
@@ -29,7 +26,6 @@ componentDidMount() {
       });
   api.get('taskDetail/'+this.props.match.params.id)
     .then(({ data }) => {
-      console.log("data: ",data);
       this.setState(() => ({
         taskDetailed: data.result,
 				attachments: data.attachments,
@@ -37,21 +33,11 @@ componentDidMount() {
         isAssignedToSelf: data.isAssignedToSelf
       }))
     });
-    // if (this.state.currentUser.length > 0 && this.state.taskDetailed.length != 0) {
-    //   this.setState(() => ({
-    //     isLoading: false,
-    //   }))
-    // }
-
 }
 
 
   render() {
-    console.log("currentUser length: ", this.state.currentUser.length);
-    console.log("taskDetailed: ", this.state.taskDetailed.length);
     
-    
-
     return (
     <TaskDetailTemplate
       isLoading= {this.state.isLoading||this.state.isLoading2}

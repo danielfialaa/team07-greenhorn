@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Form, Button, notification, Select, DatePicker } from 'antd';
+import { Form } from 'antd';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Field } from 'formik';
 
-import api from '../../api';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 export class FormItemWithError extends Component {
   static propTypes = {
@@ -33,7 +31,6 @@ export class FormItemWithError extends Component {
       value,
       handleBlur,
       handleChange,
-      ...filed
     } = this.props;
     return (
       <Field

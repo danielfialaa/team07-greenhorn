@@ -2,17 +2,6 @@ import db from '../../models/';
 import randomstring from 'randomstring';
 
 export const addUserFormController = async (req, res) => {
-  // const selectGroupTasks = db.taskGroupBelonging.findAll({
-  //   where : {
-  //     groupId: 1,
-  //   }
-  // }).then((data) => {
-  //   console.log(data);
-    
-  //   res.json({
-  //     data
-  //   })
-  // });
   req.body.password = randomstring.generate(20);
   const form = await db.users.create(req.body).then((data) => {
     let id = data.get('id');
@@ -35,15 +24,12 @@ export const addUserFormController = async (req, res) => {
                 idReporter: req.user.id,
               })
             });
-            console.log("aha?");
-            console.log(data);
           });
         })
 
       
     });
   });
-  // const form = await req.body;
   const sendmail = require('sendmail')();
 
   sendmail(

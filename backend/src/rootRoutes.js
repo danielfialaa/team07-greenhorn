@@ -65,7 +65,6 @@ router.use('*', (req, res, next) => {
     }
   });
 });
-/* ROUTES FOR ALL USERS */
 router.use('/api/currentUser', currentUserRoutes);
 router.use('/api/updateUser', updateUserFormRoutes);
 router.use('/api/userList', userListRoutes);
@@ -84,9 +83,6 @@ router.use('/api/doneTasks/:id', doneTasksRoutes);
 router.use('/api/uploadTaskFile', upload.single('file'), uploadTaskFileRoutes);
 router.use('/api/groupList', groupListRoutes);
 router.use('/api/assignUserUploads', assignUserUploadsRoutes);
-
-
-/* ROUTES ONLY FOR ADMINS */
 router.use('/api/addUser', addUserFormRoutes);
 router.use('/api/addTask', addTaskFormRoutes);
 router.use('/api/addGroup', addGroupFormRoutes);
@@ -94,13 +90,6 @@ router.use('/api/assignTask', assignTaskRoutes);
 router.use('/api/deleteUserTask', deleteUserTaskRoutes);
 router.use('/api/modifyUserTask', modifyUserTaskRoutes);
 
-
-
-/* SOME OLD STUFF */
-/*
-router.use('/api/products', productRoutes);
-router.use('/api/contactForm', contactFormRoutes);
-*/
 
 router.use('/api/', (req, res) => {
   res.json({

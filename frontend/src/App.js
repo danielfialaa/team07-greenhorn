@@ -4,7 +4,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import ScrollToTop from 'react-router-scroll-top';
 
-// import 'bootstrap/dist/css/bootstrap.css';
 import 'antd/dist/antd.css';
 import './style/style.css';
 

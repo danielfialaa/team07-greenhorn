@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, notification } from 'antd';
+import { Row, Col, Form, Button } from 'antd';
 import { Logo } from '../atoms/Logo';
 import { InputWithIcon } from '../molecules/Login/InputWithIcon';
 import { Formik } from 'formik';
@@ -19,7 +19,6 @@ export class LoginForm extends Component {
 
   render() {
     const initialValues = { email: '', password: '' };
-    const isLoggedIn = false;
 
     if (this.state.loggedIn === true && this.state.isAdmin === true) {
       return <Redirect to="/Dashboard" />;
@@ -31,12 +30,10 @@ export class LoginForm extends Component {
         initialValues={initialValues}
         onSubmit={(values, actions) => {
           api.post('auth', values).then(({ data }) => {
-            console.log(data);
             actions.setSubmitting(false);
             if (data.status) {
               localStorage.setItem('token', data.token);
               localStorage.setItem('isAdmin', data.isAdmin);
-              console.log(localStorage.getItem('token'));
               api.defaults.headers.common['Authorization'] = data.token;
               this.setState(() => ({
                 loggedIn: true,
@@ -62,7 +59,6 @@ export class LoginForm extends Component {
           handleChange,
           handleSubmit,
           isSubmitting,
-          loggedIn,
         }) => (
           <Row
             type="flex"

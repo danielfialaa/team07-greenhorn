@@ -1,15 +1,11 @@
 import React from 'react';
-import { Row, Col, Layout } from 'antd';
-import { SiderMenu } from '../organisms/SiderMenu';
-import { Footer } from '../atoms/Footer';
+import { Row, Col } from 'antd';
 import { UserAdministrationForm } from '../organisms/UserAdministrationForm';
 import { AssignTaskForm } from '../organisms/AssignTaskForm';
 import { TaskListTable } from '../organisms/TaskListTable';
 import { Spin, Icon } from 'antd';
-import { HeaderUser } from '../molecules/HeaderUser';
 import { GroupForm } from '../organisms/AssignUserToGroupForm';
 
-const { Header, Content } = Layout;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 export const UserAdministrationTemplate = ({
@@ -17,7 +13,6 @@ export const UserAdministrationTemplate = ({
   taskList,
   tasks,
   userId,
-  currentUserId,
   isLoading,
   requestorList,
   currentUser,

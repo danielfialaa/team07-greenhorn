@@ -1,27 +1,20 @@
 import React from 'react';
-import { Row, Col, Layout } from 'antd';
-import { Footer } from '../atoms/Footer';
 import { Spin, Icon } from 'antd';
 import { TaskDetailForm } from '../organisms/TaskDetailForm';
-import { HeaderUser } from '../molecules/HeaderUser';
 
 
-const { Header, Content } = Layout;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 export const TaskDetailTemplate = ({
-  isLoading,
-  isError,
   taskDetailed,
 	attachments,
   relatedUsers,
   isAssignedToSelf,
   currentUser,
 }) => {
-  // if (isLoading) {
-    if(currentUser.length == 0 || taskDetailed.length == 0) {
-    return <Spin indicator={antIcon} />;
-  }
+    if(currentUser.length === 0 || taskDetailed.length === 0) {
+      return <Spin indicator={antIcon} />;
+    }
 
   return (
     <div>
