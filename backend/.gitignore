@@ -16,7 +16,6 @@ npm-debug.log
 /db.sqlite*
 
 # DB Config
-/src/config/config.js
 
 
 /public/uploads/*
